@@ -4,20 +4,39 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SectionLabel } from '../ui/SectionLabel';
 import { projects } from '../../data/projects';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
-import { Play, ArrowUpRight } from 'lucide-react';
+import { Play } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
+
+function getYoutubeId(url: string | undefined) {
+  if (!url) return null;
+  const match = url.match(/embed\/([^?]+)/);
+  return match ? match[1] : null;
+}
 
 function VideoCard({ project }: { project: typeof projects[0] }) {
   const [isPlaying, setIsPlaying] = useState(false);
 
+  // Auto-generate YouTube poster
+  const ytId = project.type === 'youtube' ? getYoutubeId(project.embedUrl) : null;
+  const autoPoster = project.poster || (ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : null);
+
+  // Format Instagram embed URL
+  const getInstaEmbed = (url: string | undefined) => {
+    if (!url) return '';
+    let cleanUrl = url.split('?')[0]; 
+    if (!cleanUrl.endsWith('/')) cleanUrl += '/';
+    return cleanUrl + 'embed';
+  };
+
   return (
     <div className="w-[85vw] md:w-[60vw] lg:w-[45vw] h-full flex-shrink-0 flex flex-col gap-4 group">
       <div className="relative w-full aspect-[4/5] md:aspect-video rounded-[var(--radius-lg)] overflow-hidden bg-[var(--surface)] border border-[var(--border-subtle)] shadow-sm">
-        {isPlaying ? (
-          project.type === 'youtube' ? (
+        
+        {project.type === 'youtube' ? (
+          isPlaying ? (
             <iframe
-              src={`${project.embedUrl}&autoplay=1`}
+              src={`${project.embedUrl}${project.embedUrl?.includes('?') ? '&' : '?'}autoplay=1`}
               title={project.title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -25,39 +44,36 @@ function VideoCard({ project }: { project: typeof projects[0] }) {
               className="absolute inset-0 w-full h-full"
             />
           ) : (
-            <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-[var(--surface)]">
-              {/* Instagram fallback for now - proper embed.js requires more complex setup */}
-              <div className="text-center p-6">
-                <p className="text-[var(--ink)] mb-4 font-display text-lg">View on Instagram</p>
-                <a 
-                  href={project.permalink} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 bg-[var(--accent)] text-white rounded-full text-sm font-semibold hover:bg-[var(--accent-hover)] transition-colors"
-                >
-                  Open Reel <ArrowUpRight size={16} className="ml-1" />
-                </a>
-              </div>
+            <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center bg-[var(--bg-alt)] group-hover:bg-[var(--surface)] transition-colors duration-300 overflow-hidden cursor-pointer" onClick={() => setIsPlaying(true)}>
+              {autoPoster ? (
+                <img 
+                  src={autoPoster} 
+                  alt={project.title} 
+                  className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105 transform"
+                />
+              ) : null}
+              <button
+                className="relative z-10 w-16 h-16 md:w-20 md:h-20 rounded-full bg-[var(--accent)] text-white flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 shadow-xl"
+                aria-label={`Play ${project.title}`}
+              >
+                <Play size={28} fill="currentColor" className="ml-1 md:ml-1.5" />
+              </button>
             </div>
           )
         ) : (
-          <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center bg-[var(--bg-alt)] group-hover:bg-[var(--surface)] transition-colors duration-300 overflow-hidden cursor-pointer" onClick={() => setIsPlaying(true)}>
-            {/* If we have a poster, render it as background */}
-            {project.poster ? (
-              <img 
-                src={project.poster} 
-                alt={project.title} 
-                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-105 transform"
-              />
-            ) : null}
-            
-            <button
-              className="relative z-10 w-16 h-16 md:w-20 md:h-20 rounded-full bg-[var(--accent)] text-white flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 shadow-xl"
-              aria-label={`Play ${project.title}`}
-            >
-              <Play size={28} fill="currentColor" className="ml-1 md:ml-1.5" />
-            </button>
-            {!project.poster && <span className="relative z-10 text-[var(--ink-muted)] mt-4 text-sm font-medium">Click to play</span>}
+          /* Instagram - just render the iframe directly */
+          <div className="absolute inset-0 w-full h-full bg-[var(--surface)]">
+            <iframe 
+              src={getInstaEmbed(project.embedUrl || project.permalink)} 
+              width="100%" 
+              height="100%" 
+              frameBorder="0" 
+              scrolling="no" 
+              allowTransparency 
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+              style={{ background: 'white' }}
+            />
           </div>
         )}
       </div>
@@ -82,7 +98,6 @@ export function Work() {
   useEffect(() => {
     if (prefersReduced || !containerRef.current || !scrollRef.current) return;
 
-    // Check if we're on desktop
     const isDesktop = window.innerWidth >= 1024;
     if (!isDesktop) return;
 
@@ -91,8 +106,7 @@ export function Work() {
       const totalWidth = scrollElement?.scrollWidth || 0;
       const viewportWidth = window.innerWidth;
       
-      // Calculate how far to scroll to see the last item
-      const xDistance = -(totalWidth - viewportWidth + 64); // 64px padding
+      const xDistance = -(totalWidth - viewportWidth + 64);
 
       gsap.to(scrollElement, {
         x: xDistance,
@@ -128,7 +142,6 @@ export function Work() {
         </h2>
       </div>
       
-      {/* Scrollable track */}
       <div 
         className="w-full overflow-x-auto lg:overflow-x-visible no-scrollbar pb-8 lg:pb-0"
         style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
@@ -140,7 +153,6 @@ export function Work() {
           {projects.map((project) => (
             <VideoCard key={project.id} project={project} />
           ))}
-          {/* Spacer for end of scroll on desktop */}
           <div className="hidden lg:block w-[10vw] flex-shrink-0" />
         </div>
       </div>
