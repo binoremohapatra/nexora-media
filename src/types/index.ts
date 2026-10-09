@@ -5,8 +5,9 @@ export interface Project {
   title: string;
   category: string;
   type: VideoType;
-  embedUrl: string;
-  permalink: string;
+  embedUrl?: string;
+  permalink?: string;
+  poster?: string;
 }
 
 export type ServiceGroup = 'Video' | 'Design' | 'Brand' | 'Growth';
