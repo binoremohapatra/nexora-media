@@ -116,22 +116,23 @@ export function Navigation({ theme, onToggleTheme }: NavigationProps) {
               flexShrink: 0,
             }}
           >
-            <div style={{ position: 'relative', width: 28, height: 28 }}>
-              <img
-                src="/images/logo.png"
-                alt="Nexora Media logo"
-                width={28}
-                height={28}
-                style={{ opacity: 'var(--logo-light-opacity)', transition: 'opacity 0.3s', position: 'absolute' }}
-              />
-              <img
-                src="/images/logo-dark.png"
-                alt=""
-                aria-hidden="true"
-                width={28}
-                height={28}
-                style={{ opacity: 'var(--logo-dark-opacity)', transition: 'opacity 0.3s', position: 'absolute' }}
-              />
+            <div 
+              style={{ 
+                position: 'relative', 
+                width: 28, 
+                height: 28, 
+                background: 'var(--ink)', 
+                color: 'var(--bg)',
+                borderRadius: '6px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 'bold',
+                fontFamily: 'var(--font-display)',
+                fontSize: '16px'
+              }}
+            >
+              N
             </div>
             <span
               style={{
