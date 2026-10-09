@@ -87,7 +87,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/80 to-[var(--bg)]/30 backdrop-blur-[2px]" />
       </div>
 
-      <div className="container" style={{ position: 'relative', z-index: 10 }}>
+      <div className="container" style={{ position: 'relative', zIndex: 10 }}>
         {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 12 }}
