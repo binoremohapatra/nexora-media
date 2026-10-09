@@ -9,6 +9,7 @@ const PillNav = ({
   logoAlt = 'Logo',
   items,
   activeHref,
+  actions,
   className = '',
   ease = 'power3.easeOut',
   baseColor = '#fff',
@@ -277,6 +278,11 @@ const PillNav = ({
               </li>
             ))}
           </ul>
+          {actions && (
+            <div className="pill-actions">
+              {actions}
+            </div>
+          )}
         </div>
 
         <button

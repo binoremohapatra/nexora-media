@@ -90,56 +90,51 @@ export function Navigation({ theme, onToggleTheme }: NavigationProps) {
           margin: '0 auto',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '1rem',
-          pointerEvents: 'auto' // re-enable clicks for content
+          justifyContent: 'center', // center the single pill
+          pointerEvents: 'auto'
         }}
       >
-        {/* React Bits PillNav component */}
-        <div style={{ position: 'relative' }}>
-          <PillNav
-            logo={CustomLogo}
-            logoAlt="Nexora Media"
-            items={NAV_ITEMS}
-            activeHref={activeSection}
-            baseColor="var(--bg-alt)"
-            pillColor="var(--surface)"
-            hoveredPillTextColor="var(--bg)"
-            pillTextColor="var(--ink)"
-            onMobileMenuClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          />
-        </div>
-
-        {/* Right side actions (Theme toggle + Quote) */}
-        <div className="hidden lg:flex items-center gap-4">
-          <div className="bg-[var(--bg-alt)] rounded-full border border-[var(--border-subtle)] p-1">
-            <ThemeToggle theme={theme} onToggle={onToggleTheme} />
-          </div>
-          <a
-            href="https://wa.me/918882722257?text=Hi%20Nexora%20Media,%20I'm%20interested%20in%20your%20services."
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.375rem',
-              padding: '0.625rem 1.25rem',
-              background: 'var(--accent)',
-              color: '#fff',
-              borderRadius: 999,
-              fontSize: 'var(--fs-small)',
-              fontWeight: 600,
-              textDecoration: 'none',
-              transition: 'background 0.2s, transform 0.15s',
-              whiteSpace: 'nowrap',
-              boxShadow: '0 4px 14px rgba(239, 68, 68, 0.2)'
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--accent-hover)')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--accent)')}
-          >
-            Get a Quote <span aria-hidden="true">↗</span>
-          </a>
-        </div>
+        <PillNav
+          logo={CustomLogo}
+          logoAlt="Nexora Media"
+          items={NAV_ITEMS}
+          activeHref={activeSection}
+          baseColor="var(--nav-bg)" // use nav-bg which has blur
+          pillColor="var(--surface)"
+          hoveredPillTextColor="var(--bg)"
+          pillTextColor="var(--ink)"
+          onMobileMenuClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          actions={
+            <div className="hidden lg:flex items-center gap-2 pl-2 border-l border-[var(--border-subtle)]">
+              <div className="bg-[var(--surface)] rounded-full p-1 flex items-center justify-center">
+                <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+              </div>
+              <a
+                href="https://wa.me/918882722257?text=Hi%20Nexora%20Media,%20I'm%20interested%20in%20your%20services."
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.375rem',
+                  padding: '0.5rem 1rem',
+                  background: 'var(--accent)',
+                  color: '#fff',
+                  borderRadius: 999,
+                  fontSize: 'var(--fs-small)',
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  transition: 'background 0.2s, transform 0.15s',
+                  whiteSpace: 'nowrap'
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--accent-hover)')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--accent)')}
+              >
+                Get a Quote <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          }
+        />
       </div>
     </motion.header>
   );
