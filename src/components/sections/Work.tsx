@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SectionLabel } from '../ui/SectionLabel';
 import { projects } from '../../data/projects';
+// @ts-ignore
 import FlexCarousel from '../ui/FlexCarousel';
 import { X, Play } from 'lucide-react';
 
@@ -99,7 +100,7 @@ export function Work() {
           squeeze={0.15}
           focusOnClick={true}
           captions={true}
-          onSelect={(_, item) => setActiveProject((item as any).project)}
+          onSelect={(_: any, item: any) => setActiveProject(item.project)}
         />
       </div>
 

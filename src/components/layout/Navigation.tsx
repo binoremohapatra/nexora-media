@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { useScrollDirection } from '../../hooks/useScrollDirection';
 import { ThemeToggle } from './ThemeToggle';
 import type { Theme } from '../../types';
+// @ts-ignore
 import PillNav from '../ui/PillNav';
 
 const NAV_ITEMS = [
