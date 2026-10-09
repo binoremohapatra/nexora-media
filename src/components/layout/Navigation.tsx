@@ -49,23 +49,10 @@ export function Navigation({ theme, onToggleTheme }: NavigationProps) {
 
   // Custom logo element for PillNav
   const CustomLogo = (
-    <div 
-      style={{ 
-        width: '100%', 
-        height: '100%', 
-        background: 'var(--ink)', 
-        color: 'var(--bg)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontWeight: 'bold',
-        fontFamily: 'var(--font-display)',
-        fontSize: '18px',
-        lineHeight: 1
-      }}
-    >
-      N
-    </div>
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', display: 'block' }}>
+      <circle cx="20" cy="20" r="20" fill="var(--accent)" />
+      <path d="M12 28V12L28 28V12" stroke="#fff" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 
   return (
@@ -105,7 +92,7 @@ export function Navigation({ theme, onToggleTheme }: NavigationProps) {
           pillTextColor="var(--ink)"
           onMobileMenuClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           actions={
-            <div className="hidden lg:flex items-center gap-2 pl-2 border-l border-[var(--border-subtle)]">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', paddingLeft: '8px', borderLeft: '1px solid var(--border-subtle)' }}>
               <div className="bg-[var(--surface)] rounded-full p-1 flex items-center justify-center">
                 <ThemeToggle theme={theme} onToggle={onToggleTheme} />
               </div>

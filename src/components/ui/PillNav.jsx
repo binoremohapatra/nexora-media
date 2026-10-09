@@ -278,12 +278,13 @@ const PillNav = ({
               </li>
             ))}
           </ul>
-          {actions && (
-            <div className="pill-actions">
-              {actions}
-            </div>
-          )}
         </div>
+
+        {actions && (
+          <div className="pill-actions desktop-only">
+            {actions}
+          </div>
+        )}
 
         <button
           className="mobile-menu-button mobile-only"
