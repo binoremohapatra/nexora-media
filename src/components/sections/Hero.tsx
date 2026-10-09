@@ -5,12 +5,19 @@ import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const WHATSAPP_URL = "https://wa.me/918882722257?text=Hi%20Nexora%20Media,%20I'm%20interested%20in%20your%20services.";
 
+// Marquee of service keywords for the editorial strip below hero headline
 const KEYWORDS = [
   'Video Editing', 'Branding', 'Reels', 'Social Media',
   'Meta Ads', 'Photography', 'Graphic Design', 'Logo Design',
   'Google Ads', 'Websites', 'SEO', 'Videography',
 ];
 
+/**
+ * Hero section — the first creative statement.
+ * Editorial large headline in Clash Display.
+ * No fake video/showreel: no local file exists.
+ * Art-directed composition with large accent numbers and staggered reveal.
+ */
 export function Hero() {
   const prefersReduced = useReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
@@ -66,40 +73,41 @@ export function Hero() {
         background: 'var(--bg)',
       }}
     >
-      {/* Background Video Showreel */}
-      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-black">
-        {/* We use an online cinematic placeholder so it's not blank, but it's positioned behind a heavy overlay */}
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          className="absolute inset-0 w-full h-full object-cover opacity-40 scale-105"
-          poster="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1934&auto=format&fit=crop"
-        >
-          {/* If the user uploads videos/showreel.mp4 to public/, it will load that! */}
-          <source src="/videos/showreel.mp4" type="video/mp4" />
-          {/* Temporary cinematic stock video for "maza" (excitement) */}
-          <source src="https://player.vimeo.com/external/494252666.sd.mp4?s=2543e49e25e9ddceb0709bcf72c1c73ec542dcfa&profile_id=164&oauth2_token_id=57447761" type="video/mp4" />
-        </video>
-        
-        {/* Gradient overlay to ensure text is readable */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/80 to-[var(--bg)]/30 backdrop-blur-[2px]" />
-      </div>
+      {/* Large editorial background numeral — pure decoration */}
+      <span
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: '-0.15em',
+          right: '-0.05em',
+          fontFamily: 'var(--font-display)',
+          fontWeight: 700,
+          fontSize: 'clamp(18rem, 35vw, 42rem)',
+          lineHeight: 1,
+          color: 'var(--bg-alt)',
+          letterSpacing: '-0.05em',
+          pointerEvents: 'none',
+          userSelect: 'none',
+          zIndex: 0,
+          transition: 'color 0.3s ease',
+        }}
+      >
+        N
+      </span>
 
-      <div className="container" style={{ position: 'relative', zIndex: 10 }}>
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className="eyebrow"
-          style={{ marginBottom: '1.5rem', color: 'var(--accent)' }}
+          style={{ marginBottom: '1.5rem' }}
         >
           Creative Studio · India
         </motion.p>
 
-        {/* Main headline */}
+        {/* Main headline — clipped lines for GSAP reveal */}
         <h1
           ref={headlineRef}
           id="hero-title"
@@ -130,7 +138,7 @@ export function Hero() {
                   <>
                     {line}{' '}
                     <span style={{ color: 'var(--accent)', fontStyle: 'italic' }}>
-                      
+                      {/* accent line */}
                     </span>
                   </>
                 ) : line}
@@ -151,12 +159,13 @@ export function Hero() {
             style={{
               fontSize: 'clamp(1.0625rem, 1.5vw, 1.25rem)',
               lineHeight: 1.6,
-              color: 'var(--ink)',
+              color: 'var(--ink-muted)',
               marginBottom: 'clamp(2rem, 5vw, 3rem)',
               maxWidth: '48ch',
             }}
           >
-            Nexora Media helps businesses grow through creative content,
+            Nexora Media helps cafes, restaurants, real-estate brands,
+            and growing businesses grow through creative content,
             branding, social media, and modern digital experiences.
           </motion.p>
 
@@ -199,7 +208,6 @@ export function Hero() {
                 gap: '0.5rem',
                 padding: '0.875rem 1.75rem',
                 border: '1px solid var(--border)',
-                background: 'var(--surface)',
                 color: 'var(--ink)',
                 borderRadius: 999,
                 fontSize: 'var(--fs-small)',
@@ -243,13 +251,14 @@ export function Hero() {
                 alignItems: 'center',
                 gap: '0.375rem',
                 padding: '0.3rem 0.75rem',
-                background: 'var(--surface)',
-                border: '1px solid var(--border)',
+                background: 'var(--bg-alt)',
+                border: '1px solid var(--border-subtle)',
                 borderRadius: 999,
                 fontSize: 'var(--fs-micro)',
                 fontWeight: 500,
-                color: 'var(--ink)',
+                color: 'var(--ink-muted)',
                 letterSpacing: '0.04em',
+                transition: 'border-color 0.2s, color 0.2s',
               }}
             >
               {kw}

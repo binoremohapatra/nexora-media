@@ -1,36 +1,44 @@
-import { Project } from '../types';
+import type { Project } from '../types';
 
 export const projects: Project[] = [
   {
-    id: '1',
+    id: 'cafe-walkaround',
+    title: 'Cafe Walkaround',
+    category: 'Video Editing',
+    type: 'youtube',
+    embedUrl: 'https://www.youtube.com/embed/g5gzHASupoY?enablejsapi=1&mute=1&rel=0&modestbranding=1',
+    permalink: 'https://www.youtube.com/watch?v=g5gzHASupoY',
+  },
+  {
+    id: 'restaurant-video',
     title: 'Restaurant Video',
     category: 'Reels',
     type: 'instagram',
-    permalink: 'https://www.instagram.com/reel/C3_a1M5oA4Y/',
-    poster: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1934&auto=format&fit=crop'
+    embedUrl: 'https://www.instagram.com/reel/Da5FUyzvW0a/',
+    permalink: 'https://www.instagram.com/reel/Da5FUyzvW0a/?igsh=OWJqYWF3Nm85Ym94',
   },
   {
-    id: '2',
+    id: 'real-estate-reel',
     title: 'Real Estate Reel',
     category: 'Video Editing',
     type: 'youtube',
-    embedUrl: 'https://www.youtube.com/embed/s9j8g8h6P5w?si=T7R4C98Vw0Y_H5h',
-    poster: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop'
+    embedUrl: 'https://www.youtube.com/embed/cx6V1vOEKwg?enablejsapi=1&mute=1&rel=0&modestbranding=1',
+    permalink: 'https://www.youtube.com/watch?v=cx6V1vOEKwg',
   },
   {
-    id: '3',
-    title: 'Brand Story',
-    category: 'Cinematography',
-    type: 'youtube',
-    embedUrl: 'https://www.youtube.com/embed/a9h8h8h6P5w?si=T7R4C98Vw0Y_H5h',
-    poster: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2071&auto=format&fit=crop'
+    id: 'event-introduction',
+    title: 'Event Introduction',
+    category: 'Reels',
+    type: 'instagram',
+    embedUrl: 'https://www.instagram.com/reel/DUas6bxkQcw/',
+    permalink: 'https://www.instagram.com/reel/DUas6bxkQcw/?utm_source=ig_web_copy_link',
   },
   {
-    id: '4',
-    title: 'Cafe Promo',
+    id: 'social-media-campaign',
+    title: 'Social Media Campaign',
     category: 'Social Media',
     type: 'instagram',
-    permalink: 'https://www.instagram.com/reel/C2_a1M5oA4Y/',
-    poster: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2047&auto=format&fit=crop'
-  }
+    embedUrl: 'https://www.instagram.com/reel/DbDwgafPS12/',
+    permalink: 'https://www.instagram.com/reel/DbDwgafPS12/?utm_source=ig_web_button_share_sheet',
+  },
 ];
