@@ -15,3 +15,5 @@ export default defineConfig({
     sourcemap: true,
   },
 });
+
+// Restart Vite server to pickup Tailwind v4 @theme changes

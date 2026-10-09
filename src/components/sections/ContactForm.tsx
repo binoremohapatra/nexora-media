@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { ArrowUpRight, Check, CheckCircle2, Loader2, X } from 'lucide-react';
-import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { Textarea } from '../ui/Textarea';
 import { Label } from '../ui/Label';
@@ -46,7 +45,7 @@ function Field({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <div className={cn('flex w-full flex-col gap-2', className)}>{children}</div>;
+  return <div className={`flex w-full flex-col gap-2 ${className || ''}`}>{children}</div>;
 }
 
 function Chip({
@@ -60,22 +59,19 @@ function Chip({
   onToggle: () => void;
   role: 'checkbox' | 'radio';
 }) {
+  const baseClasses = 'inline-flex h-10 items-center gap-1.5 rounded-full border px-4 text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface';
+  const selectedClasses = 'border-accent bg-accent text-white';
+  const unselectedClasses = 'border-input-border bg-input-bg text-ink-muted hover:border-ink-muted hover:text-ink';
+  
   return (
     <button
       type="button"
       role={role}
       aria-checked={selected}
       onClick={onToggle}
-      className={cn(
-        'inline-flex h-10 items-center gap-1.5 rounded-full border px-4 text-sm font-medium',
-        'transition-colors duration-200 motion-reduce:transition-none',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]',
-        selected
-          ? 'border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_14%,transparent)] text-[var(--ink)]'
-          : 'border-[var(--border)] bg-transparent text-[var(--ink-muted)] hover:border-[var(--ink-muted)] hover:text-[var(--ink)]'
-      )}
+      className={`${baseClasses} ${selected ? selectedClasses : unselectedClasses}`}
     >
-      {selected && <Check size={14} strokeWidth={3} className="text-[var(--accent)]" />}
+      {selected && <Check size={14} strokeWidth={3} className="text-white" />}
       {label}
     </button>
   );
@@ -84,7 +80,7 @@ function Chip({
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p id={id} role="alert" className="text-sm font-medium text-red-600 dark:text-red-400">
+    <p id={id} role="alert" className="text-sm font-medium text-red-500">
       {message}
     </p>
   );
@@ -164,7 +160,7 @@ export function ContactForm() {
 
         {/* ---- About you ---- */}
         <fieldset className="flex flex-col gap-6 border-0 p-0">
-          <legend className="mb-6 font-display text-xl font-semibold text-[var(--ink)]">
+          <legend className="mb-6 font-display text-2xl font-semibold text-ink">
             About you
           </legend>
 
@@ -221,13 +217,13 @@ export function ContactForm() {
 
         {/* ---- What you need ---- */}
         <fieldset className="flex flex-col gap-8 border-0 p-0">
-          <legend className="mb-6 font-display text-xl font-semibold text-[var(--ink)]">
+          <legend className="mb-6 font-display text-2xl font-semibold text-ink">
             What you need
           </legend>
 
           <Field>
-            <span id="services-label" className="text-sm font-medium text-[var(--ink)]">
-              Services <span className="font-normal text-[var(--ink-muted)]">(pick one or more)</span>
+            <span id="services-label" className="text-sm font-medium text-ink">
+              Services <span className="font-normal text-ink-muted">(pick one or more)</span>
             </span>
             <div
               id="services-group"
@@ -250,8 +246,8 @@ export function ContactForm() {
           </Field>
 
           <Field>
-            <span id="budget-label" className="text-sm font-medium text-[var(--ink)]">
-              Budget <span className="font-normal text-[var(--ink-muted)]">(optional)</span>
+            <span id="budget-label" className="text-sm font-medium text-ink">
+              Budget <span className="font-normal text-ink-muted">(optional)</span>
             </span>
             <div
               role="radiogroup"
@@ -274,12 +270,11 @@ export function ContactForm() {
             <div className="flex items-baseline justify-between">
               <Label htmlFor="Message">Tell us about the project</Label>
               <span
-                className={cn(
-                  'text-xs tabular-nums',
+                className={`text-xs tabular-nums ${
                   message.length > MESSAGE_LIMIT - 40
-                    ? 'text-red-600 dark:text-red-400'
-                    : 'text-[var(--ink-muted)]'
-                )}
+                    ? 'text-red-500'
+                    : 'text-ink-muted'
+                }`}
               >
                 {message.length}/{MESSAGE_LIMIT}
               </span>
@@ -302,7 +297,7 @@ export function ContactForm() {
           {status === 'error' && (
             <div
               role="alert"
-              className="rounded-[var(--radius-sm)] border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-900/60 dark:bg-red-950/30 dark:text-red-300"
+              className="rounded-[12px] border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-500"
             >
               <p className="font-medium">{errorMsg}</p>
               <a
@@ -319,14 +314,7 @@ export function ContactForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className={cn(
-              'group inline-flex h-14 w-full items-center justify-center gap-2 rounded-full px-8',
-              'bg-[var(--ink)] text-[var(--bg)] font-medium',
-              'transition-[transform,opacity] duration-200 motion-reduce:transition-none',
-              'hover:opacity-90 active:scale-[0.99]',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]',
-              'disabled:cursor-not-allowed disabled:opacity-60'
-            )}
+            className={`group inline-flex h-14 w-full items-center justify-center gap-2 rounded-full px-8 bg-ink text-bg font-medium transition-all duration-200 hover:bg-accent hover:text-white active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:cursor-not-allowed disabled:opacity-60`}
           >
             {isSubmitting ? (
               <>
@@ -344,13 +332,13 @@ export function ContactForm() {
             )}
           </button>
 
-          <p className="text-center text-sm text-[var(--ink-muted)]">
+          <p className="text-center text-sm text-ink-muted">
             We reply within 24 hours. Prefer chatting?{' '}
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--ink)] underline underline-offset-4"
+              className="text-ink underline underline-offset-4 hover:text-accent transition-colors"
             >
               Open WhatsApp
             </a>
@@ -364,27 +352,29 @@ export function ContactForm() {
         onOpenChange={(open) => !open && setStatus('idle')}
       >
         <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 z-[200] bg-black/50 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-          <Dialog.Content className="fixed left-1/2 top-1/2 z-[201] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-[var(--radius-xl)] border border-[var(--border)] bg-[var(--bg)] p-8 shadow-2xl duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+          <Dialog.Overlay className="fixed inset-0 z-[200] bg-[rgba(0,0,0,0.5)] backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+          <Dialog.Content className="fixed left-1/2 top-1/2 z-[201] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-[var(--radius-xl)] border border-border bg-bg p-8 shadow-2xl duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
             <div className="flex flex-col items-center gap-4 text-center">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--accent)_16%,transparent)] text-[var(--accent)]">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent-dim text-accent">
                 <CheckCircle2 size={32} />
               </div>
-              <Dialog.Title className="font-display text-2xl font-bold text-[var(--ink)]">
+              <Dialog.Title className="font-display text-2xl font-bold text-ink">
                 Inquiry received
               </Dialog.Title>
-              <Dialog.Description className="text-[var(--ink-muted)]">
+              <Dialog.Description className="text-ink-muted">
                 Thanks for reaching out. We will review your project and reply within 24 hours on
                 the email or number you shared.
               </Dialog.Description>
               <Dialog.Close asChild>
-                <Button variant="primary" className="mt-2 w-full justify-center">
+                <button
+                  className="mt-2 flex w-full items-center justify-center rounded-[12px] bg-accent text-white px-4 h-12 font-medium transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                >
                   Close
-                </Button>
+                </button>
               </Dialog.Close>
             </div>
             <Dialog.Close
-              className="absolute right-4 top-4 rounded-sm p-1 opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+              className="absolute right-4 top-4 rounded-sm p-1 text-ink-muted opacity-70 transition-opacity hover:opacity-100 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               aria-label="Close"
             >
               <X className="h-4 w-4" />

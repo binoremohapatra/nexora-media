@@ -1,56 +1,17 @@
 import React from "react";
 import { cn } from "../../lib/utils";
-import { useMotionTemplate, useMotionValue, motion } from "motion/react";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
-    const radius = 100;
-    const [visible, setVisible] = React.useState(false);
-
-    let mouseX = useMotionValue(0);
-    let mouseY = useMotionValue(0);
-
-    function handleMouseMove({ currentTarget, clientX, clientY }: any) {
-      let { left, top } = currentTarget.getBoundingClientRect();
-      mouseX.set(clientX - left);
-      mouseY.set(clientY - top);
-    }
-    
     return (
-      <motion.div
-        style={{
-          background: useMotionTemplate`
-        radial-gradient(
-          ${visible ? radius + "px" : "0px"} circle at ${mouseX}px ${mouseY}px,
-          var(--blue-500, #3b82f6),
-          transparent 80%
-        )
-      `,
-        }}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setVisible(true)}
-        onMouseLeave={() => setVisible(false)}
-        className="p-[2px] rounded-[var(--radius-sm)] transition duration-300 group/input"
-      >
-        <input
-          type={type}
-          className={cn(
-            `flex h-12 w-full border-none bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-input rounded-[calc(var(--radius-sm)-2px)] px-4 py-2 text-sm
-          file:border-0 file:bg-transparent file:text-sm file:font-medium 
-          placeholder:text-zinc-400 dark:placeholder:text-zinc-600 
-          focus-visible:outline-none focus-visible:ring-[2px] focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-600
-           disabled:cursor-not-allowed disabled:opacity-50
-           dark:shadow-[0px_0px_1px_1px_var(--neutral-700)]
-           group-hover/input:shadow-none transition duration-400
-           `,
-            className
-          )}
-          ref={ref}
-          {...props}
-        />
-      </motion.div>
+      <input
+        type={type}
+        className={`flex h-12 w-full px-4 py-2 text-base transition-colors duration-200 rounded-[12px] bg-input-bg border border-input-border text-ink placeholder:text-ink-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:border-accent disabled:cursor-not-allowed disabled:opacity-50 ${className || ''}`}
+        ref={ref}
+        {...props}
+      />
     );
   }
 );
