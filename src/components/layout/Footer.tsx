@@ -41,15 +41,14 @@ export function Footer() {
       <div className="container">
         {/* Large wordmark */}
         <div
+          className="text-[var(--ink)] opacity-[0.08] hover:text-[var(--accent)] hover:opacity-100 transition-all duration-500"
           style={{
             fontFamily: 'var(--font-display)',
             fontWeight: 700,
             fontSize: 'clamp(2.5rem, 8vw, 7rem)',
             letterSpacing: '-0.04em',
             lineHeight: 1,
-            color: 'var(--ink)',
             marginBottom: 'clamp(2rem, 5vw, 4rem)',
-            opacity: 0.08,
             userSelect: 'none',
           }}
           aria-hidden="true"

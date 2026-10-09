@@ -5,37 +5,19 @@ import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const WHATSAPP_URL = "https://wa.me/918882722257?text=Hi%20Nexora%20Media,%20I'm%20interested%20in%20your%20services.";
 
-// Marquee of service keywords for the editorial strip below hero headline
 const KEYWORDS = [
   'Video Editing', 'Branding', 'Reels', 'Social Media',
   'Meta Ads', 'Photography', 'Graphic Design', 'Logo Design',
   'Google Ads', 'Websites', 'SEO', 'Videography',
 ];
 
-/**
- * Hero section — the first creative statement.
- * Editorial large headline in Clash Display.
- * No fake video/showreel: no local file exists.
- * Art-directed composition with large accent numbers and staggered reveal.
- */
 export function Hero() {
   const prefersReduced = useReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    if (prefersReduced || !headlineRef.current) return;
-
-    const lines = headlineRef.current.querySelectorAll<HTMLElement>('.hero-line');
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-    tl.fromTo(
-      lines,
-      { y: '110%', opacity: 0 },
-      { y: '0%', opacity: 1, duration: 0.9, stagger: 0.12 }
-    );
-
-    return () => { tl.kill(); };
+    // Keep empty or remove if not needed, GSAP logic removed
   }, [prefersReduced]);
 
   const containerVariants = {
@@ -66,7 +48,8 @@ export function Hero() {
         minHeight: '100svh',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'flex-end',
+        justifyContent: 'center', // Changed to center vertically
+        alignItems: 'center', // Changed to center horizontally
         paddingBottom: 'clamp(3rem, 8vw, 6rem)',
         paddingTop: 'clamp(7rem, 15vw, 11rem)',
         overflow: 'hidden',
@@ -87,74 +70,64 @@ export function Hero() {
             transition: 'filter 0.5s ease, opacity 0.5s ease'
           }}
         >
-          {/* PC Aspect (Horizontal) */}
-          <source src="https://videos.pexels.com/video-files/3129977/3129977-hd_1920_1080_30fps.mp4" media="(min-width: 768px)" type="video/mp4" />
-          {/* Mobile Aspect (Vertical/Fallback) */}
           <source src="https://videos.pexels.com/video-files/3129977/3129977-hd_1920_1080_30fps.mp4" type="video/mp4" />
         </video>
-        
-        {/* Dynamic gradient overlay that uses the actual theme background color to fade seamlessly */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)]/50 via-[var(--bg)]/20 to-[var(--bg)] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)]/40 via-transparent to-[var(--bg)] pointer-events-none" />
       </div>
 
-      <div className="container" style={{ position: 'relative', zIndex: 10 }}>
+      <div className="container" style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
         {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className="eyebrow"
-          style={{ marginBottom: '1.5rem' }}
+          style={{ marginBottom: '1.5rem', background: 'var(--surface)', padding: '0.5rem 1rem', borderRadius: '999px', border: '1px solid var(--border-subtle)' }}
         >
           Creative Studio · India
         </motion.p>
 
-        {/* Main headline — clipped lines for GSAP reveal */}
-        <h1
-          ref={headlineRef}
+        {/* Main headline */}
+        <motion.h1
           id="hero-title"
+          variants={parent}
+          initial="hidden"
+          animate="visible"
           style={{
             fontFamily: 'var(--font-display)',
             fontSize: 'var(--fs-display)',
             fontWeight: 700,
             letterSpacing: '-0.03em',
-            lineHeight: 1.0,
+            lineHeight: 1.05,
             color: 'var(--ink)',
             marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)',
-            maxWidth: '14ch',
+            maxWidth: '16ch',
           }}
         >
-          {['Make them', 'stop', 'scrolling.'].map((line, i) => (
+          {['Make them', 'stop scrolling.'].map((line, i) => (
             <span
               key={i}
               style={{ display: 'block', overflow: 'hidden' }}
             >
-              <span
-                className="hero-line"
+              <motion.span
+                variants={child}
                 style={{
                   display: 'block',
-                  opacity: prefersReduced ? 1 : 0,
+                  color: line.includes('stop') ? 'var(--accent)' : 'var(--ink)'
                 }}
               >
-                {line === 'stop' ? (
-                  <>
-                    {line}{' '}
-                    <span style={{ color: 'var(--accent)', fontStyle: 'italic' }}>
-                      {/* accent line */}
-                    </span>
-                  </>
-                ) : line}
-              </span>
+                {line}
+              </motion.span>
             </span>
           ))}
-        </h1>
+        </motion.h1>
 
         {/* Supporting copy + CTAs */}
         <motion.div
           variants={parent}
           initial="hidden"
           animate="visible"
-          style={{ maxWidth: 680 }}
+          style={{ maxWidth: 680, display: 'flex', flexDirection: 'column', alignItems: 'center' }}
         >
           <motion.p
             variants={child}
@@ -167,13 +140,13 @@ export function Hero() {
             }}
           >
             Nexora Media helps cafes, restaurants, real-estate brands,
-            and growing businesses grow through creative content,
+            and growing businesses dominate through premium content,
             branding, social media, and modern digital experiences.
           </motion.p>
 
           <motion.div
             variants={child}
-            style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: 'clamp(3rem, 8vw, 5rem)' }}
+            style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginBottom: 'clamp(3rem, 8vw, 5rem)' }}
           >
             <a
               href={WHATSAPP_URL}
@@ -183,20 +156,19 @@ export function Hero() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.5rem',
-                padding: '0.875rem 1.75rem',
+                padding: '1rem 2rem',
                 background: 'var(--accent)',
                 color: '#fff',
                 borderRadius: 999,
-                fontSize: 'var(--fs-small)',
+                fontSize: '1rem',
                 fontWeight: 600,
                 textDecoration: 'none',
                 transition: 'background 0.2s, transform 0.15s',
-                letterSpacing: '0.01em',
               }}
               onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--accent-hover)')}
               onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--accent)')}
             >
-              Get a Quote <span aria-hidden="true">↗</span>
+              Start a Project <span aria-hidden="true">↗</span>
             </a>
             <a
               href="#work"
@@ -208,12 +180,13 @@ export function Hero() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.5rem',
-                padding: '0.875rem 1.75rem',
+                padding: '1rem 2rem',
                 border: '1px solid var(--border)',
+                background: 'var(--surface)',
                 color: 'var(--ink)',
                 borderRadius: 999,
-                fontSize: 'var(--fs-small)',
-                fontWeight: 500,
+                fontSize: '1rem',
+                fontWeight: 600,
                 textDecoration: 'none',
                 transition: 'border-color 0.2s, color 0.2s',
               }}
@@ -239,9 +212,10 @@ export function Hero() {
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: '0.5rem',
-            borderTop: '1px solid var(--border-subtle)',
+            justifyContent: 'center',
+            gap: '0.75rem',
             paddingTop: '1.5rem',
+            maxWidth: '800px'
           }}
           aria-label="Services offered by Nexora Media"
         >
@@ -252,15 +226,22 @@ export function Hero() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.375rem',
-                padding: '0.3rem 0.75rem',
+                padding: '0.5rem 1rem',
                 background: 'var(--bg-alt)',
                 border: '1px solid var(--border-subtle)',
                 borderRadius: 999,
-                fontSize: 'var(--fs-micro)',
+                fontSize: '0.875rem',
                 fontWeight: 500,
                 color: 'var(--ink-muted)',
-                letterSpacing: '0.04em',
                 transition: 'border-color 0.2s, color 0.2s',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--accent)';
+                e.currentTarget.style.color = 'var(--accent)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                e.currentTarget.style.color = 'var(--ink-muted)';
               }}
             >
               {kw}

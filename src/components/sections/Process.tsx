@@ -1,51 +1,77 @@
 import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SectionLabel } from '../ui/SectionLabel';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { SpotlightCard } from '../ui/SpotlightCard';
-import { SplitText } from '../ui/SplitText';
-import { Compass, PenTool, Sparkles, Sliders, Rocket } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const steps = [
-  { icon: Compass, label: 'Discover', desc: 'We dive deep to understand your business, audience, goals, competitors, and current digital presence.' },
-  { icon: PenTool, label: 'Define', desc: 'We create a solid strategy, content direction, timeline, and conversion path before production even starts.' },
-  { icon: Sparkles, label: 'Create', desc: 'We craft visuals, pages, reels, campaigns, and brand assets using our premium creative system.' },
-  { icon: Sliders, label: 'Refine', desc: 'We publish, heavily test, optimize, and ensure every single experience works buttery-smooth across all devices.' },
-  { icon: Rocket, label: 'Deliver', desc: 'We review performance, improve the creative direction, and help your brand scale aggressively and steadily.' }
+  { label: 'Discovery', eyebrow: 'STEP 1', desc: 'We dive deep to understand your business, audience, goals, competitors and current digital presence.' },
+  { label: 'Planning', eyebrow: 'STEP 2', desc: 'We create a strategy, content direction, timeline and conversion path before production starts.' },
+  { label: 'Design & Create', eyebrow: 'STEP 3', desc: 'We craft visuals, pages, reels, campaigns and brand assets with a premium creative system.' },
+  { label: 'Refine & Test', eyebrow: 'STEP 4', desc: 'We publish, heavily test, optimize, and ensure every single experience works buttery-smooth across all devices.' },
+  { label: 'Launch & Scale', eyebrow: 'STEP 5', desc: 'We review performance, improve the creative direction, and help your brand scale aggressively and steadily.' }
 ];
 
 export function Process() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const prefersReduced = useReducedMotion();
-
+  
   useEffect(() => {
     if (prefersReduced || !containerRef.current) return;
 
-    const isDesktop = window.innerWidth >= 768;
-    if (!isDesktop) return;
-
     const ctx = gsap.context(() => {
-      const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
-      if (cards.length === 0) return;
+      // Animate the vertical line growing
+      gsap.fromTo('.timeline-line-fill', 
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: 'none',
+          transformOrigin: 'top center',
+          scrollTrigger: {
+            trigger: '.timeline-container',
+            start: 'top 50%',
+            end: 'bottom 70%',
+            scrub: true,
+          }
+        }
+      );
 
-      cards.forEach((card, index) => {
-        if (index < cards.length - 1) {
-          gsap.to(card, {
-            scale: 0.9,
-            opacity: 0.3,
+      // Animate each node
+      gsap.utils.toArray('.step-node').forEach((node: any) => {
+        gsap.fromTo(node,
+          { opacity: 0, scale: 0.5 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            ease: 'back.out(1.5)',
+            scrollTrigger: {
+              trigger: node,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse'
+            }
+          }
+        );
+      });
+
+      // Animate each card
+      gsap.utils.toArray('.step-card').forEach((card: any) => {
+        gsap.fromTo(card,
+          { opacity: 0, x: 40 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            ease: 'power3.out',
             scrollTrigger: {
               trigger: card,
-              start: "top 12%",
-              end: "bottom -100%",
-              scrub: true,
-              invalidateOnRefresh: true,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse'
             }
-          });
-        }
+          }
+        );
       });
     }, containerRef);
 
@@ -53,62 +79,78 @@ export function Process() {
   }, [prefersReduced]);
 
   return (
-    <section id="process" ref={containerRef} aria-labelledby="process-title" className="section bg-[var(--bg)] relative overflow-hidden">
-      <div className="container max-w-5xl relative z-10">
-        <div className="mb-16 md:mb-24">
-          <SectionLabel className="mb-6">The Process</SectionLabel>
-          <h2 id="process-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 700, letterSpacing: '-0.03em', color: 'var(--ink)', lineHeight: 1.1 }}>
-            <SplitText text="How we build premium brands." delay={0.2} />
-          </h2>
-        </div>
+    <section id="process" ref={containerRef} aria-labelledby="process-title" className="section bg-[var(--bg)] relative overflow-hidden py-20 md:py-32">
+      <div className="container max-w-7xl relative z-10 px-6 md:px-8">
         
-        <div className="flex flex-col gap-8 md:gap-16">
-          {steps.map((step, i) => {
-            const Icon = step.icon;
-            return (
-              <SpotlightCard
-                key={i}
-                ref={(el: HTMLDivElement | null) => { cardsRef.current[i] = el; }}
-                className="md:sticky p-8 md:p-12 lg:p-16 rounded-[var(--radius-xl)] bg-[var(--surface)] border border-[var(--border-subtle)] shadow-xl origin-top overflow-hidden"
-                style={{ 
-                  top: `calc(12% + ${i * 2}rem)`,
-                  zIndex: i,
-                }}
-              >
-                {/* Huge Background Number Watermark */}
-                <div 
-                  className="absolute -bottom-8 -right-4 md:-bottom-12 md:-right-8 text-[12rem] md:text-[20rem] font-black leading-none pointer-events-none select-none z-0"
-                  style={{ 
-                    color: 'var(--ink)', 
-                    opacity: 0.03,
-                    fontFamily: 'var(--font-display)' 
-                  }}
-                >
-                  0{i+1}
-                </div>
-
-                <div className="relative z-10 flex flex-col md:flex-row gap-6 md:gap-12 items-start pointer-events-none">
-                  {/* Icon Container - Glassmorphic Gradient */}
-                  <div className="w-16 h-16 md:w-24 md:h-24 shrink-0 bg-gradient-to-br from-[var(--accent-dim)] to-transparent border border-[var(--border-subtle)] rounded-full flex items-center justify-center backdrop-blur-sm shadow-inner">
-                    <Icon className="w-8 h-8 md:w-10 md:h-10 text-[var(--accent)]" strokeWidth={1.5} />
+        {/* Bulletproof CSS Grid perfectly matched to github repo minmax layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(260px,0.42fr)_minmax(0,1fr)] gap-12 lg:gap-[clamp(36px,6vw,82px)] items-start">
+          
+          {/* Left Column - Sticky Heading */}
+          <div className="lg:sticky lg:top-40">
+            <div className="flex items-center gap-3 mb-6 md:mb-8">
+              <div className="w-6 h-px bg-[var(--accent)]" />
+              <span className="text-[var(--accent)] font-bold tracking-[0.2em] text-xs uppercase">Our Process</span>
+            </div>
+            <h2 
+              id="process-title" 
+              className="text-[var(--ink)] font-bold leading-[1.05] tracking-tight"
+              style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}
+            >
+              A simple, <br className="hidden lg:block"/>
+              premium <br className="hidden lg:block"/>
+              workflow <br className="hidden lg:block"/>
+              from idea <br className="hidden lg:block"/>
+              to launch <br className="hidden lg:block"/>
+              and <br className="hidden lg:block"/>
+              growth.
+            </h2>
+          </div>
+          
+          {/* Right Column - Timeline */}
+          <div className="relative timeline-container w-full">
+            {/* Vertical Line Background (matches center of 4rem node) */}
+            <div className="absolute left-[1.75rem] md:left-[2rem] top-8 bottom-8 w-px bg-[var(--border-subtle)] -translate-x-1/2 hidden sm:block z-0" />
+            
+            {/* Vertical Line Animated Fill */}
+            <div className="absolute left-[1.75rem] md:left-[2rem] top-8 bottom-8 w-px bg-[var(--accent)] -translate-x-1/2 hidden sm:block z-0 timeline-line-fill origin-top" />
+            
+            <div className="flex flex-col gap-8 md:gap-10 relative z-10 w-full">
+              {steps.map((step, i) => (
+                <div key={i} className="grid grid-cols-[3.5rem_minmax(0,1fr)] md:grid-cols-[4rem_minmax(0,1fr)] gap-5 md:gap-8 items-start relative group">
+                  
+                  {/* Timeline Node */}
+                  <div className="step-node w-14 h-14 md:w-16 md:h-16 shrink-0 bg-[var(--accent)] rounded-full flex items-center justify-center text-white font-bold text-lg shadow-[0_0_30px_var(--accent-dim)] relative z-10">
+                    0{i+1}
                   </div>
                   
-                  {/* Content */}
-                  <div className="flex-1 mt-2">
-                    <div className="flex items-center gap-4 mb-4">
-                      <span className="text-[var(--accent)] font-mono font-bold text-lg md:text-xl">0{i+1} //</span>
-                      <h3 className="text-3xl md:text-5xl font-bold text-[var(--ink)]" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
-                        {step.label}
-                      </h3>
+                  {/* Card */}
+                  <SpotlightCard 
+                    className="step-card bg-white dark:bg-[var(--surface)] border border-[var(--border-subtle)] rounded-2xl md:rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] relative group-hover:border-[var(--accent-dim)] group-hover:shadow-[0_20px_60px_-15px_rgba(37,99,235,0.15)] group-hover:-translate-y-1 transition-all duration-500 box-border"
+                    style={{ padding: 'clamp(2rem, 5vw, 3.5rem)' }}
+                    spotlightColor="rgba(37, 99, 235, 0.08)"
+                  >
+                    
+                    {/* Card Eyebrow */}
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-6 h-px bg-[var(--ink-muted)] opacity-50" />
+                      <span className="text-[var(--ink-muted)] font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase">{step.eyebrow}</span>
                     </div>
-                    <p className="text-[var(--ink-muted)] text-lg md:text-2xl leading-relaxed max-w-2xl">
+                    
+                    {/* Card Title */}
+                    <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-[var(--ink)] mb-3 md:mb-4" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
+                      {step.label}
+                    </h3>
+                    
+                    {/* Card Description */}
+                    <p className="text-[var(--ink-muted)] text-sm md:text-base lg:text-lg leading-relaxed relative z-10">
                       {step.desc}
                     </p>
-                  </div>
+                  </SpotlightCard>
                 </div>
-              </SpotlightCard>
-            );
-          })}
+              ))}
+            </div>
+          </div>
+          
         </div>
       </div>
     </section>

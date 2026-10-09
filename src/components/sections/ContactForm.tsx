@@ -42,15 +42,15 @@ export function ContactForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6 md:gap-8">
         {/* Web3Forms Hidden Fields */}
         <input type="hidden" name="access_key" value={ACCESS_KEY} />
         <input type="hidden" name="subject" value="New Nexora Media Website Inquiry" />
         <input type="hidden" name="from_name" value="Nexora Media Website" />
         <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className="flex flex-col gap-1.5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="flex flex-col gap-2">
             <label htmlFor="FullName" className="text-sm font-medium text-[var(--ink)]">Full Name</label>
             <input
               id="FullName"
@@ -58,10 +58,10 @@ export function ContactForm() {
               type="text"
               required
               placeholder="Jane Doe"
-              className="w-full px-4 py-3 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-2 focus:ring-[var(--input-focus)] focus:border-transparent transition-shadow text-[var(--ink)]"
+              className="w-full px-4 py-4 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-2 focus:ring-[var(--input-focus)] focus:border-transparent transition-shadow text-[var(--ink)]"
             />
           </div>
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-2">
             <label htmlFor="CompanyName" className="text-sm font-medium text-[var(--ink)]">Company Name</label>
             <input
               id="CompanyName"
@@ -69,13 +69,13 @@ export function ContactForm() {
               type="text"
               required
               placeholder="Your Brand"
-              className="w-full px-4 py-3 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-2 focus:ring-[var(--input-focus)] focus:border-transparent transition-shadow text-[var(--ink)]"
+              className="w-full px-4 py-4 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-2 focus:ring-[var(--input-focus)] focus:border-transparent transition-shadow text-[var(--ink)]"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className="flex flex-col gap-1.5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="flex flex-col gap-2">
             <label htmlFor="EmailAddress" className="text-sm font-medium text-[var(--ink)]">Email Address</label>
             <input
               id="EmailAddress"
@@ -83,10 +83,10 @@ export function ContactForm() {
               type="email"
               required
               placeholder="jane@example.com"
-              className="w-full px-4 py-3 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-2 focus:ring-[var(--input-focus)] focus:border-transparent transition-shadow text-[var(--ink)]"
+              className="w-full px-4 py-4 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-2 focus:ring-[var(--input-focus)] focus:border-transparent transition-shadow text-[var(--ink)]"
             />
           </div>
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-2">
             <label htmlFor="PhoneNumber" className="text-sm font-medium text-[var(--ink)]">Phone Number</label>
             <input
               id="PhoneNumber"
@@ -94,18 +94,18 @@ export function ContactForm() {
               type="tel"
               required
               placeholder="+91 0000000000"
-              className="w-full px-4 py-3 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-2 focus:ring-[var(--input-focus)] focus:border-transparent transition-shadow text-[var(--ink)]"
+              className="w-full px-4 py-4 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-2 focus:ring-[var(--input-focus)] focus:border-transparent transition-shadow text-[var(--ink)]"
             />
           </div>
         </div>
 
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-2">
           <label htmlFor="ServiceRequired" className="text-sm font-medium text-[var(--ink)]">Service Required</label>
           <select
             id="ServiceRequired"
             name="Service Required"
             required
-            className="w-full px-4 py-3 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-2 focus:ring-[var(--input-focus)] focus:border-transparent transition-shadow text-[var(--ink)] appearance-none"
+            className="w-full px-4 py-4 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-2 focus:ring-[var(--input-focus)] focus:border-transparent transition-shadow text-[var(--ink)] appearance-none"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
               backgroundRepeat: 'no-repeat',
@@ -129,13 +129,13 @@ export function ContactForm() {
           </select>
         </div>
 
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-2">
           <label htmlFor="EstimatedBudget" className="text-sm font-medium text-[var(--ink)]">Estimated Budget (Optional but helpful)</label>
           <select
             id="EstimatedBudget"
             name="Estimated Budget"
             required
-            className="w-full px-4 py-3 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-2 focus:ring-[var(--input-focus)] focus:border-transparent transition-shadow text-[var(--ink)] appearance-none"
+            className="w-full px-4 py-4 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-2 focus:ring-[var(--input-focus)] focus:border-transparent transition-shadow text-[var(--ink)] appearance-none"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
               backgroundRepeat: 'no-repeat',
@@ -152,7 +152,7 @@ export function ContactForm() {
           </select>
         </div>
 
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-2">
           <label htmlFor="Message" className="text-sm font-medium text-[var(--ink)]">Project Details</label>
           <textarea
             id="Message"
@@ -160,7 +160,7 @@ export function ContactForm() {
             required
             rows={4}
             placeholder="Tell us about your brand, goals, and what you need help with."
-            className="w-full px-4 py-3 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-2 focus:ring-[var(--input-focus)] focus:border-transparent transition-shadow text-[var(--ink)] resize-y"
+            className="w-full px-4 py-4 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-[var(--radius-sm)] focus:outline-none focus:ring-2 focus:ring-[var(--input-focus)] focus:border-transparent transition-shadow text-[var(--ink)] resize-y"
           />
         </div>
 

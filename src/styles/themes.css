@@ -15,10 +15,10 @@
   --ink-faint: #9A9896;
   --border: #D9D7D3;
   --border-subtle: #E5E3DF;
-  --accent: #F05A3C;
-  --accent-hover: #D94A2E;
-  --accent-dim: rgba(240, 90, 60, 0.08);
-  --accent-dim-hover: rgba(240, 90, 60, 0.14);
+  --accent: #2563EB;
+  --accent-hover: #1D4ED8;
+  --accent-dim: rgba(37, 99, 235, 0.08);
+  --accent-dim-hover: rgba(37, 99, 235, 0.14);
 
   /* Navigation */
   --nav-bg: rgba(246, 245, 241, 0.88);
@@ -27,7 +27,7 @@
   /* Form */
   --input-bg: #FFFFFF;
   --input-border: #D9D7D3;
-  --input-focus: #F05A3C;
+  --input-focus: #2563EB;
 
   /* Shadows */
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
@@ -39,8 +39,8 @@
   --logo-dark-opacity: 0;
   
   /* Theme-aware Hero Video Settings */
-  --hero-video-filter: invert(1) contrast(1.1) brightness(1.1);
-  --hero-video-opacity: 0.15;
+  --hero-video-filter: invert(1) contrast(1.1) brightness(1.1) hue-rotate(200deg) saturate(1.5);
+  --hero-video-opacity: 0.12;
 }
 
 /* --- Dark theme -------------------------------------------- */
@@ -53,10 +53,10 @@
   --ink-faint: #5A5855;
   --border: #2A2A2D;
   --border-subtle: #1F1F22;
-  --accent: #F05A3C;
-  --accent-hover: #FF6B4D;
-  --accent-dim: rgba(240, 90, 60, 0.12);
-  --accent-dim-hover: rgba(240, 90, 60, 0.20);
+  --accent: #3B82F6;
+  --accent-hover: #60A5FA;
+  --accent-dim: rgba(59, 130, 246, 0.12);
+  --accent-dim-hover: rgba(59, 130, 246, 0.20);
 
   /* Navigation */
   --nav-bg: rgba(11, 11, 12, 0.88);
@@ -65,7 +65,7 @@
   /* Form */
   --input-bg: #141416;
   --input-border: #2A2A2D;
-  --input-focus: #F05A3C;
+  --input-focus: #3B82F6;
 
   /* Shadows */
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
@@ -77,6 +77,6 @@
   --logo-dark-opacity: 1;
 
   /* Theme-aware Hero Video Settings */
-  --hero-video-filter: contrast(1.2) brightness(0.8);
-  --hero-video-opacity: 0.4;
+  --hero-video-filter: contrast(1.2) brightness(0.9) hue-rotate(200deg) saturate(2);
+  --hero-video-opacity: 0.3;
 }

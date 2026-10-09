@@ -116,7 +116,7 @@ export function Services() {
                   fontFamily: 'var(--font-display)',
                   fontSize: 'clamp(3rem, 6vw, 5rem)',
                   fontWeight: 700,
-                  letterSpacing: '-0.03em',
+                  letterSpacing: '-0.01em',
                   color: 'var(--ink)',
                   lineHeight: 1.05,
                 }}

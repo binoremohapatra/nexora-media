@@ -3,6 +3,7 @@ import { useTheme } from './hooks/useTheme';
 import { Preloader } from './components/sections/Preloader';
 import { Navigation } from './components/layout/Navigation';
 import { Hero } from './components/sections/Hero';
+import { InstagramReels } from './components/sections/InstagramReels';
 import { Marquee } from './components/sections/Marquee';
 import { About } from './components/sections/About';
 import { Services } from './components/sections/Services';
@@ -34,6 +35,7 @@ export default function App() {
         <Marquee />
         <Services />
         <Work />
+        <InstagramReels />
         <About />
         <Process />
         <Faq />
