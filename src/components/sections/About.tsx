@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'motion/react';
 import { SectionLabel } from '../ui/SectionLabel';
+import { SplitText } from '../ui/SplitText';
+import { BlurText } from '../ui/BlurText';
 
 /**
- * About section — Phase 3 will fully implement.
- * Original copy preserved exactly.
+ * About section — Premium animated copy.
  */
 export function About() {
+  const listRef = useRef(null);
+  const isListInView = useInView(listRef, { once: true, margin: '-10% 0px' });
+
   return (
     <section
       id="about"
@@ -28,15 +33,18 @@ export function About() {
               maxWidth: '20ch',
             }}
           >
-            A creative partner for brands that want to look premium and grow with confidence.
+            <SplitText text="A creative partner for brands that want to look premium and grow with confidence." delay={0.1} />
           </h2>
-          <p style={{ fontSize: 'var(--fs-body)', color: 'var(--ink-muted)', maxWidth: '60ch', lineHeight: 1.75, marginBottom: '2.5rem' }}>
-            Nexora Media is a creative marketing agency helping businesses grow through powerful content,
-            strategic branding, social media marketing, advertising, and modern digital experiences.
-            We combine creativity, strategy, and technology to help businesses establish a strong online
-            presence and achieve measurable growth.
-          </p>
+          
+          <div style={{ fontSize: 'var(--fs-body)', color: 'var(--ink-muted)', maxWidth: '60ch', lineHeight: 1.75, marginBottom: '3.5rem' }}>
+            <BlurText 
+              text="Nexora Media is a creative marketing agency helping businesses grow through powerful content, strategic branding, social media marketing, advertising, and modern digital experiences. We combine creativity, strategy, and technology to help businesses establish a strong online presence and achieve measurable growth." 
+              delay={0.3} 
+            />
+          </div>
+
           <div
+            ref={listRef}
             role="list"
             aria-label="Nexora Media approach"
             style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
@@ -45,10 +53,13 @@ export function About() {
               { num: '01', label: 'Clear brand positioning' },
               { num: '02', label: 'Content made for attention' },
               { num: '03', label: 'Digital experiences that convert' },
-            ].map(({ num, label }) => (
-              <div
+            ].map(({ num, label }, i) => (
+              <motion.div
                 key={num}
                 role="listitem"
+                initial={{ opacity: 0, x: -20 }}
+                animate={isListInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                transition={{ duration: 0.6, delay: 0.6 + i * 0.15, ease: [0.22, 1, 0.36, 1] }}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -63,7 +74,7 @@ export function About() {
                 <strong style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'clamp(1.1rem, 2vw, 1.375rem)', color: 'var(--ink)', letterSpacing: '-0.01em' }}>
                   {label}
                 </strong>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
