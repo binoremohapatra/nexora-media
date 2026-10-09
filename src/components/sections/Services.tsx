@@ -27,12 +27,12 @@ function ServiceGroupItem({
       <button
         type="button"
         onClick={onClick}
-        className="w-full py-6 md:py-8 flex items-center justify-between text-left cursor-pointer transition-colors"
+        className="w-full py-8 md:py-12 flex items-center justify-between text-left cursor-pointer transition-colors"
       >
         <span
           style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
           className={cn(
-            'text-3xl md:text-5xl font-semibold transition-colors duration-300',
+            'text-4xl md:text-7xl font-semibold transition-colors duration-300',
             isActive ? 'text-[var(--accent)]' : 'text-[var(--ink)] group-hover/accordion:text-[var(--ink-muted)]'
           )}
         >
@@ -64,19 +64,19 @@ function ServiceGroupItem({
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <div ref={contentRef} className="pb-8 pt-2 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-x-12">
+            <div ref={contentRef} className="pb-10 pt-4 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-x-16">
               {groupServices.map((service) => (
-                <div key={service.id} className="relative pl-6 md:pl-8 border-l border-[var(--accent-dim)]">
-                  <span className="absolute top-1 left-0 text-[10px] font-mono text-[var(--accent)] rotate-[-90deg] origin-top-left -translate-x-full mt-2">
+                <div key={service.id} className="relative pl-6 md:pl-8 border-l-2 border-[var(--accent-dim)]">
+                  <span className="absolute top-1.5 left-0 text-[10px] font-mono text-[var(--accent)] rotate-[-90deg] origin-top-left -translate-x-full mt-2">
                     {service.number}
                   </span>
                   <h4
-                    className="text-xl font-semibold text-[var(--ink)] mb-2"
+                    className="text-2xl md:text-3xl font-semibold text-[var(--ink)] mb-3 tracking-tight"
                     style={{ fontFamily: 'var(--font-display)' }}
                   >
                     {service.name}
                   </h4>
-                  <p className="text-[var(--ink-muted)] leading-relaxed text-sm md:text-base">
+                  <p className="text-[var(--ink-muted)] leading-relaxed text-base md:text-lg">
                     {service.description}
                   </p>
                 </div>
