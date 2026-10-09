@@ -26,17 +26,23 @@ const INSTAGRAM_LINKS = [
   "https://www.instagram.com/nexoramediain.in/reel/DbVqe_zKqBh/"
 ];
 
+// 1.jpg, 4.jpg, 13.jpg, 21.jpg, 22.jpg were identical fallback thumbnails that caused duplicates in the UI.
+const EXCLUDED_INDICES = [3, 12, 20, 21]; // 0-based indices for 4, 13, 21, 22
+
 // Use the actual Instagram thumbnails we downloaded via Microlink API
-const items = INSTAGRAM_LINKS.map((url, index) => {
-  const isReel = url.includes('/reel/');
-  return {
-    src: `/images/instagram/${index + 1}.jpg?v=2`,
-    alt: `Nexora Media Instagram ${isReel ? 'Reel' : 'Post'} ${index + 1}`,
-    title: isReel ? 'Reel' : 'Post',
-    subtitle: 'Instagram',
-    url: url
-  };
-});
+const items = INSTAGRAM_LINKS
+  .map((url, index) => ({ url, index }))
+  .filter(({ index }) => !EXCLUDED_INDICES.includes(index))
+  .map(({ url, index }) => {
+    const isReel = url.includes('/reel/');
+    return {
+      src: `/images/instagram/${index + 1}.jpg?v=2`,
+      alt: `Nexora Media Instagram ${isReel ? 'Reel' : 'Post'} ${index + 1}`,
+      title: isReel ? 'Reel' : 'Post',
+      subtitle: 'Instagram',
+      url: url
+    };
+  });
 
 export function InstagramReels() {
   const handleItemClick = (item: any) => {

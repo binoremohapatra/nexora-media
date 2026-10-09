@@ -34,7 +34,7 @@ export function Contact() {
     <section id="contact" aria-labelledby="contact-title" className="section bg-[var(--bg)]">
       <div className="container max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          
+
           {/* Contact Details Column */}
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
@@ -57,7 +57,7 @@ export function Contact() {
                   <CopyButton value="teamnexoramediain@gmail.com" label="email address" />
                 </div>
               </div>
-              
+
               <div>
                 <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--ink-faint)] mb-3 font-body">Phone</h3>
                 <div className="flex items-center gap-3">
@@ -70,9 +70,9 @@ export function Contact() {
 
               <div>
                 <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--ink-faint)] mb-3 font-body">Quick Chat</h3>
-                <a 
-                  href="https://wa.me/918882722257?text=Hi%20Nexora%20Media,%20I'm%20interested%20in%20your%20services." 
-                  target="_blank" 
+                <a
+                  href="https://wa.me/918882722257?text=Hi%20Nexora%20Media,%20I'm%20interested%20in%20your%20services."
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-lg font-medium text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors"
                 >
@@ -81,7 +81,7 @@ export function Contact() {
               </div>
             </div>
           </div>
-          
+
           {/* Form Column */}
           <div className="lg:col-span-7 bg-[var(--surface)] p-6 md:p-10 rounded-[var(--radius-xl)] border border-[var(--border-subtle)] shadow-sm">
             <h3 className="text-2xl md:text-3xl font-bold mb-8 font-display text-[var(--ink)] tracking-tight">Project Inquiry</h3>
