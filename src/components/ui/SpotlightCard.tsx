@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, forwardRef, useImperativeHandle } from 'react';
 
 interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -6,13 +6,17 @@ interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement> {
   spotlightColor?: string;
 }
 
-export function SpotlightCard({ 
+export const SpotlightCard = forwardRef<HTMLDivElement, SpotlightCardProps>(({ 
   children, 
   className = '', 
   spotlightColor = 'var(--accent-dim-hover)', 
   ...props 
-}: SpotlightCardProps) {
+}, ref) => {
   const divRef = useRef<HTMLDivElement>(null);
+  
+  // Forward the internal ref to the parent
+  useImperativeHandle(ref, () => divRef.current as HTMLDivElement);
+
   const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
@@ -64,4 +68,4 @@ export function SpotlightCard({
       </div>
     </div>
   );
-}
+});

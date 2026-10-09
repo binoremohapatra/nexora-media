@@ -65,7 +65,7 @@ export function Process() {
           {steps.map((step, i) => (
             <SpotlightCard
               key={i}
-              ref={(el) => { cardsRef.current[i] = el; }}
+              ref={(el: HTMLDivElement | null) => { cardsRef.current[i] = el; }}
               className="md:sticky p-8 md:p-12 lg:p-16 rounded-[var(--radius-xl)] bg-[var(--surface)] border border-[var(--border-subtle)] shadow-sm origin-top"
               style={{ 
                 top: `calc(12% + ${i * 2}rem)`,
