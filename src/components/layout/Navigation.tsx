@@ -88,7 +88,7 @@ export function Navigation({ theme, onToggleTheme }: NavigationProps) {
           activeHref={activeSection}
           baseColor="var(--nav-bg)" // use nav-bg which has blur
           pillColor="var(--surface)"
-          hoveredPillTextColor="var(--bg)"
+          hoveredPillTextColor="var(--accent)"
           pillTextColor="var(--ink)"
           onMobileMenuClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           actions={
