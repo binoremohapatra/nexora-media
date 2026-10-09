@@ -37,6 +37,10 @@
   /* Logo: show light, hide dark */
   --logo-light-opacity: 1;
   --logo-dark-opacity: 0;
+  
+  /* Theme-aware Hero Video Settings */
+  --hero-video-filter: invert(1) contrast(1.1) brightness(1.1);
+  --hero-video-opacity: 0.15;
 }
 
 /* --- Dark theme -------------------------------------------- */
@@ -71,4 +75,8 @@
   /* Logo: hide light, show dark */
   --logo-light-opacity: 0;
   --logo-dark-opacity: 1;
+
+  /* Theme-aware Hero Video Settings */
+  --hero-video-filter: contrast(1.2) brightness(0.8);
+  --hero-video-opacity: 0.4;
 }

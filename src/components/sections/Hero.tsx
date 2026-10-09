@@ -73,21 +73,28 @@ export function Hero() {
         background: 'var(--bg)',
       }}
     >
-      {/* Cinematic Abstract Video Background */}
-      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-black">
+      {/* Cinematic Theme Video Background */}
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[var(--bg)]">
         <video 
           autoPlay 
           loop 
           muted 
           playsInline 
-          className="absolute inset-0 w-full h-full object-cover opacity-30"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            filter: 'var(--hero-video-filter)',
+            opacity: 'var(--hero-video-opacity)',
+            transition: 'filter 0.5s ease, opacity 0.5s ease'
+          }}
         >
-          {/* High-quality dark abstract particles/fluid stock video */}
-          <source src="https://cdn.pixabay.com/video/2021/04/13/70929-536965684_large.mp4" type="video/mp4" />
+          {/* PC Aspect (Horizontal) */}
+          <source src="https://videos.pexels.com/video-files/3129977/3129977-hd_1920_1080_30fps.mp4" media="(min-width: 768px)" type="video/mp4" />
+          {/* Mobile Aspect (Vertical/Fallback) */}
+          <source src="https://videos.pexels.com/video-files/3129977/3129977-hd_1920_1080_30fps.mp4" type="video/mp4" />
         </video>
         
-        {/* Deep gradient overlay to ensure text is perfectly readable and blends with the dark theme */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)]/40 via-transparent to-[var(--bg)]" />
+        {/* Dynamic gradient overlay that uses the actual theme background color to fade seamlessly */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)]/50 via-[var(--bg)]/20 to-[var(--bg)] pointer-events-none" />
       </div>
 
       <div className="container" style={{ position: 'relative', zIndex: 10 }}>
