@@ -16,7 +16,7 @@ export const projects: Project[] = [
     type: 'instagram',
     embedUrl: 'https://www.instagram.com/reel/Da5FUyzvW0a/',
     permalink: 'https://www.instagram.com/reel/Da5FUyzvW0a/?igsh=OWJqYWF3Nm85Ym94',
-    poster: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
+    poster: '/images/reels/reel1.jpg',
   },
   {
     id: 'real-estate-reel',
@@ -33,7 +33,7 @@ export const projects: Project[] = [
     type: 'instagram',
     embedUrl: 'https://www.instagram.com/reel/DUas6bxkQcw/',
     permalink: 'https://www.instagram.com/reel/DUas6bxkQcw/?utm_source=ig_web_copy_link',
-    poster: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
+    poster: '/images/reels/reel2.jpg',
   },
   {
     id: 'social-media-campaign',
@@ -42,6 +42,6 @@ export const projects: Project[] = [
     type: 'instagram',
     embedUrl: 'https://www.instagram.com/reel/DbDwgafPS12/',
     permalink: 'https://www.instagram.com/reel/DbDwgafPS12/?utm_source=ig_web_button_share_sheet',
-    poster: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80',
+    poster: '/images/reels/reel3.jpg',
   },
 ];
