@@ -58,11 +58,11 @@ export function Hero() {
     >
       {/* Cinematic Theme Video Background */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[var(--bg)]">
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           className="absolute inset-0 w-full h-full object-cover"
           style={{
             filter: 'var(--hero-video-filter)',

@@ -33,12 +33,52 @@ export function Footer() {
     <footer
       aria-labelledby="footer-brand"
       style={{
+        position: 'relative',
+        overflow: 'hidden',
         background: 'var(--bg-alt)',
         borderTop: '1px solid var(--border)',
         paddingTop: 'clamp(3rem, 8vw, 6rem)',
       }}
     >
-      <div className="container">
+      {/* Dynamic Video Backgrounds */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          src="https://assets.mixkit.co/videos/242/242-1080.mp4"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: 'var(--logo-light-opacity)',
+            transition: 'opacity 0.7s ease-in-out',
+          }}
+        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          src="https://assets.mixkit.co/videos/2374/2374-1080.mp4"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: 'var(--logo-dark-opacity)',
+            transition: 'opacity 0.7s ease-in-out',
+          }}
+        />
+        {/* Overlay to ensure text readability */}
+        <div style={{ position: 'absolute', inset: 0, background: 'var(--bg-alt)', opacity: 0.8 }} />
+      </div>
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         {/* Large wordmark */}
         <div
           className="text-[var(--ink)] opacity-[0.08] hover:text-[var(--accent)] hover:opacity-100 transition-all duration-500"
@@ -208,7 +248,7 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div style={{ borderTop: '1px solid var(--border)', padding: '1.25rem 0' }}>
+      <div style={{ position: 'relative', zIndex: 1, borderTop: '1px solid var(--border)', padding: '1.25rem 0' }}>
         <div className="container" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem' }}>
           <p style={{ fontSize: 'var(--fs-micro)', color: 'var(--ink-faint)', margin: 0 }}>
             © {year} Nexora Media. All rights reserved.
