@@ -3,6 +3,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SectionLabel } from '../ui/SectionLabel';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { SpotlightCard } from '../ui/SpotlightCard';
+import { SplitText } from '../ui/SplitText';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,7 +24,6 @@ export function Process() {
   useEffect(() => {
     if (prefersReduced || !containerRef.current) return;
 
-    // Only apply sticky stacking on desktop
     const isDesktop = window.innerWidth >= 768;
     if (!isDesktop) return;
 
@@ -31,7 +32,6 @@ export function Process() {
       if (cards.length === 0) return;
 
       cards.forEach((card, index) => {
-        // Only animate scaling for cards that aren't the last one
         if (index < cards.length - 1) {
           gsap.to(card, {
             scale: 0.9,
@@ -57,33 +57,35 @@ export function Process() {
         <div className="mb-16 md:mb-24">
           <SectionLabel className="mb-6">The Process</SectionLabel>
           <h2 id="process-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 700, letterSpacing: '-0.03em', color: 'var(--ink)', lineHeight: 1.1 }}>
-            How we build premium brands.
+            <SplitText text="How we build premium brands." delay={0.2} />
           </h2>
         </div>
         
         <div className="flex flex-col gap-8 md:gap-16">
           {steps.map((step, i) => (
-            <div 
-              key={i} 
+            <SpotlightCard
+              key={i}
               ref={(el) => { cardsRef.current[i] = el; }}
-              className="md:sticky p-8 md:p-12 lg:p-16 rounded-[var(--radius-xl)] bg-[var(--surface)] border border-[var(--border-subtle)] flex flex-col md:flex-row gap-6 md:gap-12 items-start shadow-sm origin-top"
+              className="md:sticky p-8 md:p-12 lg:p-16 rounded-[var(--radius-xl)] bg-[var(--surface)] border border-[var(--border-subtle)] shadow-sm origin-top"
               style={{ 
                 top: `calc(12% + ${i * 2}rem)`,
                 zIndex: i,
               }}
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 shrink-0 bg-[var(--bg-alt)] border border-[var(--border-subtle)] rounded-full flex items-center justify-center">
-                <span className="text-[var(--accent)] font-mono font-bold text-xl md:text-2xl">0{i+1}</span>
+              <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start pointer-events-none">
+                <div className="w-16 h-16 md:w-20 md:h-20 shrink-0 bg-[var(--bg-alt)] border border-[var(--border-subtle)] rounded-full flex items-center justify-center">
+                  <span className="text-[var(--accent)] font-mono font-bold text-xl md:text-2xl">0{i+1}</span>
+                </div>
+                <div className="flex-1 mt-2">
+                  <h3 className="text-3xl md:text-4xl font-bold mb-4 text-[var(--ink)]" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
+                    {step.label}
+                  </h3>
+                  <p className="text-[var(--ink-muted)] text-lg md:text-xl leading-relaxed max-w-3xl">
+                    {step.desc}
+                  </p>
+                </div>
               </div>
-              <div className="flex-1 mt-2">
-                <h3 className="text-3xl md:text-4xl font-bold mb-4 text-[var(--ink)]" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
-                  {step.label}
-                </h3>
-                <p className="text-[var(--ink-muted)] text-lg md:text-xl leading-relaxed max-w-3xl">
-                  {step.desc}
-                </p>
-              </div>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
       </div>
