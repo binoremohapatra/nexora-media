@@ -73,29 +73,26 @@ export function Hero() {
         background: 'var(--bg)',
       }}
     >
-      {/* Large editorial background numeral — pure decoration */}
-      <span
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: '-0.15em',
-          right: '-0.05em',
-          fontFamily: 'var(--font-display)',
-          fontWeight: 700,
-          fontSize: 'clamp(18rem, 35vw, 42rem)',
-          lineHeight: 1,
-          color: 'var(--bg-alt)',
-          letterSpacing: '-0.05em',
-          pointerEvents: 'none',
-          userSelect: 'none',
-          zIndex: 0,
-          transition: 'color 0.3s ease',
-        }}
-      >
-        N
-      </span>
+      {/* Cinematic Ambient Background Video (Using their own Cafe Walkaround video) */}
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[var(--bg)]">
+        <iframe
+          src="https://www.youtube.com/embed/g5gzHASupoY?autoplay=1&mute=1&loop=1&playlist=g5gzHASupoY&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+          title="Background Reel"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          className="absolute top-1/2 left-1/2 w-[150vw] h-[150vh] -translate-x-1/2 -translate-y-1/2 object-cover opacity-20 saturate-50 blur-[2px] pointer-events-none"
+          style={{ 
+            minWidth: '100%', 
+            minHeight: '100%',
+            maskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)'
+          }}
+        />
+        {/* Deep gradient overlay to ensure text is perfectly readable */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/80 to-transparent mix-blend-multiply" />
+      </div>
 
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="container" style={{ position: 'relative', zIndex: 10 }}>
         {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 12 }}
