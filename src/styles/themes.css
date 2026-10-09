@@ -1,0 +1,74 @@
+/* ============================================================
+   Nexora Media — Design System Tokens
+   Light and dark theme CSS custom properties.
+   Applied via [data-theme="light"|"dark"] on <html>.
+   ============================================================ */
+
+/* --- Light theme (default) --------------------------------- */
+[data-theme='light'],
+:root {
+  --bg: #F6F5F1;
+  --bg-alt: #EEECEA;
+  --surface: #E8E6E2;
+  --ink: #181817;
+  --ink-muted: #5A5957;
+  --ink-faint: #9A9896;
+  --border: #D9D7D3;
+  --border-subtle: #E5E3DF;
+  --accent: #F05A3C;
+  --accent-hover: #D94A2E;
+  --accent-dim: rgba(240, 90, 60, 0.08);
+  --accent-dim-hover: rgba(240, 90, 60, 0.14);
+
+  /* Navigation */
+  --nav-bg: rgba(246, 245, 241, 0.88);
+  --nav-border: rgba(217, 215, 211, 0.6);
+
+  /* Form */
+  --input-bg: #FFFFFF;
+  --input-border: #D9D7D3;
+  --input-focus: #F05A3C;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.05);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.06);
+
+  /* Logo: show light, hide dark */
+  --logo-light-opacity: 1;
+  --logo-dark-opacity: 0;
+}
+
+/* --- Dark theme -------------------------------------------- */
+[data-theme='dark'] {
+  --bg: #0B0B0C;
+  --bg-alt: #111113;
+  --surface: #1A1A1D;
+  --ink: #F3F0E9;
+  --ink-muted: #8A8785;
+  --ink-faint: #5A5855;
+  --border: #2A2A2D;
+  --border-subtle: #1F1F22;
+  --accent: #F05A3C;
+  --accent-hover: #FF6B4D;
+  --accent-dim: rgba(240, 90, 60, 0.12);
+  --accent-dim-hover: rgba(240, 90, 60, 0.20);
+
+  /* Navigation */
+  --nav-bg: rgba(11, 11, 12, 0.88);
+  --nav-border: rgba(42, 42, 45, 0.8);
+
+  /* Form */
+  --input-bg: #141416;
+  --input-border: #2A2A2D;
+  --input-focus: #F05A3C;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.25);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3);
+
+  /* Logo: hide light, show dark */
+  --logo-light-opacity: 0;
+  --logo-dark-opacity: 1;
+}
