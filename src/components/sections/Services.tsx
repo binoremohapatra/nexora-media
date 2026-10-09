@@ -111,19 +111,19 @@ export function Services() {
               <SectionLabel className="mb-6">Capabilities</SectionLabel>
               <h2
                 id="services-title"
-                className="mb-6"
+                className="mb-6 tracking-tight"
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(2.5rem, 4vw, 3.5rem)',
+                  fontSize: 'clamp(3rem, 6vw, 5rem)',
                   fontWeight: 700,
                   letterSpacing: '-0.03em',
                   color: 'var(--ink)',
-                  lineHeight: 1.1,
+                  lineHeight: 1.05,
                 }}
               >
-                Systems that perform.
+                Systems that<br />perform.
               </h2>
-              <p className="text-[var(--ink-muted)] leading-relaxed text-lg max-w-sm mb-8 lg:mb-0">
+              <p className="text-[var(--ink-muted)] leading-relaxed text-lg md:text-xl max-w-sm mb-8 lg:mb-0">
                 We craft premium content, modern identities, and strategic campaigns designed to cut through the noise and drive growth.
               </p>
             </div>
