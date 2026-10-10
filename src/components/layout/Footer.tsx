@@ -232,7 +232,7 @@ export function Footer() {
         <div style={{ height: '1px', backgroundColor: 'var(--border)', width: '100%', marginBottom: '3rem' }} />
 
         {/* Copyright */}
-        <div style={{ textAlign: 'center', paddingBottom: '16rem' }}>
+        <div style={{ textAlign: 'center', paddingBottom: '26rem' }}>
           <p style={{ fontSize: '0.875rem', color: 'var(--ink-faint)', margin: 0 }}>
             © {year} Nexora Media. All rights reserved.
           </p>
@@ -243,16 +243,15 @@ export function Footer() {
       <div 
         style={{
           position: 'absolute',
-          bottom: '-12%',
+          bottom: '-25%',
           left: '50%',
           transform: 'translateX(-50%)',
           fontSize: 'clamp(14rem, 30vw, 40rem)',
           fontWeight: 900,
           fontFamily: 'var(--font-display)',
-          color: 'var(--bg-alt)',
-          textShadow: '0px 0px 40px rgba(0, 102, 255, 0.4), 0px 0px 80px rgba(0, 102, 255, 0.15)',
-          WebkitTextStroke: '2px rgba(0, 102, 255, 0.2)',
-          opacity: 0.8,
+          color: 'var(--ink)',
+          WebkitTextStroke: '1px var(--ink-faint)',
+          opacity: 0.04,
           pointerEvents: 'none',
           whiteSpace: 'nowrap',
           userSelect: 'none',
