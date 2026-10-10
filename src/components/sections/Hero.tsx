@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import gsap from 'gsap';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
-import MaskedHeading from '../ui/MaskedHeading';
 
 const WHATSAPP_URL = "https://wa.me/918882722257?text=Hi%20Nexora%20Media,%20I'm%20interested%20in%20your%20services.";
 
@@ -112,21 +111,9 @@ export function Hero() {
               Make them
             </motion.span>
           </span>
-          <span style={{ display: 'block', width: '100%' }}>
-            <motion.span variants={child} style={{ display: 'block' }}>
-              <MaskedHeading 
-                text="Stop Scrolling." 
-                mediaType="video" 
-                src="https://videos.pexels.com/video-files/2759477/2759477-hd_1920_1080_30fps.mp4" 
-                fillScale={1.3} 
-                parallax={34} 
-                reveal="wipe" 
-                trigger="mount" 
-                align="center"
-                weight={700}
-                textScale={0}
-                tag="div"
-              />
+          <span style={{ display: 'block', overflow: 'hidden' }}>
+            <motion.span variants={child} style={{ display: 'block', color: 'var(--accent)' }}>
+              Stop Scrolling.
             </motion.span>
           </span>
         </motion.h1>
