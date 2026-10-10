@@ -487,7 +487,7 @@ const FlexCarousel = ({
       const handleLoad = () => {
         if (!alive || !slots.includes(slot)) return;
         texture.image = media;
-        texture.update();
+        texture.needsUpdate = true;
         slot.image = isVideo ? [media.videoWidth || 1, media.videoHeight || 1] : [media.naturalWidth || 1, media.naturalHeight || 1];
         slot.aspect = item.aspect || (slot.image[0] / slot.image[1]);
         if (!isVideo) {
@@ -806,7 +806,7 @@ const FlexCarousel = ({
         if (slot.video && slot.video.readyState >= 2) {
           if (slot.index === activeIndex || !slot._textureInitialized) {
             slot.texture.image = slot.video;
-            slot.texture.update();
+            slot.texture.needsUpdate = true;
             slot._textureInitialized = true;
             needsUpdate = true;
           }
