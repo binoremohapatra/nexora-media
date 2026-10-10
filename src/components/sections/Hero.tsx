@@ -76,21 +76,20 @@ export function Hero() {
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
         <DriftWall
           items={DRIFT_ITEMS}
-          columns={5}
-          tileWidth={210}
-          tileHeight={140}
+          tileWidth={230}
+          tileHeight={150}
           gap={18}
           tilt={16}
           turn={-14}
           perspective={1200}
           depth={120}
-          speed={38}
+          speed={36}
           direction="up"
           variance={0.45}
-          parallax={0.6}
+          parallax={0.65}
           lift={64}
-          fade={0.65}
-          dim={0.4}
+          fade={0.25}
+          dim={0.45}
           overlayColor="var(--bg)"
         />
         {/* Soft vignette for crystal clear text readability */}
