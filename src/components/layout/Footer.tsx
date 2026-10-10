@@ -42,7 +42,7 @@ export function Footer() {
 
   const linkStyle = {
     fontSize: '0.875rem',
-    color: '#a3a3a3',
+    color: 'var(--ink-muted)',
     textDecoration: 'none',
     transition: 'color 0.2s',
     marginBottom: '0.875rem',
@@ -52,20 +52,20 @@ export function Footer() {
   const headerStyle = {
     fontSize: '0.9375rem',
     fontWeight: 600,
-    color: '#ffffff',
+    color: 'var(--ink)',
     marginBottom: '1.5rem',
   };
 
   return (
     <footer
       style={{
-        backgroundColor: '#0a0a0a',
-        color: '#ffffff',
+        backgroundColor: 'var(--bg-alt)',
+        color: 'var(--ink)',
         paddingTop: '6rem',
         paddingBottom: '2rem',
         position: 'relative',
         overflow: 'hidden',
-        borderTop: '1px solid #1a1a1a',
+        borderTop: '1px solid var(--border)',
         fontFamily: 'var(--font-body)'
       }}
     >
@@ -83,8 +83,8 @@ export function Footer() {
               {PAGES.map((link) => (
                 <li key={link.label}>
                   <a href={link.href} onClick={(e) => handleNavClick(e, link.href)} style={linkStyle}
-                     onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-                     onMouseLeave={(e) => (e.currentTarget.style.color = '#a3a3a3')}>
+                     onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ink)')}
+                     onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-muted)')}>
                     {link.label}
                   </a>
                 </li>
@@ -99,8 +99,8 @@ export function Footer() {
               {SERVICES.map((link) => (
                 <li key={link.label}>
                   <a href={link.href} style={linkStyle}
-                     onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-                     onMouseLeave={(e) => (e.currentTarget.style.color = '#a3a3a3')}>
+                     onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ink)')}
+                     onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-muted)')}>
                     {link.label}
                   </a>
                 </li>
@@ -115,8 +115,8 @@ export function Footer() {
               {LEGAL.map((link) => (
                 <li key={link.label}>
                   <a href={link.href} style={linkStyle}
-                     onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-                     onMouseLeave={(e) => (e.currentTarget.style.color = '#a3a3a3')}>
+                     onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ink)')}
+                     onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-muted)')}>
                     {link.label}
                   </a>
                 </li>
@@ -131,8 +131,8 @@ export function Footer() {
               {CONTACT.map((link) => (
                 <li key={link.label}>
                   <a href={link.href} style={linkStyle}
-                     onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-                     onMouseLeave={(e) => (e.currentTarget.style.color = '#a3a3a3')}>
+                     onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ink)')}
+                     onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-muted)')}>
                     {link.label}
                   </a>
                 </li>
@@ -143,13 +143,13 @@ export function Footer() {
           {/* Brand Column */}
           <div style={{ gridColumn: 'span 2', maxWidth: '320px', marginLeft: 'auto' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-              <div style={{ width: 32, height: 32, backgroundColor: '#ffffff', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                <img src="/images/logo.png" alt="Nexora" style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px' }} />
+              <div style={{ width: 32, height: 32, backgroundColor: 'var(--ink)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                <img src="/images/logo.png" alt="Nexora" style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px', filter: 'var(--logo-invert)' }} />
               </div>
-              <span style={{ fontSize: '1.25rem', fontWeight: 700, letterSpacing: '-0.02em', fontFamily: 'var(--font-display)' }}>Nexora</span>
+              <span style={{ fontSize: '1.25rem', fontWeight: 700, letterSpacing: '-0.02em', fontFamily: 'var(--font-display)', color: 'var(--ink)' }}>Nexora</span>
             </div>
-            <p style={{ fontSize: '0.875rem', color: '#a3a3a3', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-              Beautiful UI components and templates for modern web applications. Built with React and Tailwind CSS.
+            <p style={{ fontSize: '0.875rem', color: 'var(--ink-muted)', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+              Premium creative agency specializing in modern digital experiences. Built with passion and creativity.
             </p>
             <div style={{ display: 'flex', gap: '1rem' }}>
               {/* LinkedIn (Blue) */}
@@ -177,11 +177,11 @@ export function Footer() {
         </div>
 
         {/* Divider */}
-        <div style={{ height: '1px', backgroundColor: '#262626', width: '100%', marginBottom: '2rem' }} />
+        <div style={{ height: '1px', backgroundColor: 'var(--border)', width: '100%', marginBottom: '2rem' }} />
 
         {/* Copyright */}
         <div style={{ textAlign: 'center', paddingBottom: '3rem' }}>
-          <p style={{ fontSize: '0.875rem', color: '#737373', margin: 0 }}>
+          <p style={{ fontSize: '0.875rem', color: 'var(--ink-faint)', margin: 0 }}>
             © {year} Nexora. All rights reserved.
           </p>
         </div>
@@ -197,7 +197,7 @@ export function Footer() {
           fontSize: 'clamp(12rem, 28vw, 35rem)',
           fontWeight: 900,
           fontFamily: 'var(--font-display)',
-          color: '#ffffff',
+          color: 'var(--ink)',
           opacity: 0.03, // Very faint
           pointerEvents: 'none',
           whiteSpace: 'nowrap',

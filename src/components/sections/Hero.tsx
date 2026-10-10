@@ -116,11 +116,11 @@ export function Hero() {
               <MaskedHeading 
                 text="Stop Scrolling." 
                 mediaType="video" 
-                src="https://videos.pexels.com/video-files/2759477/2759477-hd_1920_1080_30fps.mp4" 
+                src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-camera-lens-zooming-in-and-out-34444-large.mp4" 
                 fillScale={1.3} 
                 parallax={34} 
                 reveal="wipe" 
-                trigger="mount" 
+                trigger="view" 
                 align="center"
                 weight={700}
                 textScale={false}
