@@ -26,13 +26,17 @@ const INSTAGRAM_LINKS = [
   "https://www.instagram.com/nexoramediain.in/reel/DbVqe_zKqBh/"
 ];
 
-// Use the actual high-res Instagram screenshots (PNGs) instead of the cropped JPG thumbnails
+// 1.jpg, 4.jpg, 13.jpg, 21.jpg, 22.jpg were identical fallback thumbnails that caused duplicates in the UI.
+const EXCLUDED_INDICES = [3, 12, 20, 21]; // 0-based indices for 4, 13, 21, 22
+
+// Use the actual Instagram thumbnails we downloaded via Microlink API
 const items = INSTAGRAM_LINKS
   .map((url, index) => ({ url, index }))
+  .filter(({ index }) => !EXCLUDED_INDICES.includes(index))
   .map(({ url, index }) => {
     const isReel = url.includes('/reel/');
     return {
-      src: `/images/instagram/${index + 1}.png`,
+      src: `/images/instagram/${index + 1}.jpg?v=2`,
       alt: `Nexora Media Instagram ${isReel ? 'Reel' : 'Post'} ${index + 1}`,
       title: isReel ? 'Reel' : 'Post',
       subtitle: 'Instagram',
@@ -41,15 +45,6 @@ const items = INSTAGRAM_LINKS
   });
 
 export function InstagramReels() {
-  const [isMobile, setIsMobile] = React.useState(false);
-
-  React.useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile(); // Check on mount
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
   const handleItemClick = (item: any) => {
     window.open(item.url, '_blank');
   };
@@ -65,15 +60,14 @@ export function InstagramReels() {
         <p className="text-[var(--ink-muted)] mt-4 text-lg">Swipe through our latest content. Click to view on Instagram.</p>
       </div>
 
-      <div className="w-full h-[400px] md:h-[560px] relative">
+      <div style={{ width: '100%', height: '560px', position: 'relative' }}>
         <CircularCarousel
           items={items}
           preset="cylinder"
           intro="rise"
-          cardWidth={isMobile ? 220 : 280}
-          radius={isMobile ? 200 : 320}
-          aspectRatio={4/5} // Perfect ratio for Instagram vertical posts (4:5) to prevent cropping
-          speed={isMobile ? 8 : 14} // Slower speed on mobile to prevent laggy feel
+          cardWidth={280}
+          aspectRatio={1.0} // Square ratio to prevent letterboxing for uploaded screenshots
+          speed={14}
           captions={true}
           onItemClick={handleItemClick}
         />
