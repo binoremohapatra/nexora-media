@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
-import { useScrollDirection } from '../../hooks/useScrollDirection';
 import { ThemeToggle } from './ThemeToggle';
 import type { Theme } from '../../types';
 // @ts-ignore
@@ -21,12 +19,8 @@ interface NavigationProps {
 }
 
 export function Navigation({ theme, onToggleTheme }: NavigationProps) {
-  const { direction, scrolled } = useScrollDirection(10);
   const [activeSection, setActiveSection] = useState('#home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Hide nav on downward scroll (only after user has scrolled)
-  const isHidden = scrolled && direction === 'down' && !mobileMenuOpen;
 
   // Track active section via IntersectionObserver
   useEffect(() => {
@@ -57,10 +51,8 @@ export function Navigation({ theme, onToggleTheme }: NavigationProps) {
   );
 
   return (
-    <motion.header
+    <header
       role="banner"
-      animate={{ y: isHidden ? '-120%' : '0%' }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       style={{
         position: 'fixed',
         top: 0,
@@ -124,6 +116,6 @@ export function Navigation({ theme, onToggleTheme }: NavigationProps) {
           }
         />
       </div>
-    </motion.header>
+    </header>
   );
 }
