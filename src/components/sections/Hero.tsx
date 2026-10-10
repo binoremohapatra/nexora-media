@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import gsap from 'gsap';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import MaskedHeading from '../ui/MaskedHeading';
 
 const WHATSAPP_URL = "https://wa.me/918882722257?text=Hi%20Nexora%20Media,%20I'm%20interested%20in%20your%20services.";
 
@@ -88,39 +89,20 @@ export function Hero() {
         </motion.p>
 
         {/* Main headline */}
-        <motion.h1
-          id="hero-title"
-          variants={parent}
-          initial="hidden"
-          animate="visible"
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'var(--fs-display)',
-            fontWeight: 700,
-            letterSpacing: '-0.03em',
-            lineHeight: 1.05,
-            color: 'var(--ink)',
-            marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)',
-            maxWidth: '16ch',
-          }}
-        >
-          {['Make them', 'stop scrolling.'].map((line, i) => (
-            <span
-              key={i}
-              style={{ display: 'block', overflow: 'hidden' }}
-            >
-              <motion.span
-                variants={child}
-                style={{
-                  display: 'block',
-                  color: line.includes('stop') ? 'var(--accent)' : 'var(--ink)'
-                }}
-              >
-                {line}
-              </motion.span>
-            </span>
-          ))}
-        </motion.h1>
+        <div style={{ marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)', width: '100%', maxWidth: '800px', zIndex: 20 }}>
+          <MaskedHeading 
+            text="Make them stop scrolling." 
+            mediaType="video" 
+            src="/videos/projects/video_11.mp4" 
+            fillScale={1.3} 
+            parallax={34} 
+            reveal="wipe" 
+            trigger="mount" 
+            align="center"
+            weight={800}
+            textScale={0.15}
+          />
+        </div>
 
         {/* Supporting copy + CTAs */}
         <motion.div
