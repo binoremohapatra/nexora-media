@@ -1,6 +1,8 @@
 // @ts-nocheck
 import React from 'react';
 import CircularGallery from '../ui/CircularGallery';
+// @ts-ignore
+import FoldText from '../ui/FoldText';
 
 const imageModules = import.meta.glob('/public/images/instagram/*.{png,jpg,jpeg}', { eager: true });
 
@@ -17,10 +19,38 @@ export function InstagramReels() {
     <section className="bg-[var(--bg-alt)] py-20 overflow-hidden border-b border-[var(--border-subtle)]">
       <div className="container mb-12 text-center relative z-10">
         <h2
-          style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 700, letterSpacing: '-0.03em', color: 'var(--ink)' }}
+          className="sr-only"
         >
           Trending on Instagram.
         </h2>
+        <div aria-hidden="true" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <FoldText
+            text="Trending on"
+            splitBy="char"
+            hinge="top"
+            duration={0.5}
+            stagger={0.025}
+            ease="power3.out"
+            perspective={700}
+            trigger="scroll"
+            fontSize="clamp(2.2rem, 5vw, 4rem)"
+            fontWeight={700}
+            color="var(--ink)"
+          />
+          <FoldText
+            text="Instagram."
+            splitBy="char"
+            hinge="top"
+            duration={0.5}
+            stagger={0.025}
+            ease="power3.out"
+            perspective={700}
+            trigger="scroll"
+            fontSize="clamp(2.2rem, 5vw, 4rem)"
+            fontWeight={700}
+            color="var(--ink)"
+          />
+        </div>
         <p className="text-[var(--ink-muted)] mt-4 text-lg">Swipe through our latest content.</p>
       </div>
 

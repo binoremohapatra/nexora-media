@@ -4,6 +4,8 @@ import { SectionLabel } from '../ui/SectionLabel';
 import { projects } from '../../data/projects';
 // @ts-ignore
 import FlexCarousel from '../ui/FlexCarousel';
+// @ts-ignore
+import FoldText from '../ui/FoldText';
 import { X, Play } from 'lucide-react';
 
 function getYoutubeId(url: string | undefined) {
@@ -95,10 +97,38 @@ export function Work() {
         <SectionLabel className="mb-4 mx-auto lg:mx-0">Selected Work</SectionLabel>
         <h2
           id="work-title"
-          style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(3rem, 6vw, 5rem)', fontWeight: 700, letterSpacing: '-0.03em', color: 'var(--ink)', lineHeight: 1.1 }}
+          className="sr-only"
         >
-          Work that speaks<br className="hidden lg:block" /> for itself.
+          Work that speaks for itself.
         </h2>
+        <div aria-hidden="true">
+          <FoldText
+            text="Work that speaks"
+            splitBy="char"
+            hinge="top"
+            duration={0.55}
+            stagger={0.03}
+            ease="power3.out"
+            perspective={800}
+            trigger="scroll"
+            fontSize="clamp(2.5rem, 5.5vw, 4.5rem)"
+            fontWeight={700}
+            color="var(--ink)"
+          />
+          <FoldText
+            text="for itself."
+            splitBy="char"
+            hinge="top"
+            duration={0.55}
+            stagger={0.03}
+            ease="power3.out"
+            perspective={800}
+            trigger="scroll"
+            fontSize="clamp(2.5rem, 5.5vw, 4.5rem)"
+            fontWeight={700}
+            color="var(--ink)"
+          />
+        </div>
         <p className="text-[var(--ink-muted)] mt-4">Click any project to play the reel.</p>
       </div>
 

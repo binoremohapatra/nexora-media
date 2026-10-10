@@ -5,6 +5,8 @@ import { faqs } from '../../data/faqs';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+// @ts-ignore
+import StrokeText from '../ui/StrokeText';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,26 +64,45 @@ export function Faq() {
         {/* Bulletproof CSS Grid perfectly matched to github repo minmax layout */}
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(260px,0.42fr)_minmax(0,1fr)] gap-12 lg:gap-[clamp(36px,6vw,82px)] items-start">
           
-          {/* Left Column - Sticky Heading */}
           <div className="lg:sticky lg:top-40 faq-heading-text">
             <div className="flex items-center gap-3 mb-6 md:mb-8">
               <div className="w-6 h-px bg-[var(--accent)]" />
               <span className="text-[var(--accent)] font-bold tracking-[0.2em] text-xs uppercase">FAQ</span>
             </div>
-            <h2 
-              id="faq-title" 
-              className="text-[var(--ink)] font-bold leading-[1.05] tracking-tight"
-              style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}
-            >
-              Questions <br className="hidden lg:block" />
-              businesses <br className="hidden lg:block" />
-              usually <br className="hidden lg:block" />
-              ask before <br className="hidden lg:block" />
-              working <br className="hidden lg:block" />
-              with <br className="hidden lg:block" />
-              Nexora <br className="hidden lg:block" />
-              Media.
-            </h2>
+            {/* StrokeText animated heading */}
+            <h2 id="faq-title" className="sr-only">Questions businesses usually ask before working with Nexora Media.</h2>
+            <div aria-hidden="true" style={{ marginBottom: '1rem' }}>
+              <StrokeText
+                text="Got"
+                strokeColor="var(--accent)"
+                fillColor="var(--ink)"
+                strokeWidth={1.5}
+                drawDuration={1.4}
+                fillDelay={0.15}
+                stagger={0.06}
+                ease="power2.out"
+                trigger="scroll"
+                fillMode="wipe"
+                fontSize={72}
+                fontWeight={800}
+                letterSpacing={-3}
+              />
+              <StrokeText
+                text="Questions?"
+                strokeColor="var(--accent)"
+                fillColor="var(--ink)"
+                strokeWidth={1.5}
+                drawDuration={1.4}
+                fillDelay={0.15}
+                stagger={0.06}
+                ease="power2.out"
+                trigger="scroll"
+                fillMode="wipe"
+                fontSize={72}
+                fontWeight={800}
+                letterSpacing={-3}
+              />
+            </div>
           </div>
           
           {/* Right Column - Accordion */}

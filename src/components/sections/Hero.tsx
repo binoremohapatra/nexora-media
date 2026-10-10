@@ -4,6 +4,9 @@ import { motion } from 'motion/react';
 import gsap from 'gsap';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import DriftWall from '../ui/DriftWall';
+// @ts-ignore
+import DepthText from '../ui/DepthText';
+import MaskedHeading from '../ui/MaskedHeading';
 
 const WHATSAPP_URL = "https://wa.me/918882722257?text=Hi%20Nexora%20Media,%20I'm%20interested%20in%20your%20services.";
 
@@ -125,35 +128,63 @@ export function Hero() {
           Creative Studio · India
         </motion.p>
 
-        {/* Main headline */}
-        <motion.h1
-          id="hero-title"
-          variants={parent}
-          initial="hidden"
-          animate="visible"
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'var(--fs-display)',
-            fontWeight: 700,
-            letterSpacing: '-0.03em',
-            lineHeight: 1.05,
-            color: 'var(--ink)',
-            marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)',
-            width: '100%',
-            textAlign: 'center'
-          }}
-        >
-          <span style={{ display: 'block', overflow: 'hidden' }}>
-            <motion.span variants={child} style={{ display: 'block', color: 'var(--ink)' }}>
-              Make them
-            </motion.span>
-          </span>
-          <span style={{ display: 'block', overflow: 'hidden' }}>
-            <motion.span variants={child} style={{ display: 'block', color: 'var(--accent)' }}>
-              Stop Scrolling.
-            </motion.span>
-          </span>
-        </motion.h1>
+          <h1
+            id="hero-title"
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 700,
+              letterSpacing: '-0.03em',
+              lineHeight: 1.05,
+              color: 'var(--ink)',
+              marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)',
+              width: '100%',
+              textAlign: 'center'
+            }}
+          >
+            {/* DepthText on 'Make them' — 3D layered orbit effect */}
+            <span style={{ display: 'block', marginBottom: '0.1em' }}>
+              <DepthText
+                text="Make them"
+                layers={28}
+                depth={2.2}
+                faceColor="var(--ink)"
+                depthColor="#1d4ed8"
+                tilt={6}
+                pointerTracking={true}
+                smoothing={0.12}
+                perspective={900}
+                autoOrbit={true}
+                orbitSpeed={0.25}
+                fontSize="var(--fs-display)"
+                fontWeight={700}
+                shadow={true}
+              />
+            </span>
+
+            {/* MaskedHeading on 'Stop Scrolling.' — media-filled text mask */}
+            <span style={{ display: 'block' }}>
+              <MaskedHeading
+                text="Stop Scrolling."
+                tag="span"
+                mediaType="video"
+                src="/videos/drifting.mp4"
+                fillScale={1.3}
+                parallax={20}
+                drift={14}
+                brightness={1.1}
+                saturation={1.2}
+                reveal="rise"
+                duration={1.1}
+                stagger={0.1}
+                trigger="mount"
+                align="center"
+                weight={700}
+                tracking={-0.04}
+                textScale={0.12}
+                style={{ fontSize: 'var(--fs-display)', display: 'block', lineHeight: 1.05 }}
+              />
+            </span>
+          </h1>
 
         {/* Supporting copy + CTAs */}
         <motion.div

@@ -3,6 +3,8 @@ import { motion, useInView } from 'motion/react';
 import { SectionLabel } from '../ui/SectionLabel';
 import { SplitText } from '../ui/SplitText';
 import { BlurText } from '../ui/BlurText';
+// @ts-ignore
+import ParticleText from '../ui/ParticleText';
 
 /**
  * About section — Premium animated copy.
@@ -21,6 +23,29 @@ export function About() {
       <div className="container">
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <SectionLabel>About Nexora Media</SectionLabel>
+
+          {/* ParticleText heading — particles form the title on scroll */}
+          <div style={{ width: '100%', height: 220, margin: '1.5rem 0 0' }}>
+            <ParticleText
+              text="About Nexora Media"
+              particleSize={2}
+              density={3}
+              color="#ffffff"
+              highlightColor="#3b82f6"
+              scatter={200}
+              gatherDuration={1800}
+              stagger={500}
+              pointerRepel={50}
+              repelRadius={130}
+              idleDrift={0.8}
+              trigger="hover"
+              fontSize="clamp(1.8rem, 5vw, 3.5rem)"
+              fontWeight={800}
+              fontFamily="inherit"
+              glow
+            />
+          </div>
+
           <h2
             id="about-title"
             style={{
@@ -29,7 +54,7 @@ export function About() {
               fontWeight: 700,
               letterSpacing: '-0.03em',
               color: 'var(--ink)',
-              margin: '1.5rem 0 2rem',
+              margin: '1rem 0 2rem',
               maxWidth: '20ch',
             }}
           >
