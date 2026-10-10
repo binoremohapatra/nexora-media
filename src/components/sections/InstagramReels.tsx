@@ -1,44 +1,15 @@
 import React from 'react';
 import CircularGallery from '../ui/CircularGallery';
 
-const INSTAGRAM_LINKS = [
-  "https://www.instagram.com/nexoramediain.in/reel/Dbpf-6bqkAi/",
-  "https://www.instagram.com/nexoramediain.in/p/Dd-2D-yKAdQ/",
-  "https://www.instagram.com/nexoramediain.in/reel/Ddx_FzaKGrE/",
-  "https://www.instagram.com/nexoramediain.in/p/DdY6cgNK_A0/",
-  "https://www.instagram.com/nexoramediain.in/reel/DdJDV5iq-VF/",
-  "https://www.instagram.com/nexoramediain.in/p/DcyJFxkq0Zh/",
-  "https://www.instagram.com/nexoramediain.in/p/Dcnj9o7qQKS/",
-  "https://www.instagram.com/nexoramediain.in/p/DckuNgqo_ZM/",
-  "https://www.instagram.com/nexoramediain.in/p/DciLBtRKWGa/",
-  "https://www.instagram.com/nexoramediain.in/p/Dcfc102quAO/",
-  "https://www.instagram.com/nexoramediain.in/reel/Dcc8OdwqdIc/",
-  "https://www.instagram.com/nexoramediain.in/reel/DcaWLpvqkjA/",
-  "https://www.instagram.com/nexoramediain.in/reel/DcXynLLKftb/",
-  "https://www.instagram.com/nexoramediain.in/p/DcVbcUlI0P1/",
-  "https://www.instagram.com/nexoramediain.in/p/DcQFBHYo52s/",
-  "https://www.instagram.com/nexoramediain.in/p/DcK6qBVI_2i/",
-  "https://www.instagram.com/nexoramediain.in/p/DcISQMnIyD0/",
-  "https://www.instagram.com/nexoramediain.in/p/DbnCJ6MGYXx/",
-  "https://www.instagram.com/nexoramediain.in/p/Dbk8ToyqYNl/",
-  "https://www.instagram.com/nexoramediain.in/p/DbfL0jyGeak/",
-  "https://www.instagram.com/nexoramediain.in/p/DbaWfTXmR_9/",
-  "https://www.instagram.com/nexoramediain.in/reel/DbVqe_zKqBh/"
-];
+const imageModules = import.meta.glob('/public/images/instagram/*.{png,jpg,jpeg}', { eager: true });
 
-// 1.jpg, 4.jpg, 13.jpg, 21.jpg, 22.jpg were identical fallback thumbnails that caused duplicates in the UI.
-const EXCLUDED_INDICES = [3, 12, 20, 21]; // 0-based indices for 4, 13, 21, 22
-
-// Use the actual Instagram thumbnails we downloaded via Microlink API
-const items = INSTAGRAM_LINKS
-  .map((url, index) => ({ url, index }))
-  .filter(({ index }) => !EXCLUDED_INDICES.includes(index))
-  .map(({ url, index }) => {
-    return {
-      image: `/images/instagram/${index + 1}.jpg?v=2`,
-      text: url.includes('/reel/') ? 'Reel' : 'Post'
-    };
-  });
+const items = Object.keys(imageModules).map(key => {
+  const url = key.replace('/public', '');
+  return {
+    image: url,
+    text: ''
+  };
+});
 
 export function InstagramReels() {
   return (
