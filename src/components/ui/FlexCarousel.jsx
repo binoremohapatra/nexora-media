@@ -803,15 +803,11 @@ const FlexCarousel = ({
 
       let needsUpdate = false;
       slots.forEach(slot => {
-        if (slot.video) {
-          if (slot.index === activeIndex) {
-            if (slot.video.paused) slot.video.play().catch(()=>{});
-          } else {
-            if (!slot.video.paused) slot.video.pause();
-          }
-          if (slot.video.readyState >= 2) {
+        if (slot.video && slot.video.readyState >= 2) {
+          if (slot.index === activeIndex || !slot._textureInitialized) {
             slot.texture.image = slot.video;
             slot.texture.update();
+            slot._textureInitialized = true;
             needsUpdate = true;
           }
         }
