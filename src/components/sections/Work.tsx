@@ -20,12 +20,14 @@ function VideoModal({ project, onClose }: { project: typeof projects[0]; onClose
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-md">
+    <div className="fixed inset-0 flex items-center justify-center p-4 sm:p-6 bg-black/95 backdrop-blur-xl" style={{ zIndex: 200 }}>
       <button
         onClick={onClose}
-        className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[var(--surface)] text-[var(--ink)] flex items-center justify-center hover:scale-110 transition-transform z-10"
+        className="absolute top-4 right-4 sm:top-6 sm:right-6 w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+        style={{ zIndex: 210 }}
+        aria-label="Close video"
       >
-        <X size={24} />
+        <X size={24} strokeWidth={2.5} />
       </button>
 
       <div className="relative w-full max-w-5xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300">
