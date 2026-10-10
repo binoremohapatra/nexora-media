@@ -180,7 +180,7 @@ export function Hero() {
                 text="Stop Scrolling."
                 tag="span"
                 mediaType="video"
-                src="/videos/camera-lens.mp4"
+                src="https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-water-150-large.mp4"
                 fillScale={1.4}
                 parallax={22}
                 drift={16}
