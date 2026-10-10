@@ -571,7 +571,12 @@ const FlexCarousel = ({
       if (!document.getElementById('flex-carousel-videos')) {
         const container = document.createElement('div');
         container.id = 'flex-carousel-videos';
-        container.style.display = 'none';
+        container.style.position = 'absolute';
+        container.style.opacity = '0';
+        container.style.pointerEvents = 'none';
+        container.style.width = '1px';
+        container.style.height = '1px';
+        container.style.overflow = 'hidden';
         document.body.appendChild(container);
       }
       
