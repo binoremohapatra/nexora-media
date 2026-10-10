@@ -104,6 +104,7 @@ const SplitTextGSAP = ({
               },
               onComplete: () => {
                 animationCompletedRef.current = true;
+                if (el) el.style.overflow = 'visible';
                 onCompleteRef.current?.();
               },
               willChange: 'transform, opacity',
@@ -150,6 +151,7 @@ const SplitTextGSAP = ({
       style={{
         textAlign,
         overflow: 'hidden',
+        paddingBottom: '0.15em',
         display: 'inline-block',
         whiteSpace: 'normal',
         wordWrap: 'break-word',

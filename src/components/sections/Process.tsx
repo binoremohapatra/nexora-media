@@ -109,7 +109,7 @@ export function Process() {
                   key={`${line}-${theme}`}
                   text={line}
                   tag="div"
-                  className="font-display font-bold tracking-tight leading-[1.15] block text-[var(--ink)]"
+                  className="font-display font-bold tracking-tight block text-[var(--ink)]"
                   delay={30}
                   duration={0.9}
                   ease="power3.out"
@@ -123,7 +123,8 @@ export function Process() {
                     fontSize: 'clamp(2.8rem, 6vw, 5rem)',
                     color: isDark ? '#ffffff' : '#181817',
                     display: 'block',
-                    lineHeight: 1.15
+                    lineHeight: 1.25,
+                    paddingBottom: '0.18em'
                   } as any}
                 />
               ))}

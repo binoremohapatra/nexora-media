@@ -114,27 +114,23 @@ export function Contact() {
         </div>
 
         {/* WhatsApp CTA */}
-        <div className="flex flex-col items-center w-full" style={{ marginTop: '2rem' }}>
+        <div className="flex flex-col items-center w-full mt-6 md:mt-8">
           <a
             href="https://wa.me/918882722257?text=Hi%20Nexora%20Media,%20I'm%20interested%20in%20your%20services."
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center justify-center rounded-full font-bold transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl"
+            className="group inline-flex items-center justify-center rounded-full font-bold transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl md:shadow-2xl gap-2.5 sm:gap-3 md:gap-4 px-5 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 text-sm sm:text-base md:text-xl w-auto max-w-[90vw] sm:min-w-[300px] md:min-w-[340px]"
             style={{
-              gap: '1rem',
               backgroundColor: 'var(--accent)',
               color: '#ffffff',
-              boxShadow: '0 20px 40px -10px var(--accent-dim)',
-              padding: '1.5rem 3rem',
-              fontSize: '1.25rem',
-              minWidth: '340px'
+              boxShadow: '0 12px 30px -8px var(--accent-dim)',
             }}
           >
-            <MessageCircle size={28} />
-            Start a chat on WhatsApp
-            <ArrowRight size={24} className="transition-transform duration-300 group-hover:translate-x-2" />
+            <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 shrink-0" />
+            <span className="whitespace-nowrap">Start a chat on WhatsApp</span>
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 shrink-0 transition-transform duration-300 group-hover:translate-x-1.5" />
           </a>
-          <p className="mt-6 text-base font-medium" style={{ color: 'var(--ink-muted)' }}>
+          <p className="mt-3 md:mt-5 text-xs sm:text-sm md:text-base font-medium text-center" style={{ color: 'var(--ink-muted)' }}>
             We usually reply within a few minutes.
           </p>
         </div>
