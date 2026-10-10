@@ -102,6 +102,8 @@ export function Work() {
           squeeze={0.15}
           focusOnClick={true}
           captions={true}
+          autoplay={true}
+          interval={3.5}
           onSelect={(_: any, item: any) => setActiveProject(item.project)}
         />
       </div>
