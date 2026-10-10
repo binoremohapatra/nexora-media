@@ -115,7 +115,7 @@ export function Hero() {
               <MaskedHeading 
                 text="stop scrolling." 
                 mediaType="video" 
-                src="/videos/projects/video_11.mp4" 
+                src="https://videos.pexels.com/video-files/2759477/2759477-hd_1920_1080_30fps.mp4" 
                 fillScale={1.3} 
                 parallax={34} 
                 reveal="wipe" 
