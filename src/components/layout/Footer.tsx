@@ -162,7 +162,7 @@ export function Footer() {
 
             {/* Insta Link Text */}
             <a
-              href="https://www.instagram.com/nexoramediain"
+              href="https://www.instagram.com/nexoramediain.in?vrfl=M3NvNHJjZXNtdGdx"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -177,13 +177,13 @@ export function Footer() {
               onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
               onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-muted)')}
             >
-              Ig: @nexoramediain ↗
+              Ig: @nexoramediain.in ↗
             </a>
 
             {/* Social SVGs: YouTube, WhatsApp, Instagram */}
             <div style={{ display: 'flex', gap: '1rem', marginTop: 'auto' }}>
               {/* YouTube (Red) */}
-              <a href="#" style={{ color: '#ff0000' }} aria-label="YouTube"
+              <a href="https://youtube.com/@nexoramediain?si=txZvNNKflqVsHqtx" target="_blank" rel="noopener noreferrer" style={{ color: '#ff0000' }} aria-label="YouTube"
                 onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
                 onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.072 0 12 0 12s0 3.928.501 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.377.55 9.377.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.928 24 12 24 12s0-3.928-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
@@ -195,7 +195,7 @@ export function Footer() {
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 0C5.383 0 0 5.383 0 12.032c0 2.658.857 5.11 2.316 7.152L.429 24l5.004-1.87a11.96 11.96 0 0 0 6.598 1.933c6.649 0 12.032-5.383 12.032-12.032S18.679 0 12.031 0zm6.554 17.202c-.27.764-1.573 1.455-2.181 1.542-.572.083-1.309.18-3.791-.849-2.981-1.233-4.887-4.295-5.034-4.492-.148-.198-1.196-1.597-1.196-3.044 0-1.448.752-2.164 1.018-2.457.265-.292.573-.365.765-.365.191 0 .382.001.548.009.18.009.421-.069.658.5.245.592.836 2.046.909 2.193.074.148.123.32.025.518-.098.197-.148.32-.296.493-.147.172-.314.382-.444.512-.147.147-.302.308-.135.594.167.287.742 1.226 1.596 1.988 1.101.985 2.016 1.291 2.312 1.439.296.147.468.122.641-.075.172-.197.74-8.865.938-1.161.196-.296.393-.247.663-.147.27.098 1.706.804 1.999.951.294.148.49.222.563.344.073.123.073.716-.197 1.48z" /></svg>
               </a>
               {/* Instagram (Pink/Orange Gradient Stroke) */}
-              <a href="https://www.instagram.com/nexoramediain" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', gap: '2px', flexWrap: 'wrap', width: '24px', height: '24px' }} aria-label="Instagram">
+              <a href="https://www.instagram.com/nexoramediain.in?vrfl=M3NvNHJjZXNtdGdx" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', gap: '2px', flexWrap: 'wrap', width: '24px', height: '24px' }} aria-label="Instagram">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e1306c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                   onMouseEnter={(e) => (e.currentTarget.style.stroke = '#c13584')}
                   onMouseLeave={(e) => (e.currentTarget.style.stroke = '#e1306c')}>

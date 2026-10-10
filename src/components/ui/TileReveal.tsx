@@ -75,7 +75,7 @@ export function TileReveal({
                 scale: tile.scale,
               }}
               className="absolute w-[150px] sm:w-[190px] md:w-[230px] aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border border-white/15 bg-black/40 backdrop-blur-sm pointer-events-auto cursor-pointer hover:border-[var(--accent)] hover:scale-105 transition-all duration-300"
-              onClick={() => window.open('https://www.instagram.com/nexoramediain.in/', '_blank')}
+              onClick={() => window.open('https://www.instagram.com/nexoramediain.in?vrfl=M3NvNHJjZXNtdGdx', '_blank')}
             >
               <img
                 src={imgSrc}
@@ -132,7 +132,7 @@ export function TileReveal({
             {ctaText} ↗
           </a>
           <a
-            href="https://www.instagram.com/nexoramediain.in/"
+            href="https://www.instagram.com/nexoramediain.in?vrfl=M3NvNHJjZXNtdGdx"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[var(--border-subtle)] text-[var(--ink)] font-medium text-sm hover:bg-[var(--surface-hover)] transition-all"
