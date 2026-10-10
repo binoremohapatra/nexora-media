@@ -14,8 +14,8 @@ export function Team() {
 
   return (
     <section id="team" className="section bg-[var(--bg-alt)] border-b border-[var(--border-subtle)] relative overflow-hidden py-24 lg:py-32">
-      <div className="container relative z-10 text-center">
-        <SectionLabel className="mb-6 mx-auto">Meet the Creator</SectionLabel>
+      <div className="container mx-auto flex flex-col items-center justify-center relative z-10 text-center px-6 md:px-8">
+        <SectionLabel className="mb-6">Meet the Creator</SectionLabel>
         
         <h2 className="mb-12 font-display font-bold leading-[1.05] tracking-tight" style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', color: 'var(--ink)' }}>
           The mind behind <br className="hidden md:block"/> Nexora Media
