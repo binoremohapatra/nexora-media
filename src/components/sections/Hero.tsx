@@ -15,7 +15,7 @@ const KEYWORDS = [
 
 const DRIFT_ITEMS = [
   { image: '/images/instagram/post_1.png', title: 'Nexora Media' },
-  { image: '/images/instagram/post_2.png', title: 'Branding' },
+  { image: '/images/instagram/post_2.png', title: 'Branding & Design' },
   { image: '/images/instagram/post_3.png', title: 'Viral Reels' },
   { image: '/images/instagram/post_4.png', title: 'Commercial Edit' },
   { image: '/images/instagram/post_5.png', title: 'Storytelling' },
@@ -29,6 +29,23 @@ const DRIFT_ITEMS = [
   { image: '/images/instagram/post_13.jpg', title: 'Shorts & Reels' },
   { image: '/images/instagram/post_14.jpg', title: 'High Retention' },
   { image: '/images/instagram/post_15.jpg', title: 'Brand Aesthetic' },
+  { image: '/images/instagram/post_16.jpg', title: 'Creator Marketing' },
+  { image: '/images/instagram/post_17.jpg', title: 'Ad Creative' },
+  { image: '/images/instagram/post_18.jpg', title: 'Visual Hooks' },
+  { image: '/images/instagram/post_19.jpg', title: 'Brand Narrative' },
+  { image: '/images/instagram/post_20.jpg', title: 'Video Production' },
+  { image: '/images/instagram/post_21.jpg', title: 'Social Ads' },
+  { image: '/images/instagram/post_22.jpg', title: 'Graphic Identity' },
+  { image: '/images/instagram/post_23.jpg', title: 'Thumbnail Design' },
+  { image: '/images/instagram/post_24.jpg', title: 'Reel Pacing' },
+  { image: '/images/instagram/post_25.jpg', title: 'Motion Graphics' },
+  { image: '/images/instagram/post_26.jpg', title: 'Performance Media' },
+  { image: '/images/instagram/post_27.jpg', title: 'Studio Showcase' },
+  { image: '/images/instagram/post_28.jpg', title: 'Visual Story' },
+  { image: '/images/instagram/post_29.jpg', title: 'Viral Strategy' },
+  { image: '/images/instagram/post_30.jpg', title: 'Media Scaling' },
+  { image: '/images/instagram/post_31.jpg', title: 'Brand Impact' },
+  { image: '/images/instagram/post_32.jpg', title: 'Production House' },
 ];
 
 export function Hero() {

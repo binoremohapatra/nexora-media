@@ -101,9 +101,19 @@ export const DriftWall = ({
   }, [columns, containerDimensions.width, tileWidth, gap]);
 
   const columnItems = useMemo(() => {
-    const cols = Array.from({ length: numColumns }, () => []);
-    items.forEach((item, i) => cols[i % numColumns].push(item));
-    return cols.map(col => (col.length ? col : items.slice(0, 1)));
+    if (!items || items.length === 0) return [];
+
+    // Provide every column with a unique, randomized sequence of posts
+    return Array.from({ length: numColumns }, (_, colIdx) => {
+      const shuffled = [...items].sort((a, b) => {
+        const idxA = items.indexOf(a);
+        const idxB = items.indexOf(b);
+        const valA = ((idxA * 1337 + colIdx * 997 + 41) % 1000) / 1000;
+        const valB = ((idxB * 1337 + colIdx * 997 + 41) % 1000) / 1000;
+        return valA - valB;
+      });
+      return shuffled.slice(0, Math.min(shuffled.length, 14));
+    });
   }, [items, numColumns]);
 
   const columnMeta = useMemo(() => {
