@@ -89,20 +89,45 @@ export function Hero() {
         </motion.p>
 
         {/* Main headline */}
-        <div style={{ marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)', width: '100%', maxWidth: '800px', zIndex: 20 }}>
-          <MaskedHeading 
-            text="Make them stop scrolling." 
-            mediaType="video" 
-            src="/videos/projects/video_11.mp4" 
-            fillScale={1.3} 
-            parallax={34} 
-            reveal="wipe" 
-            trigger="mount" 
-            align="center"
-            weight={800}
-            textScale={0.15}
-          />
-        </div>
+        <motion.h1
+          id="hero-title"
+          variants={parent}
+          initial="hidden"
+          animate="visible"
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'var(--fs-display)',
+            fontWeight: 700,
+            letterSpacing: '-0.03em',
+            lineHeight: 1.05,
+            color: 'var(--ink)',
+            marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)',
+            maxWidth: '16ch',
+          }}
+        >
+          <span style={{ display: 'block', overflow: 'hidden' }}>
+            <motion.span variants={child} style={{ display: 'block', color: 'var(--ink)' }}>
+              Make them
+            </motion.span>
+          </span>
+          <span style={{ display: 'block', width: '100%' }}>
+            <motion.span variants={child} style={{ display: 'block' }}>
+              <MaskedHeading 
+                text="stop scrolling." 
+                mediaType="video" 
+                src="/videos/projects/video_11.mp4" 
+                fillScale={1.3} 
+                parallax={34} 
+                reveal="wipe" 
+                trigger="mount" 
+                align="center"
+                weight={700}
+                textScale={0.155}
+                tag="span"
+              />
+            </motion.span>
+          </span>
+        </motion.h1>
 
         {/* Supporting copy + CTAs */}
         <motion.div
