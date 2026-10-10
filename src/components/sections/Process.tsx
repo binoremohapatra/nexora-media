@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useTheme } from '../../hooks/useTheme';
 import { SpotlightCard } from '../ui/SpotlightCard';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -19,6 +20,10 @@ const steps = [
 export function Process() {
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReduced = useReducedMotion();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  // Real hex colors for WarpText canvas rasterizer (CSS vars won't resolve)
+  const warpColor = isDark ? '#F3F0E9' : '#181817';
   
   useEffect(() => {
     if (prefersReduced || !containerRef.current) return;
@@ -99,11 +104,11 @@ export function Process() {
             >
               A simple, premium workflow from idea to launch and growth.
             </h2>
-            {/* WarpText — WebGL glass-refraction heading */}
-            <div aria-hidden="true" style={{ width: '100%', height: 'clamp(280px, 40vw, 420px)' }}>
+            {/* WarpText — WebGL glass-refraction heading with actual hex colors */}
+            <div aria-hidden="true" style={{ width: '100%', height: 'clamp(380px, 50vw, 520px)' }}>
               <WarpText
-                text={`A simple,\npremium\nworkflow\nfrom idea\nto launch\nand growth.`}
-                color="var(--ink)"
+                text={`A simple,\npremium\nworkflow  \nfrom idea  \nto launch\nand growth.`}
+                color={warpColor}
                 warpStrength={0.1}
                 warpScale={1.5}
                 speed={0.45}
@@ -111,11 +116,11 @@ export function Process() {
                 pointerStrength={0.42}
                 refraction={0.02}
                 ripple
-                fontSize="clamp(1.4rem, 3.5vw, 2.6rem)"
+                fontSize="clamp(1.8rem, 4vw, 3.2rem)"
                 fontWeight={800}
                 fontFamily="inherit"
-                letterSpacing="-0.04em"
-                lineHeight={1.15}
+                letterSpacing="-0.03em"
+                lineHeight={1.25}
                 style={{ width: '100%', height: '100%' }}
               />
             </div>

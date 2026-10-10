@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { motion } from 'motion/react';
 import gsap from 'gsap';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useTheme } from '../../hooks/useTheme';
 import DriftWall from '../ui/DriftWall';
 // @ts-ignore
 import DepthText from '../ui/DepthText';
@@ -53,8 +54,14 @@ const DRIFT_ITEMS = [
 
 export function Hero() {
   const prefersReduced = useReducedMotion();
+  const { theme } = useTheme();
   const heroRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
+
+  // Theme-aware colors for DepthText
+  const isDark = theme === 'dark';
+  const faceColor = isDark ? '#F3F0E9' : '#181817';
+  const depthColor = isDark ? '#3B82F6' : '#1D4ED8';
 
   const containerVariants = {
     hidden: {},
@@ -142,13 +149,13 @@ export function Hero() {
             }}
           >
             {/* DepthText on 'Make them' — 3D layered orbit effect */}
-            <span style={{ display: 'block', marginBottom: '0.1em' }}>
+            <span style={{ display: 'block', marginBottom: '0.15em' }}>
               <DepthText
                 text="Make them"
                 layers={28}
                 depth={2.2}
-                faceColor="var(--ink)"
-                depthColor="#1d4ed8"
+                faceColor={faceColor}
+                depthColor={depthColor}
                 tilt={6}
                 pointerTracking={true}
                 smoothing={0.12}
@@ -161,29 +168,35 @@ export function Hero() {
               />
             </span>
 
-            {/* MaskedHeading on 'Stop Scrolling.' — media-filled text mask */}
-            <span style={{ display: 'block' }}>
+            {/* MaskedHeading on 'Stop Scrolling.' — video-filled text mask */}
+            <div style={{
+              display: 'block',
+              width: '100%',
+              height: 'clamp(5rem, 12vw, 13rem)',
+              position: 'relative',
+              marginTop: '0.1em'
+            }}>
               <MaskedHeading
                 text="Stop Scrolling."
                 tag="span"
                 mediaType="video"
-                src="/videos/drifting.mp4"
-                fillScale={1.3}
-                parallax={20}
-                drift={14}
-                brightness={1.1}
-                saturation={1.2}
+                src="/videos/camera-lens.mp4"
+                fillScale={1.4}
+                parallax={22}
+                drift={16}
+                brightness={isDark ? 1.3 : 1.15}
+                saturation={isDark ? 1.6 : 1.4}
                 reveal="rise"
-                duration={1.1}
-                stagger={0.1}
+                duration={1.2}
+                stagger={0.09}
                 trigger="mount"
                 align="center"
                 weight={700}
                 tracking={-0.04}
-                textScale={0.12}
-                style={{ fontSize: 'var(--fs-display)', display: 'block', lineHeight: 1.05 }}
+                textScale={false}
+                style={{ fontSize: 'var(--fs-display)', display: 'block', width: '100%', height: '100%', lineHeight: 1.05 }}
               />
-            </span>
+            </div>
           </h1>
 
         {/* Supporting copy + CTAs */}
