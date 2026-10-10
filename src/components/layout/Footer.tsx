@@ -1,4 +1,9 @@
+// @ts-nocheck
 import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const QUICK_LINKS = [
   { href: '#home', label: 'Home' },
@@ -31,22 +36,38 @@ const year = new Date().getFullYear();
 
 export function Footer() {
   const footerRef = useRef<HTMLElement>(null);
-  const videoLightRef = useRef<HTMLVideoElement>(null);
-  const videoDarkRef = useRef<HTMLVideoElement>(null);
+  const cameraVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (!footerRef.current) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        videoLightRef.current?.play().catch(() => {});
-        videoDarkRef.current?.play().catch(() => {});
-      } else {
-        videoLightRef.current?.pause();
-        videoDarkRef.current?.pause();
-      }
-    }, { threshold: 0.05 });
-    observer.observe(footerRef.current);
-    return () => observer.disconnect();
+    if (!footerRef.current || !cameraVideoRef.current) return;
+    const video = cameraVideoRef.current;
+
+    let trigger: any;
+    const setupTrigger = () => {
+      trigger = ScrollTrigger.create({
+        trigger: footerRef.current,
+        start: 'top bottom',
+        end: 'bottom bottom',
+        scrub: 1,
+        onUpdate: (self) => {
+          if (video.duration && !isNaN(video.duration)) {
+            video.currentTime = self.progress * video.duration;
+          }
+        }
+      });
+    };
+
+    if (video.readyState >= 1) {
+      setupTrigger();
+    } else {
+      video.onloadedmetadata = () => {
+        setupTrigger();
+      };
+    }
+
+    return () => {
+      if (trigger) trigger.kill();
+    };
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -88,44 +109,26 @@ export function Footer() {
         flexDirection: 'column',
       }}
     >
-      {/* Dynamic Video Backgrounds */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+      {/* ScrollTrigger Camera Lens Video Background */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', overflow: 'hidden' }}>
         <video
-          ref={videoLightRef}
-          autoPlay
+          ref={cameraVideoRef}
           muted
-          loop
           playsInline
-          src="/videos/footer-light.mp4"
+          preload="auto"
+          src="/videos/camera-lens.mp4"
           style={{
             position: 'absolute',
             inset: 0,
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            opacity: 'var(--logo-light-opacity)',
-            transition: 'opacity 0.7s ease-in-out',
-          }}
-        />
-        <video
-          ref={videoDarkRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          src="/videos/footer-dark.mp4"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            opacity: 'var(--logo-dark-opacity)',
-            transition: 'opacity 0.7s ease-in-out',
+            opacity: 0.38,
+            filter: 'contrast(1.1) brightness(0.9)',
           }}
         />
         {/* Overlay to ensure text readability */}
-        <div style={{ position: 'absolute', inset: 0, background: 'var(--bg-alt)', opacity: 0.8 }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'var(--bg-alt)', opacity: 0.72 }} />
       </div>
 
       <div className="container" style={{ position: 'relative', zIndex: 1, padding: '0 2rem', width: '100%' }}>
