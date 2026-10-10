@@ -49,7 +49,7 @@ export function Contact() {
           <SplitTextGSAP
             text="Let's build something"
             tag="span"
-            className="block font-display font-bold leading-[1.1] tracking-tight"
+            className="block font-display font-bold tracking-tight"
             delay={40}
             duration={0.9}
             ease="power3.out"
@@ -59,13 +59,13 @@ export function Contact() {
             threshold={0.1}
             rootMargin="-80px"
             textAlign="center"
-            style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)', color: 'var(--ink)', display: 'block' } as any}
+            style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)', color: 'var(--ink)', display: 'block', lineHeight: 1.3 } as any}
           />
           {/* @ts-ignore */}
           <SplitTextGSAP
             text="amazing together."
             tag="span"
-            className="block font-display font-bold leading-[1.1] tracking-tight pb-4"
+            className="block font-display font-bold tracking-tight pb-2"
             delay={40}
             duration={0.9}
             ease="power3.out"
@@ -75,7 +75,7 @@ export function Contact() {
             threshold={0.1}
             rootMargin="-80px"
             textAlign="center"
-            style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)', color: 'var(--accent)', display: 'block' } as any}
+            style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)', color: 'var(--accent)', display: 'block', lineHeight: 1.3 } as any}
           />
         </div>
         
