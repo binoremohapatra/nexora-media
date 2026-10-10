@@ -152,19 +152,19 @@ export function Footer() {
               Premium creative agency specializing in modern digital experiences. Built with passion and creativity.
             </p>
             <div style={{ display: 'flex', gap: '1rem' }}>
-              {/* LinkedIn (Blue) */}
-              <a href="#" style={{ color: '#0077b5' }} aria-label="LinkedIn"
+              {/* YouTube (Red) */}
+              <a href="#" style={{ color: '#ff0000' }} aria-label="YouTube"
                  onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
                  onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.072 0 12 0 12s0 3.928.501 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.377.55 9.377.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.928 24 12 24 12s0-3.928-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
               </a>
-              {/* Twitter (Light Blue) */}
-              <a href="#" style={{ color: '#1da1f2' }} aria-label="Twitter"
+              {/* WhatsApp (Green) */}
+              <a href="https://wa.me/918882722257?text=Hi%20Nexora%20Media,%20I'm%20interested%20in%20your%20services." style={{ color: '#25d366' }} aria-label="WhatsApp"
                  onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
                  onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 0C5.383 0 0 5.383 0 12.032c0 2.658.857 5.11 2.316 7.152L.429 24l5.004-1.87a11.96 11.96 0 0 0 6.598 1.933c6.649 0 12.032-5.383 12.032-12.032S18.679 0 12.031 0zm6.554 17.202c-.27.764-1.573 1.455-2.181 1.542-.572.083-1.309.18-3.791-.849-2.981-1.233-4.887-4.295-5.034-4.492-.148-.198-1.196-1.597-1.196-3.044 0-1.448.752-2.164 1.018-2.457.265-.292.573-.365.765-.365.191 0 .382.001.548.009.18.009.421-.069.658.5.245.592.836 2.046.909 2.193.074.148.123.32.025.518-.098.197-.148.32-.296.493-.147.172-.314.382-.444.512-.147.147-.302.308-.135.594.167.287.742 1.226 1.596 1.988 1.101.985 2.016 1.291 2.312 1.439.296.147.468.122.641-.075.172-.197.74-8.865.938-1.161.196-.296.393-.247.663-.147.27.098 1.706.804 1.999.951.294.148.49.222.563.344.073.123.073.716-.197 1.48z"/></svg>
               </a>
-              {/* Slack (Multi-color SVG approximation) */}
+              {/* Instagram (Pink/Orange Gradient Stroke) */}
               <a href="https://www.instagram.com/nexoramediain" style={{ display: 'flex', gap: '2px', flexWrap: 'wrap', width: '24px', height: '24px' }} aria-label="Instagram">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e1306c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" 
                      onMouseEnter={(e) => (e.currentTarget.style.stroke = '#c13584')}
