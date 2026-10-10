@@ -531,6 +531,11 @@ const FlexCarousel = ({
         media.addEventListener('loadeddata', handleLoad);
         media.addEventListener('error', handleError);
         media.src = item.src;
+        
+        // Append to DOM to bypass browser autoplay restrictions
+        const container = document.getElementById('flex-carousel-videos');
+        if (container) container.appendChild(media);
+        
         media.play().catch(() => {});
         slot.video = media;
       } else {
@@ -547,6 +552,7 @@ const FlexCarousel = ({
           media.pause();
           media.removeAttribute('src');
           media.load();
+          if (media.parentNode) media.parentNode.removeChild(media);
         } else {
           media.onload = null;
           media.onerror = null;
@@ -557,6 +563,14 @@ const FlexCarousel = ({
     };
 
     const setItems = next => {
+      // Ensure hidden container exists
+      if (!document.getElementById('flex-carousel-videos')) {
+        const container = document.createElement('div');
+        container.id = 'flex-carousel-videos';
+        container.style.display = 'none';
+        document.body.appendChild(container);
+      }
+      
       slots.forEach(slot => slot.dispose());
       slots = next.map(loadSlot);
       activeIndex = -1;
