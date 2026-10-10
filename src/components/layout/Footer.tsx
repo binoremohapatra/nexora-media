@@ -136,23 +136,24 @@ export function Footer() {
         }}>
           {/* Brand Column (Left Side) */}
           <div style={{ flex: '0 1 320px', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-              <div style={{ position: 'relative', width: 28, height: 28 }}>
+            {/* Official Brand Logo Lockup */}
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.875rem', marginBottom: '1.5rem' }}>
+              <div style={{ position: 'relative', width: 44, height: 44, flexShrink: 0 }}>
                 <img
-                  src="/images/logo.png"
+                  src="/images/logo-icon.png"
                   alt="Nexora Media"
-                  style={{ opacity: 'var(--logo-light-opacity)', position: 'absolute', width: '100%', height: '100%', objectFit: 'contain', transition: 'opacity 0.3s' }}
-                />
-                <img
-                  src="/images/logo-dark.png"
-                  alt=""
-                  aria-hidden="true"
-                  style={{ opacity: 'var(--logo-dark-opacity)', position: 'absolute', width: '100%', height: '100%', objectFit: 'contain', transition: 'opacity 0.3s' }}
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', filter: 'drop-shadow(0 2px 8px rgba(37, 99, 235, 0.4))' }}
                 />
               </div>
-              <span style={{ fontSize: '1.125rem', fontWeight: 700, letterSpacing: '-0.02em', fontFamily: 'var(--font-display)', color: 'var(--ink)' }}>
-                Nexora Media
-              </span>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span style={{ fontSize: '1.4rem', fontWeight: 800, letterSpacing: '-0.03em', fontFamily: 'var(--font-display)', color: 'var(--ink)', lineHeight: 1.1 }}>
+                  Nexora
+                </span>
+                <div style={{ width: '100%', height: '2px', background: 'var(--accent)', margin: '3px 0 2px 0', borderRadius: '1px' }} />
+                <span style={{ fontSize: '0.625rem', fontWeight: 700, letterSpacing: '0.28em', color: 'var(--accent)', textTransform: 'uppercase', lineHeight: 1 }}>
+                  MEDIA
+                </span>
+              </div>
             </div>
 
             <p style={{ fontSize: '0.875rem', color: 'var(--ink-muted)', lineHeight: 1.6, marginBottom: '2rem' }}>

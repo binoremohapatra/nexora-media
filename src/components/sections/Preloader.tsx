@@ -62,27 +62,14 @@ export function Preloader({ onDone }: { onDone: () => void }) {
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}
           >
-            {/* Logo images — both in DOM, CSS opacity driven by theme */}
-            <div style={{ position: 'relative', width: 48, height: 48 }}>
+            {/* Logo emblem */}
+            <div style={{ position: 'relative', width: 52, height: 52 }}>
               <img
-                src="/images/logo.png"
+                src="/images/logo-icon.png"
                 alt="Nexora Media"
-                width={48}
-                height={48}
-                style={{ opacity: 'var(--logo-light-opacity)', transition: 'opacity 0.3s' }}
-              />
-              <img
-                src="/images/logo-dark.png"
-                alt=""
-                aria-hidden="true"
-                width={48}
-                height={48}
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  opacity: 'var(--logo-dark-opacity)',
-                  transition: 'opacity 0.3s',
-                }}
+                width={52}
+                height={52}
+                style={{ width: '100%', height: '100%', objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(37, 99, 235, 0.45))' }}
               />
             </div>
             <motion.span
