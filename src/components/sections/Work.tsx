@@ -30,7 +30,7 @@ function VideoModal({ project, onClose }: { project: typeof projects[0]; onClose
         <X size={24} strokeWidth={2.5} />
       </button>
 
-      <div className="relative w-full max-w-5xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300">
+      <div className="relative w-[90vw] max-w-[420px] aspect-[9/16] bg-black rounded-xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300 border border-white/10">
         {project.type === 'youtube' ? (
           <iframe
             src={`${project.embedUrl}${project.embedUrl?.includes('?') ? '&' : '?'}autoplay=1`}

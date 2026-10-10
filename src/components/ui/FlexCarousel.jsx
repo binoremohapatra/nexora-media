@@ -787,12 +787,9 @@ const FlexCarousel = ({
             if (!slot.video.paused) slot.video.pause();
           }
           if (slot.video.readyState >= 2) {
-            if (!slot.video.paused || !slot._textureInitialized) {
-              slot.texture.image = slot.video;
-              slot.texture.update();
-              slot._textureInitialized = true;
-              needsUpdate = true;
-            }
+            slot.texture.image = slot.video;
+            slot.texture.update();
+            needsUpdate = true;
           }
         }
       });
