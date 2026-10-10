@@ -102,7 +102,8 @@ export function Hero() {
             lineHeight: 1.05,
             color: 'var(--ink)',
             marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)',
-            maxWidth: '16ch',
+            width: '100%',
+            textAlign: 'center'
           }}
         >
           <span style={{ display: 'block', overflow: 'hidden' }}>
@@ -113,7 +114,7 @@ export function Hero() {
           <span style={{ display: 'block', width: '100%' }}>
             <motion.span variants={child} style={{ display: 'block' }}>
               <MaskedHeading 
-                text="stop scrolling." 
+                text="Stop Scrolling." 
                 mediaType="video" 
                 src="https://videos.pexels.com/video-files/2759477/2759477-hd_1920_1080_30fps.mp4" 
                 fillScale={1.3} 
@@ -123,7 +124,7 @@ export function Hero() {
                 align="center"
                 weight={700}
                 textScale={false}
-                tag="span"
+                tag="div"
               />
             </motion.span>
           </span>
