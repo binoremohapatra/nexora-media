@@ -524,12 +524,14 @@ const FlexCarousel = ({
       };
 
       if (isVideo) {
+        media.autoplay = true;
         media.loop = true;
         media.muted = true;
         media.playsInline = true;
         media.addEventListener('loadeddata', handleLoad);
         media.addEventListener('error', handleError);
         media.src = item.src;
+        media.play().catch(() => {});
         slot.video = media;
       } else {
         media.decoding = 'async';
@@ -785,9 +787,12 @@ const FlexCarousel = ({
             if (!slot.video.paused) slot.video.pause();
           }
           if (slot.video.readyState >= 2) {
-            slot.texture.image = slot.video;
-            slot.texture.update();
-            needsUpdate = true;
+            if (!slot.video.paused || !slot._textureInitialized) {
+              slot.texture.image = slot.video;
+              slot.texture.update();
+              slot._textureInitialized = true;
+              needsUpdate = true;
+            }
           }
         }
       });
