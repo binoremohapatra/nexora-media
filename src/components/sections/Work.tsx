@@ -93,15 +93,15 @@ export function Work() {
       aria-labelledby="work-title"
       className="bg-[var(--bg-alt)] py-24 lg:py-32 overflow-hidden border-b border-[var(--border-subtle)] relative"
     >
-      <div className="container mb-8 lg:mb-12 text-center lg:text-left relative z-10">
-        <SectionLabel className="mb-4 mx-auto lg:mx-0">Selected Work</SectionLabel>
+      <div className="container mb-8 lg:mb-12 text-center relative z-10">
+        <SectionLabel className="mb-4 mx-auto">Selected Work</SectionLabel>
         <h2
           id="work-title"
           className="sr-only"
         >
           Work that speaks for itself.
         </h2>
-        <div aria-hidden="true">
+        <div aria-hidden="true" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <FoldText
             text="Work that speaks"
             splitBy="char"

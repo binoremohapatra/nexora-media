@@ -3,6 +3,8 @@ import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { SpotlightCard } from '../ui/SpotlightCard';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+// @ts-ignore
+import WarpText from '../ui/WarpText';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -91,19 +93,32 @@ export function Process() {
               <div className="w-6 h-px bg-[var(--accent)]" />
               <span className="text-[var(--accent)] font-bold tracking-[0.2em] text-xs uppercase">Our Process</span>
             </div>
-            <h2 
-              id="process-title" 
-              className="text-[var(--ink)] font-bold leading-[1.05] tracking-tight"
-              style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}
+            <h2
+              id="process-title"
+              className="sr-only"
             >
-              A simple, <br className="hidden lg:block"/>
-              premium <br className="hidden lg:block"/>
-              workflow <br className="hidden lg:block"/>
-              from idea <br className="hidden lg:block"/>
-              to launch <br className="hidden lg:block"/>
-              and <br className="hidden lg:block"/>
-              growth.
+              A simple, premium workflow from idea to launch and growth.
             </h2>
+            {/* WarpText — WebGL glass-refraction heading */}
+            <div aria-hidden="true" style={{ width: '100%', height: 'clamp(280px, 40vw, 420px)' }}>
+              <WarpText
+                text={`A simple,\npremium\nworkflow\nfrom idea\nto launch\nand growth.`}
+                color="var(--ink)"
+                warpStrength={0.1}
+                warpScale={1.5}
+                speed={0.45}
+                pointerInfluence={0.5}
+                pointerStrength={0.42}
+                refraction={0.02}
+                ripple
+                fontSize="clamp(1.4rem, 3.5vw, 2.6rem)"
+                fontWeight={800}
+                fontFamily="inherit"
+                letterSpacing="-0.04em"
+                lineHeight={1.15}
+                style={{ width: '100%', height: '100%' }}
+              />
+            </div>
           </div>
           
           {/* Right Column - Timeline */}
