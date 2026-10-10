@@ -162,7 +162,7 @@ export function Hero() {
                 perspective={900}
                 autoOrbit={true}
                 orbitSpeed={0.25}
-                fontSize="clamp(4rem, 15vw, 12rem)"
+                fontSize="clamp(3rem, 9vw, 7rem)"
                 fontWeight={700}
                 shadow={true}
               />
@@ -172,7 +172,7 @@ export function Hero() {
             <div style={{
               display: 'block',
               width: '100%',
-              height: 'clamp(6rem, 15vw, 15rem)',
+              height: 'clamp(4rem, 10vw, 8rem)',
               position: 'relative',
               marginTop: '0.1em'
             }}>
@@ -194,7 +194,7 @@ export function Hero() {
                 weight={700}
                 tracking={-0.04}
                 textScale={false}
-                style={{ fontSize: 'clamp(4rem, 15vw, 12rem)', display: 'block', width: '100%', height: '100%', lineHeight: 1.05 }}
+                style={{ fontSize: 'clamp(3rem, 9vw, 7rem)', whiteSpace: 'nowrap', display: 'block', width: '100%', height: '100%', lineHeight: 1.05 }}
               />
             </div>
           </h1>
