@@ -8,6 +8,7 @@ import { Marquee } from './components/sections/Marquee';
 import { About } from './components/sections/About';
 import { Services } from './components/sections/Services';
 import { Work } from './components/sections/Work';
+import { Team } from './components/sections/Team';
 import { Process } from './components/sections/Process';
 import { Faq } from './components/sections/Faq';
 import { Contact } from './components/sections/Contact';
@@ -37,6 +38,7 @@ export default function App() {
         <Work />
         <InstagramReels />
         <About />
+        <Team />
         <Process />
         <Faq />
         <Contact />
