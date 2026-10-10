@@ -41,6 +41,11 @@
   /* Theme-aware Hero Video Settings */
   --hero-video-filter: invert(1) contrast(1.1) brightness(1.1) hue-rotate(200deg) saturate(1.5);
   --hero-video-opacity: 0.12;
+
+  /* Theme-aware Footer Camera Loop Settings */
+  --footer-video-opacity: 0.28;
+  --footer-video-filter: contrast(1.1) brightness(0.95);
+  --footer-overlay-opacity: 0.65;
 }
 
 /* --- Dark theme -------------------------------------------- */
@@ -79,4 +84,9 @@
   /* Theme-aware Hero Video Settings */
   --hero-video-filter: contrast(1.2) brightness(0.9) hue-rotate(200deg) saturate(2);
   --hero-video-opacity: 0.3;
+
+  /* Theme-aware Footer Camera Loop Settings */
+  --footer-video-opacity: 0.42;
+  --footer-video-filter: contrast(1.2) brightness(0.9);
+  --footer-overlay-opacity: 0.55;
 }

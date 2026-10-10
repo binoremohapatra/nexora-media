@@ -31,18 +31,15 @@ const year = new Date().getFullYear();
 
 export function Footer() {
   const footerRef = useRef<HTMLElement>(null);
-  const videoLightRef = useRef<HTMLVideoElement>(null);
-  const videoDarkRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (!footerRef.current) return;
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
-        videoLightRef.current?.play().catch(() => { });
-        videoDarkRef.current?.play().catch(() => { });
+        videoRef.current?.play().catch(() => { });
       } else {
-        videoLightRef.current?.pause();
-        videoDarkRef.current?.pause();
+        videoRef.current?.pause();
       }
     }, { threshold: 0.05 });
     observer.observe(footerRef.current);
@@ -88,44 +85,45 @@ export function Footer() {
         flexDirection: 'column',
       }}
     >
-      {/* Dynamic Video Backgrounds */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+      {/* Cinematic Camera Aperture Video Background */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', overflow: 'hidden' }}>
         <video
-          ref={videoLightRef}
+          ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
-          src="/videos/footer-light.mp4"
+          src="/videos/camera-lens.mp4"
           style={{
             position: 'absolute',
             inset: 0,
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            opacity: 'var(--logo-light-opacity)',
+            objectPosition: 'center',
+            opacity: 'var(--footer-video-opacity, 0.35)',
+            filter: 'var(--footer-video-filter, contrast(1.15))',
             transition: 'opacity 0.7s ease-in-out',
           }}
         />
-        <video
-          ref={videoDarkRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          src="/videos/footer-dark.mp4"
+        {/* Radial vignette so the aperture motion is vibrant in the center and blends smoothly into the edges */}
+        <div
           style={{
             position: 'absolute',
             inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            opacity: 'var(--logo-dark-opacity)',
-            transition: 'opacity 0.7s ease-in-out',
+            background: 'radial-gradient(ellipse at center, transparent 0%, var(--bg-alt) 82%)',
+            opacity: 'var(--footer-overlay-opacity, 0.6)',
           }}
         />
-        {/* Overlay to ensure text readability */}
-        <div style={{ position: 'absolute', inset: 0, background: 'var(--bg-alt)', opacity: 0.8 }} />
+        {/* Vertical gradient to softly ground text top and bottom */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to bottom, var(--bg-alt) 0%, transparent 25%, transparent 75%, var(--bg-alt) 100%)',
+            opacity: 0.8,
+          }}
+        />
       </div>
 
       <div className="container" style={{ position: 'relative', zIndex: 1, padding: '0 2rem', width: '100%' }}>
