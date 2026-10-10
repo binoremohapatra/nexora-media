@@ -122,7 +122,7 @@ export function Hero() {
                 trigger="mount" 
                 align="center"
                 weight={700}
-                textScale={0.155}
+                textScale={false}
                 tag="span"
               />
             </motion.span>

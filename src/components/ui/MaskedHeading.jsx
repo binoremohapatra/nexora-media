@@ -70,7 +70,9 @@ const MaskedHeading = ({
     if (!root || !measure) return;
     const s = settingsRef.current;
 
-    root.style.fontSize = `${clamp(root.clientWidth * s.textScale, 20, 200).toFixed(1)}px`;
+    if (s.textScale !== false) {
+      root.style.fontSize = `${clamp(root.clientWidth * s.textScale, 20, 200).toFixed(1)}px`;
+    }
 
     const cs = window.getComputedStyle(measure);
     for (let i = 0; i < wordRefs.current.length; i += 1) {
