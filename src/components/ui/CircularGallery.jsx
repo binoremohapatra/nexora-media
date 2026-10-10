@@ -457,8 +457,9 @@ class App {
       { image: `https://picsum.photos/seed/12/800/600?grayscale`, text: 'Palm Trees' }
     ];
     const galleryItems = items && items.length ? items : defaultItems;
-    // Only duplicate the array if there are fewer than 15 items to save memory
-    this.mediasImages = galleryItems.length < 15 ? galleryItems.concat(galleryItems) : galleryItems;
+    // Always duplicate the array! The infinite-scroll logic relies on items extending far to the right 
+    // so they can immediately teleport to the left side on load to fill the initial empty gap!
+    this.mediasImages = galleryItems.concat(galleryItems);
     this.medias = this.mediasImages.map((data, index) => {
       return new Media({
         geometry: this.planeGeometry,
