@@ -2,9 +2,8 @@ import React, { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 import { SectionLabel } from '../ui/SectionLabel';
 import { SplitText } from '../ui/SplitText';
+import { BlurText } from '../ui/BlurText';
 import { useTheme } from '../../hooks/useTheme';
-// @ts-ignore
-import FallingText from '../ui/FallingText';
 // @ts-ignore
 import ParticleText from '../ui/ParticleText';
 
@@ -66,21 +65,10 @@ export function About() {
             <SplitText text="A creative partner for brands that want to look premium and grow with confidence." delay={0.1} />
           </h2>
           
-          {/* Interactive Physics Falling Text */}
-          <div style={{ width: '100%', minHeight: '340px', height: 'clamp(320px, 40vw, 380px)', marginBottom: '3.5rem', position: 'relative' }}>
-            {/* @ts-ignore */}
-            <FallingText
-              key={`falling-${theme}`}
-              text="Nexora Media is a creative marketing agency helping businesses grow through powerful content, strategic branding, social media marketing, advertising, and modern digital experiences. We combine creativity, strategy, and technology to help businesses establish a strong online presence and achieve measurable growth."
-              highlightWords={["Nexora", "creative", "branding", "marketing", "content", "technology", "growth"] as any}
-              highlightClass="highlighted"
-              trigger="hover"
-              backgroundColor="transparent"
-              wireframes={false}
-              gravity={0.56}
-              fontSize="clamp(1.05rem, 1.8vw, 1.25rem)"
-              textColor={isDark ? '#e4e4e7' : '#27272a'}
-              mouseConstraintStiffness={0.9}
+          <div style={{ fontSize: 'var(--fs-body)', color: 'var(--ink-muted)', maxWidth: '60ch', lineHeight: 1.75, marginBottom: '3.5rem' }}>
+            <BlurText 
+              text="Nexora Media is a creative marketing agency helping businesses grow through powerful content, strategic branding, social media marketing, advertising, and modern digital experiences. We combine creativity, strategy, and technology to help businesses establish a strong online presence and achieve measurable growth." 
+              delay={0.3} 
             />
           </div>
 
