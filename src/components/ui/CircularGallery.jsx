@@ -251,7 +251,8 @@ class Media {
         void main() {
           vUv = uv;
           vec3 p = position;
-          p.z = (sin(p.x * 4.0 + uTime) * 1.5 + cos(p.y * 2.0 + uTime) * 1.5) * (0.1 + uSpeed * 0.5);
+          // Removed the wavy sin/cos distortion to keep cards perfectly flat
+          p.z = 0.0;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
         }
       `,
@@ -373,8 +374,9 @@ class Media {
       }
     }
     this.scale = this.screen.height / 1500;
-    this.plane.scale.y = (this.viewport.height * (900 * this.scale)) / this.screen.height;
-    this.plane.scale.x = (this.viewport.width * (700 * this.scale)) / this.screen.width;
+    // Increased base sizing (from 900 to 1100, 700 to 900) to make the cards larger
+    this.plane.scale.y = (this.viewport.height * (1200 * this.scale)) / this.screen.height;
+    this.plane.scale.x = (this.viewport.width * (950 * this.scale)) / this.screen.width;
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
     this.padding = 2;
     this.width = this.plane.scale.x + this.padding;
@@ -540,6 +542,11 @@ class App {
     }
   }
   update() {
+    // Auto-scroll when the user is not holding the gallery
+    if (!this.isDown) {
+      this.scroll.target += this.scrollSpeed * 0.03;
+    }
+    
     this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
     const direction = this.scroll.current > this.scroll.last ? 'right' : 'left';
     if (this.medias) {
