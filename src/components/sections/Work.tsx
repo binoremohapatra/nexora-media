@@ -22,17 +22,24 @@ function VideoModal({ project, onClose }: { project: typeof projects[0]; onClose
   const isYouTube = project.type === 'youtube';
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center p-4 sm:p-6 bg-black/95 backdrop-blur-xl" style={{ zIndex: 200 }}>
+    <div 
+      className="fixed inset-0 flex items-center justify-center p-4 sm:p-6 bg-black/95 backdrop-blur-xl" 
+      style={{ zIndex: 9999 }}
+      onClick={onClose}
+    >
       <button
-        onClick={onClose}
-        className="absolute top-4 right-4 sm:top-6 sm:right-6 w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
-        style={{ zIndex: 210 }}
+        onClick={(e) => { e.stopPropagation(); onClose(); }}
+        className="absolute top-4 right-4 sm:top-8 sm:right-8 w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-2xl cursor-pointer"
+        style={{ zIndex: 10000, backgroundColor: '#ffffff', color: '#000000', border: 'none' }}
         aria-label="Close video"
       >
-        <X size={24} strokeWidth={2.5} />
+        <X size={24} strokeWidth={3} />
       </button>
 
-      <div className={`relative bg-black rounded-xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300 border border-white/10 ${isYouTube ? 'w-full max-w-5xl aspect-video' : 'w-[90vw] max-w-[420px] aspect-[9/16]'}`}>
+      <div 
+        className={`relative bg-black rounded-xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300 border border-white/10 ${isYouTube ? 'w-full max-w-5xl aspect-video' : 'w-[90vw] max-w-[420px] aspect-[9/16]'}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {isYouTube ? (
           <iframe
             src={`${project.embedUrl}${project.embedUrl?.includes('?') ? '&' : '?'}autoplay=1`}
