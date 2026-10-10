@@ -1,5 +1,5 @@
 import React from 'react';
-import { CircularCarousel } from '../ui/CircularCarousel';
+import CircularGallery from '../ui/CircularGallery';
 
 const INSTAGRAM_LINKS = [
   "https://www.instagram.com/nexoramediain.in/reel/Dbpf-6bqkAi/",
@@ -34,30 +34,13 @@ const items = INSTAGRAM_LINKS
   .map((url, index) => ({ url, index }))
   .filter(({ index }) => !EXCLUDED_INDICES.includes(index))
   .map(({ url, index }) => {
-    const isReel = url.includes('/reel/');
     return {
-      src: `/images/instagram/${index + 1}.jpg?v=2`,
-      alt: `Nexora Media Instagram ${isReel ? 'Reel' : 'Post'} ${index + 1}`,
-      title: isReel ? 'Reel' : 'Post',
-      subtitle: 'Instagram',
-      url: url
+      image: `/images/instagram/${index + 1}.jpg?v=2`,
+      text: url.includes('/reel/') ? 'Reel' : 'Post'
     };
   });
 
 export function InstagramReels() {
-  const [isMobile, setIsMobile] = React.useState(false);
-
-  React.useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile(); // Check on mount
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const handleItemClick = (item: any) => {
-    window.open(item.url, '_blank');
-  };
-
   return (
     <section className="bg-[var(--bg-alt)] py-20 overflow-hidden border-b border-[var(--border-subtle)]">
       <div className="container mb-12 text-center relative z-10">
@@ -66,20 +49,17 @@ export function InstagramReels() {
         >
           Trending on Instagram.
         </h2>
-        <p className="text-[var(--ink-muted)] mt-4 text-lg">Swipe through our latest content. Click to view on Instagram.</p>
+        <p className="text-[var(--ink-muted)] mt-4 text-lg">Swipe through our latest content.</p>
       </div>
 
-      <div className="w-full h-[400px] md:h-[560px] relative">
-        <CircularCarousel
+      <div className="w-full h-[400px] md:h-[600px] relative">
+        <CircularGallery
           items={items}
-          preset="cylinder"
-          intro="rise"
-          cardWidth={isMobile ? 220 : 280}
-          radius={isMobile ? 200 : 320}
-          aspectRatio={1.0} // Reverted back to Square since our current JPGs are square
-          speed={isMobile ? 8 : 14}
-          captions={true}
-          onItemClick={handleItemClick}
+          bend={0} // User requested to remove the wavy effect
+          textColor="var(--ink)"
+          borderRadius={0.05}
+          scrollSpeed={2}
+          scrollEase={0.05}
         />
       </div>
     </section>
