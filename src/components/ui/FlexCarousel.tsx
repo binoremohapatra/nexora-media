@@ -1167,8 +1167,8 @@ const FlexCarousel = ({
       const [x, y] = localPoint(e);
       const hit = instances.find(inst => x >= inst.x0 && x <= inst.x1 && y >= inst.y0 && y <= inst.y1);
       if (!hit) return;
+      callbacksRef.current.onSelect?.(hit.index, itemsRef.current[hit.index]);
       if (hit.index === activeIndex && Math.abs(goal - pos) < 2) {
-        callbacksRef.current.onSelect?.(hit.index, itemsRef.current[hit.index]);
         if (s.focusOnClick) openFocus(hit.index);
       } else {
         const rel = (hit.x0 + hit.x1) / 2 - width / 2;

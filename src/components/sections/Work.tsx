@@ -129,7 +129,7 @@ export function Work() {
             color="var(--ink)"
           />
         </div>
-        <p className="text-[var(--ink-muted)] mt-4">Click any project to play the reel.</p>
+        <p className="text-[var(--ink-muted)] mt-4 text-sm sm:text-base">Tap any project to watch the reel.</p>
       </div>
 
       {/* 3D Liquid WebGL Carousel */}
@@ -145,13 +145,14 @@ export function Work() {
           captions={true}
           autoplay={true}
           interval={10}
-          onSelect={(_: any, item: any) => setActiveProject(item.project)}
+          onSelect={(_: any, item: any) => {
+            const url = item?.project?.permalink || item?.project?.embedUrl;
+            if (url) {
+              window.open(url, '_blank', 'noopener,noreferrer');
+            }
+          }}
         />
       </div>
-
-      {activeProject && (
-        <VideoModal project={activeProject} onClose={() => setActiveProject(null)} />
-      )}
     </section>
   );
 }
