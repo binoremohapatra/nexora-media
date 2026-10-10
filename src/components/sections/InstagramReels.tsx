@@ -66,7 +66,7 @@ export function InstagramReels() {
         <p className="text-[var(--ink-muted)] mt-4 text-lg">Swipe through and click to watch our latest content.</p>
       </div>
 
-      <div className="container max-w-7xl mx-auto h-[400px] md:h-[600px] relative cursor-pointer flex justify-center items-center">
+      <div className="w-full h-[400px] md:h-[600px] relative cursor-pointer">
         <CircularGallery
           items={IG_LINKS}
           bend={3} // Restored circular (cylindrical) layout
