@@ -1,19 +1,16 @@
 import React from 'react';
 
 const PAGES = [
-  { href: '#home', label: 'Home' },
-  { href: '#about', label: 'About' },
-  { href: '#services', label: 'Services' },
-  { href: '#work', label: 'Work' },
-  { href: '#faq', label: 'FAQ' },
-];
-
-const SERVICES = [
-  { href: '#', label: 'Social Media Management' },
-  { href: '#', label: 'Content Creation' },
-  { href: '#', label: 'Video Editing' },
-  { href: '#', label: 'Branding & Identity' },
-  { href: '#', label: 'Website Design' },
+  { href: '#', label: 'Home' },
+  { href: '#', label: 'About' },
+  { href: '#', label: 'Contact' },
+  { href: '#', label: 'Careers' },
+  { href: '#', label: 'Press' },
+  { href: '#', label: 'Blog' },
+  { href: '#', label: 'Changelog' },
+  { href: '#', label: 'Roadmap' },
+  { href: '#', label: 'Pricing' },
+  { href: '#', label: 'FAQ' },
 ];
 
 const LEGAL = [
@@ -21,27 +18,58 @@ const LEGAL = [
   { href: '#', label: 'Privacy Policy' },
   { href: '#', label: 'Cookie Policy' },
   { href: '#', label: 'Refund Policy' },
+  { href: '#', label: 'Acceptable Use' },
+  { href: '#', label: 'GDPR' },
+  { href: '#', label: 'Licenses' },
 ];
 
-const CONTACT = [
-  { href: 'tel:+918882722257', label: '+91 8882722257' },
-  { href: 'mailto:teamnexoramediain@gmail.com', label: 'Email Us' },
-  { href: "https://wa.me/918882722257?text=Hi%20Nexora%20Media,%20I'm%20interested%20in%20your%20services.", label: 'WhatsApp' },
-  { href: '#', label: 'Remote · India' },
+const COMPONENTS = [
+  { href: '#', label: 'Buttons' },
+  { href: '#', label: 'Cards' },
+  { href: '#', label: 'Navigation' },
+  { href: '#', label: 'Forms' },
+  { href: '#', label: 'Modals' },
+  { href: '#', label: 'Tables' },
+  { href: '#', label: 'Alerts' },
+  { href: '#', label: 'Badges' },
+  { href: '#', label: 'Avatars' },
+  { href: '#', label: 'Tooltips' },
+];
+
+const RESOURCES = [
+  { href: '#', label: 'Documentation' },
+  { href: '#', label: 'Tutorials' },
+  { href: '#', label: 'Examples' },
+  { href: '#', label: 'Templates' },
+  { href: '#', label: 'Guides' },
+  { href: '#', label: 'API Reference' },
+  { href: '#', label: 'Community' },
+  { href: '#', label: 'Support' },
+];
+
+const MARKETING = [
+  { href: '#', label: 'Best Place to Market' },
+  { href: '#', label: 'AI Tools' },
+  { href: '#', label: 'Product Hunt Launch' },
+  { href: '#', label: 'Indie Hackers' },
+  { href: '#', label: 'Hacker News' },
+  { href: '#', label: 'Twitter Marketing' },
+  { href: '#', label: 'Reddit Communities' },
+  { href: '#', label: 'Discord Servers' },
 ];
 
 const year = new Date().getFullYear();
 
 export function Footer() {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
+    if (href.startsWith('#') && href !== '#') {
       e.preventDefault();
       document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   const linkStyle = {
-    fontSize: '0.875rem',
+    fontSize: '0.8125rem',
     color: 'var(--ink-muted)',
     textDecoration: 'none',
     transition: 'color 0.2s',
@@ -50,7 +78,7 @@ export function Footer() {
   };
 
   const headerStyle = {
-    fontSize: '0.9375rem',
+    fontSize: '0.875rem',
     fontWeight: 600,
     color: 'var(--ink)',
     marginBottom: '1.5rem',
@@ -62,7 +90,6 @@ export function Footer() {
         backgroundColor: 'var(--bg-alt)',
         color: 'var(--ink)',
         paddingTop: '6rem',
-        paddingBottom: '2rem',
         position: 'relative',
         overflow: 'hidden',
         borderTop: '1px solid var(--border)',
@@ -71,77 +98,102 @@ export function Footer() {
     >
       <div className="container" style={{ position: 'relative', zIndex: 10, padding: '0 2rem' }}>
         <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-          gap: '2rem',
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '3rem',
+          justifyContent: 'space-between',
           marginBottom: '5rem',
         }}>
-          {/* Column 1 */}
-          <div>
-            <h3 style={headerStyle}>Pages</h3>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {PAGES.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} onClick={(e) => handleNavClick(e, link.href)} style={linkStyle}
-                     onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ink)')}
-                     onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-muted)')}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Columns 1-5 container */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', 
+            gap: '2rem',
+            flex: '1 1 auto' 
+          }}>
+            {/* Column 1 */}
+            <div>
+              <h3 style={headerStyle}>Pages</h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {PAGES.map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} onClick={(e) => handleNavClick(e, link.href)} style={linkStyle}
+                       onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ink)')}
+                       onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-muted)')}>
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Column 2 */}
-          <div>
-            <h3 style={headerStyle}>Services</h3>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {SERVICES.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} style={linkStyle}
-                     onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ink)')}
-                     onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-muted)')}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+            {/* Column 2 */}
+            <div>
+              <h3 style={headerStyle}>Legal</h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {LEGAL.map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} style={linkStyle}
+                       onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ink)')}
+                       onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-muted)')}>
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Column 3 */}
-          <div>
-            <h3 style={headerStyle}>Legal</h3>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {LEGAL.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} style={linkStyle}
-                     onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ink)')}
-                     onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-muted)')}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+            {/* Column 3 */}
+            <div>
+              <h3 style={headerStyle}>Components</h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {COMPONENTS.map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} style={linkStyle}
+                       onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ink)')}
+                       onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-muted)')}>
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Column 4 */}
-          <div>
-            <h3 style={headerStyle}>Contact</h3>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {CONTACT.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} style={linkStyle}
-                     onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ink)')}
-                     onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-muted)')}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            {/* Column 4 */}
+            <div>
+              <h3 style={headerStyle}>Resources</h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {RESOURCES.map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} style={linkStyle}
+                       onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ink)')}
+                       onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-muted)')}>
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 5 */}
+            <div>
+              <h3 style={headerStyle}>Marketing</h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {MARKETING.map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} style={linkStyle}
+                       onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--ink)')}
+                       onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-muted)')}>
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Brand Column */}
-          <div style={{ gridColumn: 'span 2', maxWidth: '320px', marginLeft: 'auto' }}>
+          <div style={{ flex: '0 1 300px', minWidth: '250px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
               <div style={{ width: 32, height: 32, backgroundColor: 'var(--ink)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                 <img src="/images/logo.png" alt="Nexora" style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px', filter: 'var(--logo-invert)' }} />
@@ -149,7 +201,7 @@ export function Footer() {
               <span style={{ fontSize: '1.25rem', fontWeight: 700, letterSpacing: '-0.02em', fontFamily: 'var(--font-display)', color: 'var(--ink)' }}>Nexora</span>
             </div>
             <p style={{ fontSize: '0.875rem', color: 'var(--ink-muted)', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-              Premium creative agency specializing in modern digital experiences. Built with passion and creativity.
+              Beautiful UI components and templates for modern web applications. Built with React and Tailwind CSS.
             </p>
             <div style={{ display: 'flex', gap: '1rem' }}>
               {/* YouTube (Red) */}
@@ -177,12 +229,12 @@ export function Footer() {
         </div>
 
         {/* Divider */}
-        <div style={{ height: '1px', backgroundColor: 'var(--border)', width: '100%', marginBottom: '2rem' }} />
+        <div style={{ height: '1px', backgroundColor: 'var(--border)', width: '100%', marginBottom: '3rem' }} />
 
         {/* Copyright */}
-        <div style={{ textAlign: 'center', paddingBottom: '3rem' }}>
+        <div style={{ textAlign: 'center', paddingBottom: '16rem' }}>
           <p style={{ fontSize: '0.875rem', color: 'var(--ink-faint)', margin: 0 }}>
-            © {year} Nexora. All rights reserved.
+            © {year} Nexora Media. All rights reserved.
           </p>
         </div>
       </div>
@@ -191,19 +243,21 @@ export function Footer() {
       <div 
         style={{
           position: 'absolute',
-          bottom: '-15%',
+          bottom: '-12%',
           left: '50%',
           transform: 'translateX(-50%)',
-          fontSize: 'clamp(12rem, 28vw, 35rem)',
+          fontSize: 'clamp(14rem, 30vw, 40rem)',
           fontWeight: 900,
           fontFamily: 'var(--font-display)',
-          color: 'var(--ink)',
-          opacity: 0.03, // Very faint
+          color: 'var(--bg-alt)',
+          textShadow: '0px 0px 40px rgba(0, 102, 255, 0.4), 0px 0px 80px rgba(0, 102, 255, 0.15)',
+          WebkitTextStroke: '2px rgba(0, 102, 255, 0.2)',
+          opacity: 0.8,
           pointerEvents: 'none',
           whiteSpace: 'nowrap',
           userSelect: 'none',
           lineHeight: 0.8,
-          zIndex: 1,
+          zIndex: 0,
         }}
       >
         Nexora
