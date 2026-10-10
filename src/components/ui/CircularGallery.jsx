@@ -234,7 +234,8 @@ class Media {
   }
   createShader() {
     const texture = new Texture(this.gl, {
-      generateMipmaps: true
+      generateMipmaps: false,
+      minFilter: this.gl.LINEAR
     });
     this.program = new Program(this.gl, {
       depthTest: false,
@@ -433,9 +434,11 @@ class App {
     this.scene = new Transform();
   }
   createGeometry() {
+    // Drastically reduced polygon count (from 50x100 to 1x15) for massive performance boost
+    // Since the bend is only on the X-axis, we only need a few segments horizontally and 1 vertically
     this.planeGeometry = new Plane(this.gl, {
-      heightSegments: 50,
-      widthSegments: 100
+      heightSegments: 1,
+      widthSegments: 15
     });
   }
   createMedias(items, bend = 1, textColor, borderRadius, font) {
@@ -454,7 +457,8 @@ class App {
       { image: `https://picsum.photos/seed/12/800/600?grayscale`, text: 'Palm Trees' }
     ];
     const galleryItems = items && items.length ? items : defaultItems;
-    this.mediasImages = galleryItems.concat(galleryItems);
+    // Only duplicate the array if there are fewer than 15 items to save memory
+    this.mediasImages = galleryItems.length < 15 ? galleryItems.concat(galleryItems) : galleryItems;
     this.medias = this.mediasImages.map((data, index) => {
       return new Media({
         geometry: this.planeGeometry,
