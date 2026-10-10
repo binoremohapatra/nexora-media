@@ -23,14 +23,15 @@ export function InstagramReels() {
         <p className="text-[var(--ink-muted)] mt-4 text-lg">Swipe through our latest content.</p>
       </div>
 
-      <div className="w-full h-[400px] md:h-[600px] relative">
+      <div className="w-full h-[400px] md:h-[600px] relative cursor-pointer">
         <CircularGallery
           items={items}
-          bend={0} // User requested to remove the wavy effect
+          bend={3} // Restored circular (cylindrical) layout
           textColor="var(--ink)"
           borderRadius={0.05}
           scrollSpeed={2}
           scrollEase={0.05}
+          onClick={() => window.open('https://www.instagram.com/nexoramediain.in/', '_blank')}
         />
       </div>
     </section>
