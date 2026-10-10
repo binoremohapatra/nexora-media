@@ -1,0 +1,23 @@
+{
+  "name": "Nexora Media",
+  "short_name": "Nexora",
+  "description": "Creative marketing agency helping businesses grow through powerful content, strategic branding, social media marketing, advertising, and modern digital experiences.",
+  "icons": [
+    {
+      "src": "/images/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#F05A3C",
+  "background_color": "#F6F5F1",
+  "display": "standalone",
+  "start_url": "/",
+  "orientation": "portrait-primary"
+}
