@@ -489,7 +489,7 @@ const FlexCarousel = ({
         texture.image = media;
         texture.update();
         slot.image = isVideo ? [media.videoWidth || 1, media.videoHeight || 1] : [media.naturalWidth || 1, media.naturalHeight || 1];
-        slot.aspect = slot.image[0] / slot.image[1];
+        slot.aspect = item.aspect || (slot.image[0] / slot.image[1]);
         if (!isVideo) {
           try {
             const probe = document.createElement('canvas');
@@ -527,7 +527,11 @@ const FlexCarousel = ({
         media.autoplay = true;
         media.loop = true;
         media.muted = true;
+        media.defaultMuted = true;
         media.playsInline = true;
+        media.setAttribute('muted', '');
+        media.setAttribute('playsinline', '');
+        media.setAttribute('autoplay', '');
         media.addEventListener('loadeddata', handleLoad);
         media.addEventListener('error', handleError);
         media.src = item.src;

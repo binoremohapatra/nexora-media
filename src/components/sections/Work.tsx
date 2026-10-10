@@ -18,6 +18,8 @@ function VideoModal({ project, onClose }: { project: typeof projects[0]; onClose
     if (!cleanUrl.endsWith('/')) cleanUrl += '/';
     return cleanUrl + 'embed';
   };
+  
+  const isYouTube = project.type === 'youtube';
 
   return (
     <div className="fixed inset-0 flex items-center justify-center p-4 sm:p-6 bg-black/95 backdrop-blur-xl" style={{ zIndex: 200 }}>
@@ -30,8 +32,8 @@ function VideoModal({ project, onClose }: { project: typeof projects[0]; onClose
         <X size={24} strokeWidth={2.5} />
       </button>
 
-      <div className="relative w-[90vw] max-w-[420px] aspect-[9/16] bg-black rounded-xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300 border border-white/10">
-        {project.type === 'youtube' ? (
+      <div className={`relative bg-black rounded-xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300 border border-white/10 ${isYouTube ? 'w-full max-w-5xl aspect-video' : 'w-[90vw] max-w-[420px] aspect-[9/16]'}`}>
+        {isYouTube ? (
           <iframe
             src={`${project.embedUrl}${project.embedUrl?.includes('?') ? '&' : '?'}autoplay=1`}
             title={project.title}
@@ -70,7 +72,8 @@ export function Work() {
       alt: p.title,
       title: p.title,
       subtitle: p.category,
-      project: p
+      project: p,
+      aspect: p.type === 'youtube' ? 16 / 9 : 9 / 16
     };
   });
 
