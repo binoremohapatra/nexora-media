@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SectionLabel } from '../ui/SectionLabel';
 import { projects } from '../../data/projects';
-// @ts-ignore
-import FlexCarousel from '../ui/FlexCarousel';
-import { X, Play } from 'lucide-react';
+import { Play } from 'lucide-react';
 
 function getYoutubeId(url: string | undefined) {
   if (!url) return null;
@@ -11,68 +9,13 @@ function getYoutubeId(url: string | undefined) {
   return match ? match[1] : null;
 }
 
-function VideoModal({ project, onClose }: { project: typeof projects[0]; onClose: () => void }) {
+export function Work() {
   const getInstaEmbed = (url: string | undefined) => {
     if (!url) return '';
     let cleanUrl = url.split('?')[0];
     if (!cleanUrl.endsWith('/')) cleanUrl += '/';
     return cleanUrl + 'embed';
   };
-
-  return (
-    <div className="fixed inset-0 flex items-center justify-center p-4 sm:p-6 bg-black/95 backdrop-blur-xl" style={{ zIndex: 200 }}>
-      <button
-        onClick={onClose}
-        className="absolute top-4 right-4 sm:top-6 sm:right-6 w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
-        style={{ zIndex: 210 }}
-        aria-label="Close video"
-      >
-        <X size={24} strokeWidth={2.5} />
-      </button>
-
-      <div className="relative w-full max-w-5xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300">
-        {project.type === 'youtube' ? (
-          <iframe
-            src={`${project.embedUrl}${project.embedUrl?.includes('?') ? '&' : '?'}autoplay=1`}
-            title={project.title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="w-full h-full"
-          />
-        ) : (
-          <iframe
-            src={getInstaEmbed(project.embedUrl || project.permalink)}
-            width="100%"
-            height="100%"
-            frameBorder="0"
-            scrolling="no"
-            allowTransparency
-            allowFullScreen
-            className="w-full h-full bg-white"
-          />
-        )}
-      </div>
-    </div>
-  );
-}
-
-export function Work() {
-  const [activeProject, setActiveProject] = useState<typeof projects[0] | null>(null);
-
-  // Map projects to FlexCarousel expected item format
-  const carouselItems = projects.map(p => {
-    const ytId = p.type === 'youtube' ? getYoutubeId(p.embedUrl) : null;
-    const poster = p.poster || (ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : 'https://images.unsplash.com/photo-1604854574958-59047362c165?w=1200&q=80&auto=format&fit=max');
-
-    return {
-      src: poster,
-      alt: p.title,
-      title: p.title,
-      subtitle: p.category,
-      project: p
-    };
-  });
 
   return (
     <section
@@ -88,29 +31,57 @@ export function Work() {
         >
           Work that speaks<br className="hidden lg:block" /> for itself.
         </h2>
-        <p className="text-[var(--ink-muted)] mt-4">Click any project to play the reel.</p>
+        <p className="text-[var(--ink-muted)] mt-4">Swipe to view our client projects.</p>
       </div>
 
-      {/* 3D Liquid WebGL Carousel */}
-      <div style={{ width: '100%', height: '600px', position: 'relative' }}>
-        <FlexCarousel
-          items={carouselItems}
-          preset="liquid"
-          intro="rise"
-          cardHeight={0.6}
-          gap={32}
-          squeeze={0.15}
-          focusOnClick={true}
-          captions={true}
-          autoplay={true}
-          interval={3.5}
-          onSelect={(_: any, item: any) => setActiveProject(item.project)}
-        />
-      </div>
+      <div className="w-full relative px-4 lg:px-8">
+        <div 
+          className="flex overflow-x-auto gap-6 sm:gap-8 snap-x snap-mandatory pb-12 pt-4 hide-scrollbar"
+          style={{ scrollBehavior: 'smooth' }}
+        >
+          {projects.map((project, idx) => (
+            <div 
+              key={project.id || idx} 
+              className="relative flex-none w-[85vw] sm:w-[400px] lg:w-[450px] aspect-[4/5] sm:aspect-video rounded-2xl overflow-hidden snap-center group shadow-2xl bg-black border border-[var(--border-subtle)]"
+            >
+              {/* Iframes directly rendered to play client videos */}
+              {project.type === 'youtube' ? (
+                <iframe
+                  src={`${project.embedUrl}${project.embedUrl?.includes('?') ? '&' : '?'}autoplay=1&mute=1&loop=1&playlist=${getYoutubeId(project.embedUrl)}`}
+                  title={project.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full object-cover pointer-events-auto"
+                />
+              ) : (
+                <iframe
+                  src={getInstaEmbed(project.embedUrl || project.permalink)}
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  scrolling="no"
+                  allowTransparency
+                  allowFullScreen
+                  className="w-full h-full bg-white pointer-events-auto scale-105"
+                />
+              )}
 
-      {activeProject && (
-        <VideoModal project={activeProject} onClose={() => setActiveProject(null)} />
-      )}
+              {/* Gradient overlay for text readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none" />
+              
+              <div className="absolute bottom-0 left-0 right-0 p-6 pointer-events-none">
+                <p className="text-white/70 text-sm font-semibold uppercase tracking-wider mb-2">
+                  {project.category}
+                </p>
+                <h3 className="text-white text-2xl font-bold">
+                  {project.title}
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

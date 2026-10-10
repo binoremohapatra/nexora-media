@@ -8,7 +8,6 @@ export const projects: Project[] = [
     type: 'youtube',
     embedUrl: 'https://www.youtube.com/embed/g5gzHASupoY?enablejsapi=1&mute=1&rel=0&modestbranding=1',
     permalink: 'https://www.youtube.com/watch?v=g5gzHASupoY',
-    poster: 'https://assets.mixkit.co/videos/242/242-1080.mp4',
   },
   {
     id: 'restaurant-video',
@@ -17,7 +16,7 @@ export const projects: Project[] = [
     type: 'instagram',
     embedUrl: 'https://www.instagram.com/reel/Da5FUyzvW0a/',
     permalink: 'https://www.instagram.com/reel/Da5FUyzvW0a/?igsh=OWJqYWF3Nm85Ym94',
-    poster: 'https://assets.mixkit.co/videos/48529/48529-720.mp4',
+    poster: '/images/reels/reel1.jpg',
   },
   {
     id: 'real-estate-reel',
@@ -26,7 +25,6 @@ export const projects: Project[] = [
     type: 'youtube',
     embedUrl: 'https://www.youtube.com/embed/cx6V1vOEKwg?enablejsapi=1&mute=1&rel=0&modestbranding=1',
     permalink: 'https://www.youtube.com/watch?v=cx6V1vOEKwg',
-    poster: 'https://assets.mixkit.co/videos/9757/9757-720.mp4',
   },
   {
     id: 'event-introduction',
@@ -35,7 +33,7 @@ export const projects: Project[] = [
     type: 'instagram',
     embedUrl: 'https://www.instagram.com/reel/DUas6bxkQcw/',
     permalink: 'https://www.instagram.com/reel/DUas6bxkQcw/?utm_source=ig_web_copy_link',
-    poster: 'https://assets.mixkit.co/videos/2374/2374-1080.mp4',
+    poster: '/images/reels/reel2.jpg',
   },
   {
     id: 'social-media-campaign',
@@ -44,6 +42,6 @@ export const projects: Project[] = [
     type: 'instagram',
     embedUrl: 'https://www.instagram.com/reel/DbDwgafPS12/',
     permalink: 'https://www.instagram.com/reel/DbDwgafPS12/?utm_source=ig_web_button_share_sheet',
-    poster: 'https://assets.mixkit.co/videos/41638/41638-1080.mp4',
+    poster: '/images/reels/reel3.jpg',
   },
 ];
