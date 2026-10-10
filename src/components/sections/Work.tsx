@@ -6,64 +6,71 @@ import { projects } from '../../data/projects';
 import FlexCarousel from '../ui/FlexCarousel';
 // @ts-ignore
 import FoldText from '../ui/FoldText';
-import { X, Play } from 'lucide-react';
+import { X, ExternalLink, Play } from 'lucide-react';
 
-function getYoutubeId(url: string | undefined) {
-  if (!url) return null;
-  const match = url.match(/embed\/([^?]+)/);
-  return match ? match[1] : null;
-}
-
-function VideoModal({ project, onClose }: { project: typeof projects[0]; onClose: () => void }) {
-  const getInstaEmbed = (url: string | undefined) => {
-    if (!url) return '';
-    let cleanUrl = url.split('?')[0];
-    if (!cleanUrl.endsWith('/')) cleanUrl += '/';
-    return cleanUrl + 'embed';
-  };
-  
-  const isYouTube = project.type === 'youtube';
+function ProjectOverviewModal({ project, onClose }: { project: typeof projects[0]; onClose: () => void }) {
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
 
   return (
     <div 
-      className="fixed inset-0 flex items-center justify-center p-4 sm:p-6 bg-black/95 backdrop-blur-xl" 
-      style={{ zIndex: 9999 }}
+      className="fixed inset-0 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md z-[9999]" 
       onClick={onClose}
     >
-      <button
-        onClick={(e) => { e.stopPropagation(); onClose(); }}
-        className="absolute top-4 right-4 sm:top-8 sm:right-8 w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-2xl cursor-pointer"
-        style={{ zIndex: 10000, backgroundColor: '#ffffff', color: '#000000', border: 'none' }}
-        aria-label="Close video"
-      >
-        <X size={24} strokeWidth={3} />
-      </button>
-
       <div 
-        className={`relative bg-black rounded-xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300 border border-white/10 ${isYouTube ? 'w-full max-w-5xl aspect-video' : 'w-[90vw] max-w-[420px] aspect-[9/16]'}`}
+        className="relative bg-[var(--surface)] text-[var(--ink)] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl max-w-sm sm:max-w-md w-full border border-[var(--border-subtle)] flex flex-col max-h-[92vh] animate-in fade-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
-        {isYouTube ? (
-          <iframe
-            src={`${project.embedUrl}${project.embedUrl?.includes('?') ? '&' : '?'}autoplay=1`}
-            title={project.title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="w-full h-full"
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-[var(--border-subtle)] bg-[var(--surface)]">
+          <div>
+            <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold text-[var(--accent)]">{project.category}</span>
+            <h3 className="text-base sm:text-lg font-bold font-display tracking-tight text-[var(--ink)] leading-tight">{project.title}</h3>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-[var(--border-subtle)] hover:bg-[var(--accent-dim)] text-[var(--ink)] flex items-center justify-center transition-all cursor-pointer"
+            aria-label="Close"
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        {/* Video Player */}
+        <div className="relative bg-black flex items-center justify-center overflow-hidden aspect-[9/16] max-h-[56vh] w-full">
+          <video
+            src={project.poster}
+            autoPlay
+            controls
+            playsInline
+            loop
+            className="w-full h-full object-contain"
           />
-        ) : (
-          <iframe
-            src={getInstaEmbed(project.embedUrl || project.permalink)}
-            width="100%"
-            height="100%"
-            frameBorder="0"
-            scrolling="no"
-            allowTransparency
-            allowFullScreen
-            className="w-full h-full bg-white"
-          />
-        )}
+        </div>
+
+        {/* Action Bar */}
+        <div className="p-3.5 sm:p-4 flex items-center justify-between gap-3 border-t border-[var(--border-subtle)] bg-[var(--surface)]">
+          <span className="text-xs text-[var(--ink-muted)]">
+            Watch full audio on Instagram:
+          </span>
+          <a
+            href={project.permalink || project.embedUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold text-white shadow-md hover:scale-105 active:scale-95 transition-all shrink-0"
+            style={{
+              background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)'
+            }}
+          >
+            <span>Open Reel</span>
+            <ExternalLink size={13} />
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -146,13 +153,16 @@ export function Work() {
           autoplay={true}
           interval={10}
           onSelect={(_: any, item: any) => {
-            const url = item?.project?.permalink || item?.project?.embedUrl;
-            if (url) {
-              window.open(url, '_blank', 'noopener,noreferrer');
+            if (item?.project) {
+              setActiveProject(item.project);
             }
           }}
         />
       </div>
+
+      {activeProject && (
+        <ProjectOverviewModal project={activeProject} onClose={() => setActiveProject(null)} />
+      )}
     </section>
   );
 }
