@@ -114,23 +114,50 @@ export function Contact() {
         </div>
 
         {/* WhatsApp CTA */}
-        <div className="flex flex-col items-center w-full mt-6 md:mt-8">
+        <div className="flex flex-col items-center w-full" style={{ marginTop: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
           <a
             href="https://wa.me/918882722257?text=Hi%20Nexora%20Media,%20I'm%20interested%20in%20your%20services."
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center justify-center rounded-full font-bold transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl md:shadow-2xl gap-2.5 sm:gap-3 md:gap-4 px-5 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 text-sm sm:text-base md:text-xl w-auto max-w-[90vw] sm:min-w-[300px] md:min-w-[340px]"
+            className="group inline-flex items-center justify-center rounded-full font-bold transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl"
             style={{
+              padding: 'clamp(0.9rem, 1.8vw, 1.5rem) clamp(1.5rem, 3.5vw, 3.5rem)',
+              fontSize: 'clamp(0.95rem, 1.6vw, 1.35rem)',
+              gap: 'clamp(0.6rem, 1.2vw, 1rem)',
+              minWidth: 'clamp(260px, 30vw, 380px)',
+              maxWidth: '92vw',
               backgroundColor: 'var(--accent)',
               color: '#ffffff',
-              boxShadow: '0 12px 30px -8px var(--accent-dim)',
+              boxShadow: '0 20px 40px -10px var(--accent-dim)',
             }}
           >
-            <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 shrink-0" />
+            <MessageCircle
+              strokeWidth={2.2}
+              style={{
+                width: 'clamp(20px, 2.2vw, 28px)',
+                height: 'clamp(20px, 2.2vw, 28px)',
+                flexShrink: 0
+              }}
+            />
             <span className="whitespace-nowrap">Start a chat on WhatsApp</span>
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 shrink-0 transition-transform duration-300 group-hover:translate-x-1.5" />
+            <ArrowRight
+              strokeWidth={2.2}
+              className="transition-transform duration-300 group-hover:translate-x-2"
+              style={{
+                width: 'clamp(18px, 2vw, 24px)',
+                height: 'clamp(18px, 2vw, 24px)',
+                flexShrink: 0
+              }}
+            />
           </a>
-          <p className="mt-3 md:mt-5 text-xs sm:text-sm md:text-base font-medium text-center" style={{ color: 'var(--ink-muted)' }}>
+          <p
+            className="font-medium text-center"
+            style={{
+              color: 'var(--ink-muted)',
+              fontSize: 'clamp(0.85rem, 1.1vw, 1.05rem)',
+              marginTop: 'clamp(0.75rem, 1.5vw, 1.5rem)'
+            }}
+          >
             We usually reply within a few minutes.
           </p>
         </div>
