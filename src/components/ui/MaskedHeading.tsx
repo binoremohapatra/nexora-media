@@ -1,11 +1,14 @@
-import React, { useCallback, useEffect, useId, useMemo, useRef } from 'react';
+// @ts-nocheck
+'use client';
+
+import { useCallback, useEffect, useId, useMemo, useRef } from 'react';
 import { gsap } from 'gsap';
 
 import './MaskedHeading.css';
 
-const clamp = (v: number, a: number, b: number) => (v < a ? a : v > b ? b : v);
+const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
 
-export const MaskedHeading = ({
+const MaskedHeading = ({
   text = 'Designed in the details',
   tag = 'h2',
   mediaType = 'image',
@@ -29,21 +32,21 @@ export const MaskedHeading = ({
   className = '',
   style,
   ...rest
-}: any) => {
-  const rootRef = useRef<HTMLElement>(null);
-  const measureRef = useRef<HTMLElement>(null);
-  const revealRef = useRef<HTMLElement>(null);
-  const mediaRef = useRef<HTMLElement>(null);
-  const wordRefs = useRef<any[]>([]);
-  const baseRefs = useRef<any[]>([]);
-  const glyphRefs = useRef<any[]>([]);
-  const tweenRef = useRef<any>(null);
+}) => {
+  const rootRef = useRef(null);
+  const measureRef = useRef(null);
+  const revealRef = useRef(null);
+  const mediaRef = useRef(null);
+  const wordRefs = useRef([]);
+  const baseRefs = useRef([]);
+  const glyphRefs = useRef([]);
+  const tweenRef = useRef(null);
   const offsetRef = useRef({ x: 0, y: 0, tx: 0, ty: 0 });
 
   const clipId = `mh-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`;
   const words = useMemo(() => String(text).split(/\s+/).filter(Boolean), [text]);
 
-  const settingsRef = useRef<any>({});
+  const settingsRef = useRef({});
   settingsRef.current = { fillScale, parallax, drift, brightness, saturation, grayscale, textScale };
 
   const place = useCallback(() => {
@@ -68,7 +71,9 @@ export const MaskedHeading = ({
     if (!root || !measure) return;
     const s = settingsRef.current;
 
-    root.style.fontSize = `${clamp(root.clientWidth * s.textScale, 20, 200).toFixed(1)}px`;
+    if (s.textScale !== false) {
+      root.style.fontSize = `${clamp(root.clientWidth * s.textScale, 20, 200).toFixed(1)}px`;
+    }
 
     const cs = window.getComputedStyle(measure);
     for (let i = 0; i < wordRefs.current.length; i += 1) {
@@ -100,7 +105,7 @@ export const MaskedHeading = ({
     let last = performance.now();
     let clock = 0;
 
-    const frame = (now: number) => {
+    const frame = now => {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       clock += dt;
@@ -118,7 +123,7 @@ export const MaskedHeading = ({
       raf = requestAnimationFrame(frame);
     };
 
-    const onMove = (e: PointerEvent) => {
+    const onMove = e => {
       const s = settingsRef.current;
       if (s.parallax <= 0) return;
       const r = root.getBoundingClientRect();
@@ -133,14 +138,14 @@ export const MaskedHeading = ({
       offsetRef.current.ty = 0;
     };
 
-    root.addEventListener('pointermove', onMove as any);
+    root.addEventListener('pointermove', onMove);
     root.addEventListener('pointerleave', onLeave);
     raf = requestAnimationFrame(frame);
 
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
-      root.removeEventListener('pointermove', onMove as any);
+      root.removeEventListener('pointermove', onMove);
       root.removeEventListener('pointerleave', onLeave);
     };
   }, [place, sync]);
@@ -242,7 +247,7 @@ export const MaskedHeading = ({
     return () => tweenRef.current?.kill();
   }, [reveal, trigger, duration, stagger, words]);
 
-  const Tag = tag as any;
+  const Tag = tag;
 
   return (
     <Tag
@@ -258,7 +263,7 @@ export const MaskedHeading = ({
       {...rest}
     >
       <span ref={measureRef} className="masked-heading__measure">
-        {words.map((word: string, i: number) => (
+        {words.map((word, i) => (
           <span
             key={`${word}-${i}`}
             ref={el => {
@@ -280,7 +285,7 @@ export const MaskedHeading = ({
       <svg className="masked-heading__defs" aria-hidden="true" focusable="false">
         <defs>
           <clipPath id={clipId} clipPathUnits="userSpaceOnUse">
-            {words.map((word: string, i: number) => (
+            {words.map((word, i) => (
               <text
                 key={`${word}-${i}`}
                 ref={el => {
@@ -308,3 +313,5 @@ export const MaskedHeading = ({
     </Tag>
   );
 };
+
+export default MaskedHeading;
