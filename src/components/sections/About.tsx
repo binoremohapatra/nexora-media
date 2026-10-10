@@ -2,7 +2,9 @@ import React, { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 import { SectionLabel } from '../ui/SectionLabel';
 import { SplitText } from '../ui/SplitText';
-import { BlurText } from '../ui/BlurText';
+import { useTheme } from '../../hooks/useTheme';
+// @ts-ignore
+import FallingText from '../ui/FallingText';
 // @ts-ignore
 import ParticleText from '../ui/ParticleText';
 
@@ -12,6 +14,8 @@ import ParticleText from '../ui/ParticleText';
 export function About() {
   const listRef = useRef(null);
   const isListInView = useInView(listRef, { once: true, margin: '-10% 0px' });
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   return (
     <section
@@ -27,10 +31,11 @@ export function About() {
           {/* ParticleText heading — particles form the title on scroll */}
           <div style={{ width: '100%', height: 280, margin: '1.5rem 0 0' }}>
             <ParticleText
+              key={`particle-${theme}`}
               text="About Nexora Media"
               particleSize={3}
               density={5}
-              color="#ffffff"
+              color={isDark ? "#ffffff" : "#181817"}
               highlightColor="#3b82f6"
               scatter={200}
               gatherDuration={1800}
@@ -42,7 +47,7 @@ export function About() {
               fontSize="clamp(3.5rem, 8vw, 6rem)"
               fontWeight={800}
               fontFamily="inherit"
-              glow
+              glow={isDark}
             />
           </div>
 
@@ -61,10 +66,21 @@ export function About() {
             <SplitText text="A creative partner for brands that want to look premium and grow with confidence." delay={0.1} />
           </h2>
           
-          <div style={{ fontSize: 'var(--fs-body)', color: 'var(--ink-muted)', maxWidth: '60ch', lineHeight: 1.75, marginBottom: '3.5rem' }}>
-            <BlurText 
-              text="Nexora Media is a creative marketing agency helping businesses grow through powerful content, strategic branding, social media marketing, advertising, and modern digital experiences. We combine creativity, strategy, and technology to help businesses establish a strong online presence and achieve measurable growth." 
-              delay={0.3} 
+          {/* Interactive Physics Falling Text */}
+          <div style={{ width: '100%', minHeight: '340px', height: 'clamp(320px, 40vw, 380px)', marginBottom: '3.5rem', position: 'relative' }}>
+            {/* @ts-ignore */}
+            <FallingText
+              key={`falling-${theme}`}
+              text="Nexora Media is a creative marketing agency helping businesses grow through powerful content, strategic branding, social media marketing, advertising, and modern digital experiences. We combine creativity, strategy, and technology to help businesses establish a strong online presence and achieve measurable growth."
+              highlightWords={["Nexora", "creative", "branding", "marketing", "content", "technology", "growth"] as any}
+              highlightClass="highlighted"
+              trigger="hover"
+              backgroundColor="transparent"
+              wireframes={false}
+              gravity={0.56}
+              fontSize="clamp(1.05rem, 1.8vw, 1.25rem)"
+              textColor={isDark ? '#e4e4e7' : '#27272a'}
+              mouseConstraintStiffness={0.9}
             />
           </div>
 

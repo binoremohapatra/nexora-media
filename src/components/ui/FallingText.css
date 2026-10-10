@@ -1,0 +1,51 @@
+.falling-text-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  text-align: left;
+  padding: 1.5rem 1.75rem;
+  border-radius: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.falling-text-container:active {
+  cursor: grabbing;
+}
+
+.falling-text-container:hover {
+  border-color: var(--accent-dim);
+}
+
+.falling-text-target {
+  display: block;
+  width: 100%;
+}
+
+.word {
+  display: inline-block;
+  margin: 0 4px 6px 0;
+  user-select: none;
+  font-family: inherit;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.highlighted {
+  color: var(--accent, #3b82f6) !important;
+  font-weight: 700;
+}
+
+.falling-text-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
