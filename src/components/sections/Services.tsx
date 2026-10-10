@@ -67,7 +67,7 @@ function ServiceGroupItem({
             <div ref={contentRef} className="pb-10 pt-4 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-x-16">
               {groupServices.map((service) => (
                 <div key={service.id} className="relative pl-6 md:pl-8 border-l-2 border-[var(--accent-dim)]">
-                  <span className="absolute top-1.5 left-0 text-[10px] font-mono text-[var(--accent)] rotate-[-90deg] origin-top-left -translate-x-full mt-2">
+                  <span className="block text-sm font-mono font-medium text-[var(--accent)] mb-2 uppercase tracking-widest">
                     {service.number}
                   </span>
                   <h4

@@ -114,27 +114,24 @@ export function Contact() {
         </div>
 
         {/* WhatsApp CTA */}
-        <div className="flex flex-col items-center w-full" style={{ marginTop: '2rem' }}>
+        <div className="flex flex-col items-center w-full mt-10 md:mt-12 mb-16 md:mb-24 px-4">
           <a
             href="https://wa.me/918882722257?text=Hi%20Nexora%20Media,%20I'm%20interested%20in%20your%20services."
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center justify-center rounded-full font-bold transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl"
+            className="group inline-flex items-center justify-center rounded-full font-bold transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl px-8 py-4 md:px-12 md:py-5 w-full sm:w-auto max-w-[340px] sm:max-w-none text-base md:text-xl"
             style={{ 
-              gap: '1rem',
+              gap: '0.75rem',
               backgroundColor: 'var(--accent)', 
               color: '#ffffff', 
-              boxShadow: '0 20px 40px -10px var(--accent-dim)',
-              padding: '1.5rem 3rem',
-              fontSize: '1.25rem',
-              minWidth: '340px'
+              boxShadow: '0 20px 40px -10px var(--accent-dim)'
             }}
           >
-            <MessageCircle size={28} />
-            Start a chat on WhatsApp 
-            <ArrowRight size={24} className="transition-transform duration-300 group-hover:translate-x-2" />
+            <MessageCircle className="w-5 h-5 md:w-7 md:h-7" />
+            <span>Start a chat</span> 
+            <ArrowRight className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:translate-x-1.5" />
           </a>
-          <p className="mt-6 text-base font-medium" style={{ color: 'var(--ink-muted)' }}>
+          <p className="mt-5 text-sm md:text-base font-medium" style={{ color: 'var(--ink-muted)' }}>
             We usually reply within a few minutes.
           </p>
         </div>
