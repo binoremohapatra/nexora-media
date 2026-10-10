@@ -571,12 +571,15 @@ const FlexCarousel = ({
       if (!document.getElementById('flex-carousel-videos')) {
         const container = document.createElement('div');
         container.id = 'flex-carousel-videos';
-        container.style.position = 'absolute';
-        container.style.opacity = '0';
+        container.style.position = 'fixed';
+        container.style.top = '-9999px';
+        container.style.left = '-9999px';
+        container.style.opacity = '1';
         container.style.pointerEvents = 'none';
         container.style.width = '1px';
         container.style.height = '1px';
         container.style.overflow = 'hidden';
+        container.style.zIndex = '-1';
         document.body.appendChild(container);
       }
       
@@ -804,11 +807,23 @@ const FlexCarousel = ({
       let needsUpdate = false;
       slots.forEach(slot => {
         if (slot.video && slot.video.readyState >= 2) {
-          if (slot.index === activeIndex || !slot._textureInitialized) {
+          if (slot.index === activeIndex) {
+            if (slot.video.paused) {
+              const p = slot.video.play();
+              if (p && p.catch) p.catch(() => {});
+            }
             slot.texture.image = slot.video;
             slot.texture.needsUpdate = true;
             slot._textureInitialized = true;
             needsUpdate = true;
+          } else {
+            if (!slot.video.paused) slot.video.pause();
+            if (!slot._textureInitialized) {
+              slot.texture.image = slot.video;
+              slot.texture.needsUpdate = true;
+              slot._textureInitialized = true;
+              needsUpdate = true;
+            }
           }
         }
       });
