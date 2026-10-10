@@ -105,7 +105,7 @@ export function Process() {
               A simple, premium workflow from idea to launch and growth.
             </h2>
             {/* WarpText — WebGL glass-refraction heading with actual hex colors */}
-            <div aria-hidden="true" style={{ width: '100%', height: 'clamp(500px, 60vw, 640px)' }}>
+            <div aria-hidden="true" style={{ width: '100%', height: 'clamp(600px, 80vw, 840px)' }}>
               <WarpText
                 text={`A simple,\npremium\nworkflow\nfrom idea\nto launch\nand growth.`}
                 color={warpColor}
@@ -116,7 +116,7 @@ export function Process() {
                 pointerStrength={0.45}
                 refraction={0.022}
                 ripple
-                fontSize="clamp(2.4rem, 5vw, 4.2rem)"
+                fontSize="clamp(3.5rem, 8vw, 6.5rem)"
                 fontWeight={800}
                 fontFamily="inherit"
                 letterSpacing="-0.03em"

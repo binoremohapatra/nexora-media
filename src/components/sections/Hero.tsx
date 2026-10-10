@@ -162,7 +162,7 @@ export function Hero() {
                 perspective={900}
                 autoOrbit={true}
                 orbitSpeed={0.25}
-                fontSize="var(--fs-display)"
+                fontSize="clamp(4rem, 15vw, 12rem)"
                 fontWeight={700}
                 shadow={true}
               />
@@ -172,7 +172,7 @@ export function Hero() {
             <div style={{
               display: 'block',
               width: '100%',
-              height: 'clamp(5rem, 12vw, 13rem)',
+              height: 'clamp(6rem, 15vw, 15rem)',
               position: 'relative',
               marginTop: '0.1em'
             }}>
@@ -180,7 +180,7 @@ export function Hero() {
                 text="Stop Scrolling."
                 tag="span"
                 mediaType="video"
-                src="/videos/footer-dark.mp4"
+                src="/videos/projects/video_1.mp4"
                 fillScale={1.4}
                 parallax={22}
                 drift={16}
@@ -194,7 +194,7 @@ export function Hero() {
                 weight={700}
                 tracking={-0.04}
                 textScale={false}
-                style={{ fontSize: 'var(--fs-display)', display: 'block', width: '100%', height: '100%', lineHeight: 1.05 }}
+                style={{ fontSize: 'clamp(4rem, 15vw, 12rem)', display: 'block', width: '100%', height: '100%', lineHeight: 1.05 }}
               />
             </div>
           </h1>

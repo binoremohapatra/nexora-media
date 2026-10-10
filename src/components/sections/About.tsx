@@ -25,11 +25,11 @@ export function About() {
           <SectionLabel>About Nexora Media</SectionLabel>
 
           {/* ParticleText heading — particles form the title on scroll */}
-          <div style={{ width: '100%', height: 220, margin: '1.5rem 0 0' }}>
+          <div style={{ width: '100%', height: 280, margin: '1.5rem 0 0' }}>
             <ParticleText
               text="About Nexora Media"
-              particleSize={2}
-              density={3}
+              particleSize={3}
+              density={5}
               color="#ffffff"
               highlightColor="#3b82f6"
               scatter={200}
@@ -39,7 +39,7 @@ export function About() {
               repelRadius={130}
               idleDrift={0.8}
               trigger="hover"
-              fontSize="clamp(1.8rem, 5vw, 3.5rem)"
+              fontSize="clamp(3.5rem, 8vw, 6rem)"
               fontWeight={800}
               fontFamily="inherit"
               glow
