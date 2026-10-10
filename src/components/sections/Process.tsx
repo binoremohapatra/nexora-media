@@ -5,7 +5,7 @@ import { SpotlightCard } from '../ui/SpotlightCard';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // @ts-ignore
-import WarpText from '../ui/WarpText';
+import SplitTextGSAP from '../ui/SplitTextGSAP';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -98,31 +98,35 @@ export function Process() {
               <div className="w-6 h-px bg-[var(--accent)]" />
               <span className="text-[var(--accent)] font-bold tracking-[0.2em] text-xs uppercase">Our Process</span>
             </div>
-            <h2
-              id="process-title"
-              className="sr-only"
-            >
+            <h2 id="process-title" className="sr-only">
               A simple, premium workflow from idea to launch and growth.
             </h2>
-            {/* WarpText — WebGL glass-refraction heading with actual hex colors */}
-            <div aria-hidden="true" style={{ width: '100%', height: 'clamp(600px, 80vw, 840px)' }}>
-              <WarpText
-                text={`A simple,\npremium\nworkflow\nfrom idea\nto launch\nand growth.`}
-                color={warpColor}
-                warpStrength={0.09}
-                warpScale={1.4}
-                speed={0.4}
-                pointerInfluence={0.55}
-                pointerStrength={0.45}
-                refraction={0.022}
-                ripple
-                fontSize="clamp(3.5rem, 8vw, 6.5rem)"
-                fontWeight={800}
-                fontFamily="inherit"
-                letterSpacing="-0.03em"
-                lineHeight={1.3}
-                style={{ width: '100%', height: '100%' }}
-              />
+            {/* SplitText animated heading — theme-aware colors */}
+            <div aria-hidden="true" className="py-4">
+              {['A simple,', 'premium', 'workflow', 'from idea', 'to launch', 'and growth.'].map((line, i) => (
+                // @ts-ignore
+                <SplitTextGSAP
+                  key={line}
+                  text={line}
+                  tag="div"
+                  className="font-display font-bold tracking-tight leading-[1.15] block"
+                  delay={30}
+                  duration={0.9}
+                  ease="power3.out"
+                  splitType="chars"
+                  from={{ opacity: 0, y: 60, rotateX: -20 }}
+                  to={{ opacity: 1, y: 0, rotateX: 0 }}
+                  threshold={0.1}
+                  rootMargin="-40px"
+                  textAlign="left"
+                  style={{
+                    fontSize: 'clamp(2.8rem, 6vw, 5rem)',
+                    color: isDark ? '#ffffff' : '#0f0f0f',
+                    display: 'block',
+                    lineHeight: 1.15
+                  } as any}
+                />
+              ))}
             </div>
           </div>
           
