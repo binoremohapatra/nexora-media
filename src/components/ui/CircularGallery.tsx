@@ -413,7 +413,19 @@ class App {
     this.onResize();
     this.createGeometry();
     this.createMedias(items, bend, textColor, borderRadius, font);
-    this.update();
+    
+    this.isVisible = false;
+    this.observer = new IntersectionObserver(([entry]) => {
+      this.isVisible = entry.isIntersecting;
+      if (this.isVisible && !this.raf) {
+        this.update();
+      } else if (!this.isVisible && this.raf) {
+        window.cancelAnimationFrame(this.raf);
+        this.raf = null;
+      }
+    }, { threshold: 0.05 });
+    this.observer.observe(this.container);
+    
     this.addEventListeners();
   }
   createRenderer() {
@@ -560,6 +572,10 @@ class App {
     }
   }
   update() {
+    if (!this.isVisible) {
+      this.raf = null;
+      return;
+    }
     // Auto-scroll when the user is not holding the gallery
     if (!this.isDown) {
       this.scroll.target += this.scrollSpeed * 0.03;
@@ -595,7 +611,12 @@ class App {
     this.container?.addEventListener('keydown', this.boundOnKeyDown);
   }
   destroy() {
-    window.cancelAnimationFrame(this.raf);
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+    if (this.raf) {
+      window.cancelAnimationFrame(this.raf);
+    }
     window.removeEventListener('resize', this.boundOnResize);
     window.removeEventListener('mousewheel', this.boundOnWheel);
     window.removeEventListener('wheel', this.boundOnWheel);

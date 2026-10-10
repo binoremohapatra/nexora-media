@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const QUICK_LINKS = [
   { href: '#home', label: 'Home' },
@@ -30,6 +30,25 @@ const CONTACT = [
 const year = new Date().getFullYear();
 
 export function Footer() {
+  const footerRef = useRef<HTMLElement>(null);
+  const videoLightRef = useRef<HTMLVideoElement>(null);
+  const videoDarkRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!footerRef.current) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        videoLightRef.current?.play().catch(() => {});
+        videoDarkRef.current?.play().catch(() => {});
+      } else {
+        videoLightRef.current?.pause();
+        videoDarkRef.current?.pause();
+      }
+    }, { threshold: 0.05 });
+    observer.observe(footerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('#') && href !== '#') {
       e.preventDefault();
@@ -57,6 +76,7 @@ export function Footer() {
 
   return (
     <footer
+      ref={footerRef}
       style={{
         position: 'relative',
         overflow: 'hidden',
@@ -71,6 +91,7 @@ export function Footer() {
       {/* Dynamic Video Backgrounds */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
         <video
+          ref={videoLightRef}
           autoPlay
           muted
           loop
@@ -87,6 +108,7 @@ export function Footer() {
           }}
         />
         <video
+          ref={videoDarkRef}
           autoPlay
           muted
           loop

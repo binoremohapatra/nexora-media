@@ -1278,7 +1278,12 @@ const FlexCarousel = ({
     resizeObserver.observe(container);
     const intersectionObserver = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
-      start();
+      if (!visible && raf) {
+        cancelAnimationFrame(raf);
+        raf = null;
+      } else if (visible) {
+        start();
+      }
     });
     intersectionObserver.observe(container);
 

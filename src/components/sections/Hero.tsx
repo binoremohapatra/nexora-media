@@ -16,10 +16,20 @@ export function Hero() {
   const prefersReduced = useReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // Keep empty or remove if not needed, GSAP logic removed
-  }, [prefersReduced]);
+    if (!heroRef.current || !videoRef.current) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        videoRef.current?.play().catch(() => {});
+      } else {
+        videoRef.current?.pause();
+      }
+    }, { threshold: 0.1 });
+    observer.observe(heroRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const containerVariants = {
     hidden: {},
@@ -60,6 +70,7 @@ export function Hero() {
       {/* Cinematic Theme Video Background */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[var(--bg)]">
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted

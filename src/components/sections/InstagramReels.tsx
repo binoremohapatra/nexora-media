@@ -4,7 +4,7 @@ import CircularGallery from '../ui/CircularGallery';
 
 const imageModules = import.meta.glob('/public/images/instagram/*.{png,jpg,jpeg}', { eager: true });
 
-const items = Object.keys(imageModules).map(key => {
+const items = Object.keys(imageModules).slice(0, 16).map(key => {
   const url = key.replace('/public', '');
   return {
     image: url,
