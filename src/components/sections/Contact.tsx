@@ -49,7 +49,7 @@ export function Contact() {
           <SplitTextGSAP
             text="Let's build something"
             tag="span"
-            className="block font-display font-bold leading-[1.05] tracking-tight"
+            className="block font-display font-bold leading-[1.1] tracking-tight"
             delay={40}
             duration={0.9}
             ease="power3.out"
@@ -65,7 +65,7 @@ export function Contact() {
           <SplitTextGSAP
             text="amazing together."
             tag="span"
-            className="block font-display font-bold leading-[1.05] tracking-tight"
+            className="block font-display font-bold leading-[1.1] tracking-tight pb-4"
             delay={40}
             duration={0.9}
             ease="power3.out"
