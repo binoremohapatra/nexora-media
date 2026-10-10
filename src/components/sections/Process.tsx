@@ -23,7 +23,7 @@ export function Process() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   // Real hex colors for WarpText canvas rasterizer (CSS vars won't resolve)
-  const warpColor = isDark ? '#F3F0E9' : '#181817';
+  const warpColor = isDark ? '#FFFFFF' : '#181817';
   
   useEffect(() => {
     if (prefersReduced || !containerRef.current) return;
@@ -105,22 +105,22 @@ export function Process() {
               A simple, premium workflow from idea to launch and growth.
             </h2>
             {/* WarpText — WebGL glass-refraction heading with actual hex colors */}
-            <div aria-hidden="true" style={{ width: '100%', height: 'clamp(380px, 50vw, 520px)' }}>
+            <div aria-hidden="true" style={{ width: '100%', height: 'clamp(500px, 60vw, 640px)' }}>
               <WarpText
-                text={`A simple,\npremium\nworkflow  \nfrom idea  \nto launch\nand growth.`}
+                text={`A simple,\npremium\nworkflow\nfrom idea\nto launch\nand growth.`}
                 color={warpColor}
-                warpStrength={0.1}
-                warpScale={1.5}
-                speed={0.45}
-                pointerInfluence={0.5}
-                pointerStrength={0.42}
-                refraction={0.02}
+                warpStrength={0.09}
+                warpScale={1.4}
+                speed={0.4}
+                pointerInfluence={0.55}
+                pointerStrength={0.45}
+                refraction={0.022}
                 ripple
-                fontSize="clamp(1.8rem, 4vw, 3.2rem)"
+                fontSize="clamp(2.4rem, 5vw, 4.2rem)"
                 fontWeight={800}
                 fontFamily="inherit"
                 letterSpacing="-0.03em"
-                lineHeight={1.25}
+                lineHeight={1.3}
                 style={{ width: '100%', height: '100%' }}
               />
             </div>

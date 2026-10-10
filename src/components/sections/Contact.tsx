@@ -44,7 +44,7 @@ export function Contact() {
           Let's build something amazing together.
         </h2>
         {/* SplitTextGSAP animated headline */}
-        <div aria-hidden="true" className="mb-6">
+        <div aria-hidden="true" className="mb-12 md:mb-16">
           {/* @ts-ignore */}
           <SplitTextGSAP
             text="Let's build something"
