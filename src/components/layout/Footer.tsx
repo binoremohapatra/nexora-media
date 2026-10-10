@@ -258,7 +258,7 @@ export function Footer() {
         style={{
           width: '100%',
           textAlign: 'center',
-          fontSize: '15vw', // Uses viewport width to perfectly fit edge-to-edge
+          fontSize: '18vw', // Uses viewport width to perfectly fit edge-to-edge
           fontWeight: 900,
           fontFamily: 'var(--font-display)',
           color: 'var(--ink)',
@@ -281,7 +281,7 @@ export function Footer() {
           e.currentTarget.style.opacity = '0.03';
         }}
       >
-        Nexora Media
+        Nexora
       </div>
     </footer>
   );
