@@ -1,8 +1,9 @@
 // @ts-nocheck
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'motion/react';
 import gsap from 'gsap';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import DriftWall from '../ui/DriftWall';
 
 const WHATSAPP_URL = "https://wa.me/918882722257?text=Hi%20Nexora%20Media,%20I'm%20interested%20in%20your%20services.";
 
@@ -12,24 +13,28 @@ const KEYWORDS = [
   'Google Ads', 'Websites', 'SEO', 'Videography',
 ];
 
+const DRIFT_ITEMS = [
+  { image: '/images/instagram/post_1.png', title: 'Nexora Media' },
+  { image: '/images/instagram/post_2.png', title: 'Branding' },
+  { image: '/images/instagram/post_3.png', title: 'Viral Reels' },
+  { image: '/images/instagram/post_4.png', title: 'Commercial Edit' },
+  { image: '/images/instagram/post_5.png', title: 'Storytelling' },
+  { image: '/images/instagram/post_6.png', title: 'Visual Identity' },
+  { image: '/images/instagram/post_7.png', title: 'Cinematography' },
+  { image: '/images/instagram/post_8.png', title: 'Content Production' },
+  { image: '/images/instagram/post_9.png', title: 'Motion Design' },
+  { image: '/images/instagram/post_10.png', title: 'Creative Direction' },
+  { image: '/images/instagram/post_11.png', title: 'Digital Campaigns' },
+  { image: '/images/instagram/post_12.jpg', title: 'Social Strategy' },
+  { image: '/images/instagram/post_13.jpg', title: 'Shorts & Reels' },
+  { image: '/images/instagram/post_14.jpg', title: 'High Retention' },
+  { image: '/images/instagram/post_15.jpg', title: 'Brand Aesthetic' },
+];
+
 export function Hero() {
   const prefersReduced = useReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (!heroRef.current || !videoRef.current) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        videoRef.current?.play().catch(() => {});
-      } else {
-        videoRef.current?.pause();
-      }
-    }, { threshold: 0.1 });
-    observer.observe(heroRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   const containerVariants = {
     hidden: {},
@@ -67,24 +72,29 @@ export function Hero() {
         background: 'var(--bg)',
       }}
     >
-      {/* Cinematic Theme Video Background */}
-      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[var(--bg)]">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{
-            filter: 'var(--hero-video-filter)',
-            opacity: 'var(--hero-video-opacity)',
-            transition: 'filter 0.5s ease, opacity 0.5s ease'
-          }}
-        >
-          <source src="https://videos.pexels.com/video-files/3129977/3129977-hd_1920_1080_30fps.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)]/40 via-transparent to-[var(--bg)] pointer-events-none" />
+      {/* Dynamic 3D DriftWall Background */}
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
+        <DriftWall
+          items={DRIFT_ITEMS}
+          columns={5}
+          tileWidth={210}
+          tileHeight={140}
+          gap={18}
+          tilt={16}
+          turn={-14}
+          perspective={1200}
+          depth={120}
+          speed={38}
+          direction="up"
+          variance={0.45}
+          parallax={0.6}
+          lift={64}
+          fade={0.65}
+          dim={0.4}
+          overlayColor="var(--bg)"
+        />
+        {/* Soft vignette for crystal clear text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)]/75 via-[var(--bg)]/40 to-[var(--bg)] pointer-events-none" />
       </div>
 
       <div className="container" style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
