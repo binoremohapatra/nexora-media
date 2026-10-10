@@ -45,6 +45,15 @@ const items = INSTAGRAM_LINKS
   });
 
 export function InstagramReels() {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile(); // Check on mount
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const handleItemClick = (item: any) => {
     window.open(item.url, '_blank');
   };
@@ -60,14 +69,15 @@ export function InstagramReels() {
         <p className="text-[var(--ink-muted)] mt-4 text-lg">Swipe through our latest content. Click to view on Instagram.</p>
       </div>
 
-      <div style={{ width: '100%', height: '560px', position: 'relative' }}>
+      <div className="w-full h-[400px] md:h-[560px] relative">
         <CircularCarousel
           items={items}
           preset="cylinder"
           intro="rise"
-          cardWidth={280}
-          aspectRatio={1.0} // Square ratio to prevent letterboxing for uploaded screenshots
-          speed={14}
+          cardWidth={isMobile ? 220 : 280}
+          radius={isMobile ? 200 : 320}
+          aspectRatio={1.0} // Reverted back to Square since our current JPGs are square
+          speed={isMobile ? 8 : 14}
           captions={true}
           onItemClick={handleItemClick}
         />
