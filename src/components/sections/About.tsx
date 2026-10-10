@@ -15,6 +15,14 @@ export function About() {
   const isListInView = useInView(listRef, { once: true, margin: '-10% 0px' });
   const { theme } = useTheme();
   const isDark = theme === 'dark';
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <section
@@ -28,22 +36,22 @@ export function About() {
           <SectionLabel>About Nexora Media</SectionLabel>
 
           {/* ParticleText heading — particles form the title on scroll */}
-          <div style={{ width: '100%', height: 280, margin: '1.5rem 0 0' }}>
+          <div style={{ width: '100%', height: isMobile ? 210 : 260, margin: '1.5rem 0 0' }}>
             <ParticleText
-              key={`particle-${theme}`}
-              text="About Nexora Media"
-              particleSize={3}
-              density={5}
+              key={`particle-${theme}-${isMobile ? 'm' : 'd'}`}
+              text={isMobile ? "About\nNexora Media" : "About Nexora Media"}
+              particleSize={isMobile ? 1.8 : 2.4}
+              density={isMobile ? 2 : 2.5}
               color={isDark ? "#ffffff" : "#181817"}
               highlightColor="#3b82f6"
-              scatter={200}
-              gatherDuration={1800}
-              stagger={500}
+              scatter={160}
+              gatherDuration={1600}
+              stagger={400}
               pointerRepel={50}
-              repelRadius={130}
-              idleDrift={0.8}
+              repelRadius={120}
+              idleDrift={0.6}
               trigger="hover"
-              fontSize="clamp(3.5rem, 8vw, 6rem)"
+              fontSize={isMobile ? "clamp(2.5rem, 11vw, 3.8rem)" : "clamp(3.5rem, 7vw, 5.5rem)"}
               fontWeight={800}
               fontFamily="inherit"
               glow={isDark}

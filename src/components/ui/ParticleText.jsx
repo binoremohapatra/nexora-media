@@ -145,7 +145,7 @@ const ParticleText = ({
       ctx.clearRect(0, 0, width, height);
 
       if (glow && !reducedMotion) {
-        ctx.shadowBlur = particleSize * 3;
+        ctx.shadowBlur = Math.min(particleSize * 1.5, 4);
         ctx.shadowColor = highlightColor;
       } else {
         ctx.shadowBlur = 0;
@@ -237,39 +237,53 @@ const ParticleText = ({
       if (!offCtx) return;
 
       const content = String(text || ' ');
+      const lines = content.split('\n');
       const maxTextWidth = width * 0.92;
       offCtx.font = font;
-      let metrics = offCtx.measureText(content);
-      const measuredWidth = Math.max(1, metrics.width);
-      if (measuredWidth > maxTextWidth) {
-        resolvedSize = Math.max(18, resolvedSize * (maxTextWidth / measuredWidth));
+
+      // Scale down if any line exceeds maxTextWidth
+      let widestLine = 0;
+      lines.forEach(line => {
+        const measured = offCtx.measureText(line).width;
+        if (measured > widestLine) widestLine = measured;
+      });
+
+      if (widestLine > maxTextWidth) {
+        resolvedSize = Math.max(16, resolvedSize * (maxTextWidth / widestLine));
         font = `${fontWeight} ${resolvedSize}px ${resolvedFamily}`;
         await waitForFonts(font);
         if (currentBuild !== buildId) return;
         offCtx.font = font;
-        metrics = offCtx.measureText(content);
       }
 
-      const left = Math.ceil(metrics.actualBoundingBoxLeft || 0);
-      const right = Math.ceil(metrics.actualBoundingBoxRight || metrics.width);
-      const ascent = Math.ceil(metrics.actualBoundingBoxAscent || resolvedSize * 0.78);
-      const descent = Math.ceil(metrics.actualBoundingBoxDescent || resolvedSize * 0.22);
+      const lineHeight = resolvedSize * 1.15;
+      let maxLineWidth = 0;
+      lines.forEach(line => {
+        const m = offCtx.measureText(line);
+        if (m.width > maxLineWidth) maxLineWidth = m.width;
+      });
+
+      const ascent = Math.ceil(resolvedSize * 0.78);
+      const descent = Math.ceil(resolvedSize * 0.22);
       const padding = Math.max(12, Math.ceil(resolvedSize * 0.08));
-      const textWidth = Math.max(1, left + right);
-      const textHeight = Math.max(1, ascent + descent);
+      const textWidth = Math.max(1, maxLineWidth);
+      const textHeight = Math.max(1, ascent + (lines.length - 1) * lineHeight + descent);
 
       offscreen.width = textWidth + padding * 2;
       offscreen.height = textHeight + padding * 2;
       offCtx.clearRect(0, 0, offscreen.width, offscreen.height);
       offCtx.font = font;
-      offCtx.textAlign = 'left';
+      offCtx.textAlign = 'center';
       offCtx.textBaseline = 'alphabetic';
       offCtx.fillStyle = '#ffffff';
-      offCtx.fillText(content, padding - left, padding + ascent);
+
+      lines.forEach((line, i) => {
+        offCtx.fillText(line, offscreen.width / 2, padding + ascent + i * lineHeight);
+      });
 
       const imageData = offCtx.getImageData(0, 0, offscreen.width, offscreen.height);
       const targets = [];
-      const step = Math.max(2, Math.floor(density));
+      const step = Math.max(1.8, Math.min(3, Math.floor(density)));
 
       for (let y = 0; y < offscreen.height; y += step) {
         for (let x = 0; x < offscreen.width; x += step) {
