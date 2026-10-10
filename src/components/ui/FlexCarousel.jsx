@@ -479,48 +479,78 @@ const FlexCarousel = ({
         image: [1, 1],
         dispose: () => {}
       };
-      const image = new Image();
-      image.crossOrigin = 'anonymous';
-      image.decoding = 'async';
-      image.onload = () => {
+      
+      const isVideo = item.src && item.src.match(/\.(mp4|webm)$/i);
+      const media = isVideo ? document.createElement('video') : new Image();
+      media.crossOrigin = 'anonymous';
+      
+      const handleLoad = () => {
         if (!alive || !slots.includes(slot)) return;
-        texture.image = image;
+        texture.image = media;
         texture.update();
-        slot.image = [image.naturalWidth || 1, image.naturalHeight || 1];
+        slot.image = isVideo ? [media.videoWidth || 1, media.videoHeight || 1] : [media.naturalWidth || 1, media.naturalHeight || 1];
         slot.aspect = slot.image[0] / slot.image[1];
-        try {
-          const probe = document.createElement('canvas');
-          probe.width = 8;
-          probe.height = 8;
-          const ctx = probe.getContext('2d', { willReadFrequently: true });
-          if (ctx) {
-            ctx.drawImage(image, 0, 0, 8, 8);
-            const data = ctx.getImageData(0, 0, 8, 8).data;
-            const avg = [0, 0, 0];
-            for (let i = 0; i < data.length; i += 4) {
-              avg[0] += data[i];
-              avg[1] += data[i + 1];
-              avg[2] += data[i + 2];
+        if (!isVideo) {
+          try {
+            const probe = document.createElement('canvas');
+            probe.width = 8;
+            probe.height = 8;
+            const ctx = probe.getContext('2d', { willReadFrequently: true });
+            if (ctx) {
+              ctx.drawImage(media, 0, 0, 8, 8);
+              const data = ctx.getImageData(0, 0, 8, 8).data;
+              const avg = [0, 0, 0];
+              for (let i = 0; i < data.length; i += 4) {
+                avg[0] += data[i];
+                avg[1] += data[i + 1];
+                avg[2] += data[i + 2];
+              }
+              slot.color = avg.map(v => v / 64 / 255);
             }
-            slot.color = avg.map(v => v / 64 / 255);
+          } catch {
+            slot.color = [0.5, 0.5, 0.5];
           }
-        } catch {
-          slot.color = [0.5, 0.5, 0.5];
         }
         slot.loaded = true;
         dirty = true;
         start();
       };
-      image.onerror = () => {
+      
+      const handleError = () => {
         if (!alive) return;
         slot.failed = true;
         dirty = true;
         start();
       };
-      image.src = item.src;
+
+      if (isVideo) {
+        media.autoplay = true;
+        media.loop = true;
+        media.muted = true;
+        media.playsInline = true;
+        media.addEventListener('loadeddata', handleLoad);
+        media.addEventListener('error', handleError);
+        media.src = item.src;
+        media.play().catch(() => {});
+        slot.video = media;
+      } else {
+        media.decoding = 'async';
+        media.onload = handleLoad;
+        media.onerror = handleError;
+        media.src = item.src;
+      }
+
       slot.dispose = () => {
-        image.onload = null;
-        image.onerror = null;
+        if (isVideo) {
+          media.removeEventListener('loadeddata', handleLoad);
+          media.removeEventListener('error', handleError);
+          media.pause();
+          media.removeAttribute('src');
+          media.load();
+        } else {
+          media.onload = null;
+          media.onerror = null;
+        }
         gl.deleteTexture(texture.texture);
       };
       return slot;
@@ -747,6 +777,16 @@ const FlexCarousel = ({
         }
         animating = true;
       }
+
+      let needsUpdate = false;
+      slots.forEach(slot => {
+        if (slot.video && slot.video.readyState >= 2) {
+          slot.texture.image = slot.video;
+          slot.texture.update();
+          needsUpdate = true;
+        }
+      });
+      if (needsUpdate) dirty = true;
 
       if (mode === 'wheel' && now - wheelAt > 150) {
         goal = snapPoint(m, goal);
