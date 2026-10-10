@@ -513,7 +513,15 @@ class App {
       const x = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
       // If movement is very small, it's a click!
       if (Math.abs(this.start - x) < 10) {
-        if (this.onClick) this.onClick();
+        if (this.onClick) {
+          // Calculate the active index (the one front and center)
+          let activeIndex = 0;
+          if (this.medias && this.medias.length > 0) {
+             const width = this.medias[0].width;
+             activeIndex = Math.round(Math.abs(this.scroll.target) / width) % this.length;
+          }
+          this.onClick(activeIndex);
+        }
       }
     }
   }
